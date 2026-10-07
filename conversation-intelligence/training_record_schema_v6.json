@@ -1,5 +1,5 @@
 {
-  "version": "6.0.0",
+  "version": "6.1.1",
   "record_types": [
     "dialogue",
     "multi_turn",
@@ -28,7 +28,9 @@
     "turn_pattern",
     "repair_state",
     "synthetic",
-    "eligible_for_behavior_training"
+    "eligible_for_behavior_training",
+    "hardware_profile_id",
+    "data_lineage"
   ],
   "behavior_targets": [
     "understand_user_goal",
@@ -43,7 +45,10 @@
     "use_evidence_for_fresh_facts",
     "respect_memory_boundaries",
     "adapt_language_and_style",
-    "decompose_multi_stage_tasks"
+    "decompose_multi_stage_tasks",
+    "respect_hardware_limits",
+    "never_start_heavy_job_without_admission",
+    "maintain_checkpoints"
   ],
   "pairwise_preference": {
     "fields": [
