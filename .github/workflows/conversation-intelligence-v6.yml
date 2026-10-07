@@ -1,0 +1,24 @@
+name: Conversation Intelligence V6
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify V6 router
+        working-directory: conversation-intelligence
+        run: python test_v6_router.py
+      - name: Smoke-generate corpus
+        working-directory: conversation-intelligence
+        run: python generate_conversation_corpus_v6.py --count 1000 --out ../.ci-v6-corpus --shard-size 250
+      - name: Verify source and corpus design
+        run: python conversation-intelligence/verify_v6.py
