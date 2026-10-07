@@ -2288,8 +2288,8 @@
     },
     {
       "path": "backend/tests/test_integration.py",
-      "sha256": "4222aae95a858146f8c8a5c1fd229c12fb69540bbe1dadbf3a8c6a6dbdd0bc76",
-      "bytes": 3035
+      "sha256": "f89bf3c661f687d89975572b75a57ba7cb4bf80bc0861f1d3b3a61310f165e2a",
+      "bytes": 3273
     },
     {
       "path": "backend/tests/test_kca_unified.py",
@@ -2378,8 +2378,8 @@
     },
     {
       "path": "backend/tests/test_v20_lifecycle.py",
-      "sha256": "247b87ed0014bef9d22acd094b5fc6dd9338ca29d3e05b1d3bbe275a231dbd34",
-      "bytes": 2962
+      "sha256": "3b57619740a6e10cc564f08f5beb1dad33a47f003d8f903eec6914fc009ed1b4",
+      "bytes": 2976
     },
     {
       "path": "backend/tests/test_v456_finalization.py",
@@ -2393,8 +2393,8 @@
     },
     {
       "path": "backend/tests/test_v458_bundled_release.py",
-      "sha256": "4a19cd231e7f77dc4912eedf722f2c855a35fa2199134cf404cec533cf784233",
-      "bytes": 2561
+      "sha256": "9d7b44d12d2b1c1be8c4248b15ab52c1d45cb0f3765d8da06d289691e3f779d7",
+      "bytes": 3287
     },
     {
       "path": "backend/tests/test_web_chat_integration.py",

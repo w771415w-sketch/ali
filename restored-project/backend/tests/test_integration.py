@@ -17,7 +17,12 @@ def _setup(tmp_path):
     from tools.registry import get_registry, reset_registry_for_tests
     reset_registry_for_tests()
     reg = get_registry()
-    reg.set_permission_manager(PermissionManager(mode="default"))
+    pm = PermissionManager(mode="default")
+    # Simulate the user approval that the production UI must obtain before
+    # write/commit actions. Default mode must never auto-allow them.
+    pm.grant("write_file", session=True)
+    pm.grant("git_commit", session=True)
+    reg.set_permission_manager(pm)
     ctx = ConversationContext(
         thread_id="t_int", project_dir=str(tmp_path), perm_mode="default",
     )
