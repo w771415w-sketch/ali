@@ -1,42 +1,57 @@
 # ALI Operation Record — 2026-10-07
 
-## Input reviewed
-The complete feature request document was reviewed through its final layer list (1–160) plus the execution requirements in the continuation messages.
+## Scope reviewed
+The complete feature-request document was read through layer 160 and compared with the current repository architecture. The operation focused on turning the most safety- and reliability-critical foundations into executable code for the Lenovo ThinkPad P50 target.
 
-## Existing project work retained
-- V6.1 conversation-intelligence generator and manifests.
-- Source export: 588 source-file markers across 85 parts.
-- Existing P50 device profile and conversation-intelligence architecture.
-- Earlier hardening commits for command filtering, permission confirmation, and audit redaction.
+## Backups created before modification
+- change-backups/2026-10-07/source-export-part-054-pre-hardware-security.md
+- change-backups/2026-10-07/source-export-part-055-pre-hardware-security.md
+- change-backups/2026-10-07/source-export-part-062-pre-hardware-security.md
+- change-backups/2026-10-07/device_profiles.py.pre-hardware-hardening
+- change-backups/2026-10-07/hardware_profile.json.pre-hardware-hardening.redacted
+- change-backups/2026-10-07/conversation-intelligence__v6_router.py.pre-p50
+- change-backups/2026-10-07/conversation-intelligence__training_record_schema_v6.json.pre-p50
+- change-backups/2026-10-07/conversation-intelligence__response_policy_v6.json.pre-p50
+- change-backups/2026-10-07/conversation-intelligence__NEXT_OPERATION_QUEUE_V6.1.md.pre-p50
 
-## New executable work
-- Canonical, privacy-safe ThinkPad P50 hardware profile.
-- Hardware detection with runtime telemetry when available.
-- CPU-first P50 training profile: 6 training threads maximum, one heavy job, CPU training by default.
-- AC/battery/thermal/free-RAM admission guards.
-- Workspace containment and sensitive-path blocking.
-- Dangerous-command screening.
-- Correct permission semantics: read-only is a hard ceiling; default mode asks for approval for elevated tools.
-- Explicit Agent state machine with checkpoints.
-- Postcondition verification primitives.
-- Persistent one-heavy-job scheduler.
-- Audit redaction for credentials and bearer tokens.
-- Conversation request framing and state update.
-- Dataset train/validation/test governance primitives.
-- Conversation-to-runtime request pipeline.
-- Deterministic P50 health-check entrypoint.
-- Regression test suite; local result: 7/7 passed.
+## Implemented executable components
+1. Privacy-safe ThinkPad P50 hardware profile.
+2. Hardware detection with psutil/nvidia-smi/optional torch probes.
+3. P50 CPU-first training policy for 4C/8T, 32 GB RAM and Quadro M1000M 2 GB.
+4. Maximum 6 training threads, 2 threads reserved for Windows/UI.
+5. Maximum one heavy local training job at a time.
+6. AC-power requirement for heavy training.
+7. Battery guard at 45% and hard stop at 25% when not on AC.
+8. Thermal guard at 80 C and hard stop at 88 C.
+9. Minimum free-RAM guard of 4 GB.
+10. Workspace containment and sensitive-path blocking.
+11. Dangerous command screening.
+12. Permission semantics where read-only is a hard ceiling and default mode asks for approval.
+13. Explicit Agent state machine with checkpoint history.
+14. Postcondition verification primitives.
+15. Persistent heavy-job scheduler.
+16. Audit redaction for credentials/tokens.
+17. Deterministic conversation request framing and state updates.
+18. Conversation-to-runtime admission boundary.
+19. Dataset split/metadata governance.
+20. Deterministic P50 health-check entrypoint.
 
-## Privacy
-The canonical hardware profile intentionally excludes UUIDs, serial numbers, MAC addresses and similar unique identifiers. The user-provided report can remain outside the canonical executable profile.
+## Local verification evidence
+- Python compileall: PASS.
+- P50 regression suite: 7/7 passed.
+- Deterministic P50 health check: PASS.
+- Expected P50 policy: CPU training, max 6 training threads, one heavy job, AC required, optional GPU offload for inference.
 
-## Important scope boundary
-The repository's 588-file source is currently stored as a text source-export publication. The new backend/ files are actual executable files, but it would be inaccurate to claim that all 588 legacy files were reconstructed and end-to-end executed solely from the connector. Full Windows/Electron/node-pty/llama.cpp/model-weight validation remains a separate hardware-on-device gate.
+## Device execution policy
+The supplied battery reading was 38%. Because the report did not establish AC-plugged state, the runtime deliberately refuses heavy training when running on battery at that state. This is an intentional safety behavior, not a failure.
+
+## Repository boundary
+The repository still contains the historical 588-file source publication in source-export/. The connector cannot reconstruct or physically execute the complete Windows/Electron/.NET/node-pty/llama.cpp stack on a non-Windows remote runtime. Therefore no claim is made that all 588 legacy files have passed native end-to-end execution.
 
 ## Next operation
-1. Reconstruct/synchronize the remaining executable application modules from source-export.
-2. Wire the existing desktop application to the new runtime policy/request pipeline.
-3. Run the Windows-specific gates on the actual ThinkPad P50.
-4. Validate model loading, GGUF/llama.cpp path, training checkpoint resume, and real tool execution.
-5. Keep Hermes inactive until separately authorized and verified.
-6. Build an isolated evaluation suite covering Arabic, project completion, tool use, memory, RAG, safety, hallucination resistance, regression and long-context behavior.
+- Synchronize remaining executable modules from source-export into a real file tree.
+- Wire the new request pipeline/resource policy into the existing desktop application.
+- Run Windows-native gates on the actual P50.
+- Validate real model loading, GGUF/llama.cpp inference, training resume, tool execution, filesystem operations and rollback.
+- Expand project/agent integration for the remaining feature layers.
+- Keep Hermes inactive until separately authorized and verified.
