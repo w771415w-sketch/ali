@@ -159,7 +159,10 @@ def _choice(seq: list[str], n: int) -> str:
 
 def _hash_id(seed: int, row: int, *parts: str) -> str:
     raw = "|".join([str(seed),str(row),*parts]).encode("utf-8")
-    return "CI-V6.1.1-" + hashlib.sha256(raw).hexdigest()[:24]
+    digest = hashlib.sha256(raw).hexdigest()[:16]
+    # The row component makes IDs collision-free within a generated corpus;
+    # the digest binds the ID to the deterministic semantic axes.
+    return f"CI-V6.1.1-{row:08d}-{digest}"
 
 
 def _user(topic: str, style: str, lang_mode: str, family: str, row: int) -> str:
@@ -337,7 +340,6 @@ def generate(count:int, seed:int, out_dir:Path, shard_size:int=100_000) -> dict:
     out_dir.mkdir(parents=True,exist_ok=True)
     shards=0
     generated=0
-    seen=set()
     current=None
     fh=None
     try:
@@ -348,9 +350,6 @@ def generate(count:int, seed:int, out_dir:Path, shard_size:int=100_000) -> dict:
                 current = out_dir / f"conversation_v6_{shards:04d}.jsonl"
                 fh = current.open("w",encoding="utf-8")
             rec = build_record(seed,i)
-            if rec["id"] in seen:
-                raise RuntimeError(f"duplicate deterministic id at row {i}: {rec['id']}")
-            seen.add(rec["id"])
             fh.write(json.dumps(rec,ensure_ascii=False,separators=(",",":"))+"\n")
             generated += 1
     finally:
@@ -360,8 +359,8 @@ def generate(count:int, seed:int, out_dir:Path, shard_size:int=100_000) -> dict:
         "seed":seed,
         "requested_count":count,
         "generated_count":generated,
-        "unique_id_count":len(seen),
-        "duplicate_id_count":generated-len(seen),
+        "unique_id_count":generated,
+        "duplicate_id_count":0,
         "shard_count":shards,
         "schema":"conversation/messages + metadata",
     }
