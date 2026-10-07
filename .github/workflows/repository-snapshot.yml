@@ -1,6 +1,8 @@
 name: ALI Repository Snapshot
 
 on:
+  push:
+    branches: ["ops/final-full-snapshot-2026-10-07"]
   pull_request:
   workflow_dispatch:
 
