@@ -3,23 +3,41 @@
 Current project source export: ALI Studio Pro Design4 4.6.0.
 
 ## Repository layout
-- `source-export/part-001.md` … `part-085.md`: ordered slices of the full source export.
+- `source-export/part-001.md` … `source-export/part-085.md`: ordered slices of the full source export.
 - `SOURCE_MANIFEST.json`: source metadata and part ordering.
 - `scripts/reassemble_source.py`: local reassembly helper.
+- `scripts/extract_project.py`: restores the 588-file text source tree locally.
 
 Hermes integration is intentionally inactive in this release and remains a later-phase integration.
 
+## Source completeness
+The repository currently contains all 85 ordered source-export parts. The final part contains the `588/588` marker, matching the manifest's 588-file declaration. This is a text source export publication, not the original binary ZIP.
 
 ## Conversation Intelligence V5
+The repository retains the existing V5 conversation layer.
 
-تمت إضافة حزمة مستقلة لتوسيع فهم المحادثات والردود:
-- `conversation-intelligence/V5_CONVERSATION_INTELLIGENCE.md`
-- `conversation-intelligence/intent_taxonomy_v5.json`
-- `conversation-intelligence/response_policy_v5.json`
-- `conversation-intelligence/v5_router.py`
-- `conversation-intelligence/training_patterns_v5.jsonl`
-- `conversation-intelligence/verify_v5.py`
+## Conversation Intelligence V6
+V6 extends V5 with a structured dialogue-state layer and a deterministic synthetic corpus generator:
+- `conversation-intelligence/V6_CONVERSATION_INTELLIGENCE.md`
+- `conversation-intelligence/intent_taxonomy_v6.json`
+- `conversation-intelligence/dialogue_state_schema_v6.json`
+- `conversation-intelligence/response_policy_v6.json`
+- `conversation-intelligence/v6_router.py`
+- `conversation-intelligence/generate_conversation_corpus_v6.py`
+- `conversation-intelligence/corpus_manifest_v6.json`
+- `conversation-intelligence/test_v6_router.py`
 
-الحزمة تغطي المتابعة والإحالات، الغموض، التصحيحات، البحث الحديث، التنفيذ متعدد المراحل، الذاكرة، اللغة المختلطة، الأمن، التحقق، وإدارة شكل الرد. وهي مصممة لتعمل stdlib-only على أجهزة P50.
+The V6 generator is configured for a default target of 10,000,000 JSONL records and uses deterministic compositional axes. The repository stores the generator and manifest rather than a multi-gigabyte generated corpus.
 
-The repository remains a source-export publication. The Conversation Intelligence V5 pack is added as an explicit integration layer; it is not claimed to be wired into the exported runtime files until a source-tree reconstruction/integration commit is applied.
+V6 covers intent hierarchy, speech acts, references/pronouns, dialogue state, user-goal modeling, ambiguity and risk, multi-intent planning, corrections/recovery, research and evidence, memory boundaries, tool planning, output-format preferences, Arabic/mixed-language handling, and measurable verification.
+
+The source export remains preserved; V6 is published as an additive integration layer and should be wired into the restored runtime through the documented integration boundary before claiming runtime-wide integration.
+
+## Validation
+Use:
+`python conversation-intelligence/test_v6_router.py`
+
+For a 10M corpus:
+`python conversation-intelligence/generate_conversation_corpus_v6.py --count 10000000`
+
+Generated shards should be kept outside Git history unless a dedicated large-dataset storage/release mechanism is used.
