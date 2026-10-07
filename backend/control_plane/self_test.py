@@ -15,6 +15,7 @@ except ImportError:
 
 def run():
     # CI entrypoint: verifies the canonical professional control plane.
+    # Final-main certification touch.
     with tempfile.TemporaryDirectory(prefix="ali-professional-") as td:
         root=Path(td);rt=ProfessionalRuntime(root)
         prep=rt.prepare("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات")
