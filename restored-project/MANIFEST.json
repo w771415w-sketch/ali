@@ -1,5 +1,5 @@
 {
-  "files": 682,
+  "files": 588,
   "entries": [
     {
       "path": "ALI_Conversation_Training_Core_V2.md",
@@ -352,11 +352,6 @@
       "bytes": 666
     },
     {
-      "path": "backend/FEATURE_COVERAGE_2026-10-07.md",
-      "sha256": "a2e516d5a7214b196730a5841d3f5580b7f31d1078ad2a91be5b1268e22d0008",
-      "bytes": 2832
-    },
-    {
       "path": "backend/FINAL_VERIFICATION.json",
       "sha256": "c45f63cfa78ee2418aed402d5e17c0a437ec907a8cd4f8c52c5b3d348a3cce85",
       "bytes": 737
@@ -372,11 +367,6 @@
       "bytes": 1002
     },
     {
-      "path": "backend/OPERATION_RECORD_2026-10-07.md",
-      "sha256": "16c63c251fff64ca3327d66f2830c3c073761fb445fac9619896c87dcf418298",
-      "bytes": 8769
-    },
-    {
       "path": "backend/PHASE2_CATALOG.md",
       "sha256": "5ed1e82eba1f8e6622b6e0ddb66bfd1ec1a2e5e07ff07882d38d5b5a6404a719",
       "bytes": 1786
@@ -390,11 +380,6 @@
       "path": "backend/README.md",
       "sha256": "fd933e8cf06b3a3fb3a5219ac1a196673495d0b41dc26ec1285dcd9c2981c22d",
       "bytes": 2079
-    },
-    {
-      "path": "backend/README_EXECUTABLE_REBUILD.md",
-      "sha256": "874e47064e2f7700cac64829487b41e453605e5fe4626786bdf387ff16788609",
-      "bytes": 1141
     },
     {
       "path": "backend/README_P50.md",
@@ -522,16 +507,6 @@
       "bytes": 85
     },
     {
-      "path": "backend/agent/__init__.py",
-      "sha256": "f1401a4a721f7336afaf2c1d913afc7171a720331cd88692a6ad9af229b2c908",
-      "bytes": 44
-    },
-    {
-      "path": "backend/agent/executor.py",
-      "sha256": "ec95001c25fdd459229d10300c4d91ffb111fbb5efa888a658863fd8291575dd",
-      "bytes": 1930
-    },
-    {
       "path": "backend/agent/project_orchestrator.py",
       "sha256": "9cd0bfa1130a5788e65af9260807c8180b021774cdcf883d43172e3bcd86724c",
       "bytes": 2423
@@ -547,19 +522,9 @@
       "bytes": 2895
     },
     {
-      "path": "backend/ali_agent.py.legacy",
-      "sha256": "d088a70531e8226c838b2a9555474709cede30f327941163dc789cd5a3f886ac",
-      "bytes": 694
-    },
-    {
       "path": "backend/ali_ai.py",
       "sha256": "6513115d7007ca1e6f77bf5cf4929fc9297802422bb997fb57c6a783d9d44d75",
       "bytes": 94693
-    },
-    {
-      "path": "backend/ali_control_plane.py",
-      "sha256": "b9df7cef1e000d0c25bad44dd3ef6f4c37a4a30b90a17cf6b79c15f7efdb8546",
-      "bytes": 16543
     },
     {
       "path": "backend/api/__init__.py",
@@ -688,13 +653,13 @@
     },
     {
       "path": "backend/config/desktop_settings.json",
-      "sha256": "1592e8027f791f6842ed57e391d295c84c4067f3da0d714e2df5c39fde917495",
-      "bytes": 721
+      "sha256": "ffee63433f16ecd01323a72fc3435f76634d859df7f07204d20fc703687d5f28",
+      "bytes": 29
     },
     {
       "path": "backend/config/device_profiles.py",
-      "sha256": "a617302dba0bba073b7781ab5a9c5d5a16275149788b3e22a97aaffba8c87144",
-      "bytes": 2470
+      "sha256": "4c2f4a3bab0d1c816b66ec8201b602427170c690f181b37c3ed33d042938d501",
+      "bytes": 4428
     },
     {
       "path": "backend/config/hardware_override.example.json",
@@ -703,8 +668,8 @@
     },
     {
       "path": "backend/config/hardware_profile.json",
-      "sha256": "93d46d03a15b658bb6449d288212adbdd4c66e2a481c341fdbc2a471ebcfca10",
-      "bytes": 1325
+      "sha256": "f19f8c22ebd4e8eca2b7172c93be5053d886adb8f1e3620a571cba51d0902bd7",
+      "bytes": 1765
     },
     {
       "path": "backend/config/hermes_integration.json",
@@ -717,134 +682,24 @@
       "bytes": 3823
     },
     {
-      "path": "backend/config/language_profiles.json",
-      "sha256": "94c77f3e9fa5b3e704765a65a2627556f60b4d016924925347f0e1a9901fc40d",
-      "bytes": 872
-    },
-    {
-      "path": "backend/config/language_settings.py",
-      "sha256": "b12bfb54e9d0f7e562bb6d37332cd66bc606614b728f6b9792dd5d3ec61dec1b",
-      "bytes": 1892
-    },
-    {
       "path": "backend/config/paths.py",
       "sha256": "214c6d40ab89ebff726ecedc045b94770a94f0329c96b716125d40b705a13f88",
       "bytes": 3214
     },
     {
-      "path": "backend/config/settings_service.py",
-      "sha256": "df81c295c4bf45ca1d839f8265f0447b868ca6832f8d7d41b76b62d3073f0ee6",
-      "bytes": 1506
-    },
-    {
-      "path": "backend/config/training_methods.json",
-      "sha256": "478dfa123444aff19af8976f4ed4f6ddb66a0b07bac196991f8d5147e8122375",
-      "bytes": 5509
-    },
-    {
-      "path": "backend/config/training_settings.py",
-      "sha256": "18099ff349e9bf2bbc2bc172b25b645ecec970ed8c8144bca79ca1445ac6c2c6",
-      "bytes": 4204
-    },
-    {
-      "path": "backend/control_plane/ACCEPTANCE_MATRIX.md",
-      "sha256": "55ee94ae4dbd791b5da2316a238ec369c0928d478d52ce591a55304204c74dfd",
-      "bytes": 3004
-    },
-    {
-      "path": "backend/control_plane/ARCHITECTURE.md",
-      "sha256": "0750de27a445976d516972ee7227404a3dd7cf1619d4f8bf96ce2ab430614c6e",
-      "bytes": 1590
-    },
-    {
-      "path": "backend/control_plane/FEATURE_MATRIX.md",
-      "sha256": "bbdfa91e0a794cfecf41f71b2a3431f9e76c1a924da68d0dcdafe2150e4cbb40",
-      "bytes": 3197
-    },
-    {
-      "path": "backend/control_plane/INTEGRATION.md",
-      "sha256": "4459649ba6a265074af48b5f396edb9c565e693a0e96f149a411e43597510840",
-      "bytes": 1172
-    },
-    {
       "path": "backend/control_plane/README.md",
-      "sha256": "9a4bca14468b6f9fdc42cb0a450222a62b1d76258d5d3a90fcf4da6c7b974d17",
-      "bytes": 986
-    },
-    {
-      "path": "backend/control_plane/SECURITY_POLICY.md",
-      "sha256": "9244296dfec5fa6bf73f4945ede7192dac2997dd4f603f6a9e07d4d481fc06f4",
-      "bytes": 1174
+      "sha256": "90c302f68dc2311eac314d2f8b1e834f336c54b8878c833a5822857de1ed461e",
+      "bytes": 189
     },
     {
       "path": "backend/control_plane/__init__.py",
-      "sha256": "6c6b58f9d64f26363661e0baf39bdea5cb82b99dce0bb3b64f7c9b3ed0b10b6d",
-      "bytes": 717
-    },
-    {
-      "path": "backend/control_plane/acceptance.py",
-      "sha256": "4c94104b2993020ed99faac836ce7416930dfbb3fc7fdab0107c98fd04671512",
-      "bytes": 772
-    },
-    {
-      "path": "backend/control_plane/agent_loop.py",
-      "sha256": "f25b55956ade4c774d80158cc67d591a6a1592dd9f07fefc87c08c0ed78916d1",
-      "bytes": 4312
-    },
-    {
-      "path": "backend/control_plane/agents.py",
-      "sha256": "348aafaab247f82cadc818c0d95c0a6d539fea4a94cbc548ba384b22713281e9",
-      "bytes": 2000
-    },
-    {
-      "path": "backend/control_plane/artifacts.py",
-      "sha256": "5e4ba023671ade1157c7b0df9fb22b34d5ea9b5fc09e789c41ce28e4b0bd5177",
-      "bytes": 1048
-    },
-    {
-      "path": "backend/control_plane/cache.py",
-      "sha256": "7c445127d82b3897555e563a805b714b2c13416739748b05d686ba437a55041e",
-      "bytes": 616
-    },
-    {
-      "path": "backend/control_plane/capabilities.py",
-      "sha256": "9602bee6f2c12861c8af6726ee8f5871144dd9417e8a9383ee9e297a14b00731",
-      "bytes": 460
-    },
-    {
-      "path": "backend/control_plane/change.py",
-      "sha256": "1ba71b15d16daf1355a8fa5216dcd5e33bc934081a6947fd0a4b4553566fa200",
-      "bytes": 924
-    },
-    {
-      "path": "backend/control_plane/code_intelligence.py",
-      "sha256": "7e36f27100d80b9571855719299ad5a01f1bda84e01ff524c5735640cbb93e3b",
-      "bytes": 1859
-    },
-    {
-      "path": "backend/control_plane/command_runner.py",
-      "sha256": "ed47d725d4c3bc9451828b2eab1314ff93e87cd3b1170ffe5f4929f972e8f7fb",
-      "bytes": 1453
+      "sha256": "c0bd46ad1276ad65005575a8a29b54a473a26d9de4df752fac097e5cf1f58f1b",
+      "bytes": 447
     },
     {
       "path": "backend/control_plane/contracts.py",
       "sha256": "e576008545865365e2953a2899aef016f62387c9de3993db8e3627c03e332640",
       "bytes": 2983
-    },
-    {
-      "path": "backend/control_plane/dataset.py",
-      "sha256": "3acd9d7772c395f1aa77b1b9eac2d123f72a2a3718344d13fb5cd607649c16ac",
-      "bytes": 2539
-    },
-    {
-      "path": "backend/control_plane/document_ingestion.py",
-      "sha256": "2c7facecaa5d4ffe6836efa61116d7c78987f92b13be577aeee61aafa4f438cb",
-      "bytes": 1469
-    },
-    {
-      "path": "backend/control_plane/evaluation.py",
-      "sha256": "f8975768d49787b7ede039d714ab717b17923524b1642c19ca2e3086a74fe97a",
-      "bytes": 858
     },
     {
       "path": "backend/control_plane/execution.py",
@@ -857,124 +712,9 @@
       "bytes": 31985
     },
     {
-      "path": "backend/control_plane/gateway.py",
-      "sha256": "e886347149c5b51d6beacded9a894d8ae9bfab2f0581266d3f76310b6c8fa7b8",
-      "bytes": 3049
-    },
-    {
-      "path": "backend/control_plane/governance.py",
-      "sha256": "277f333db4a2033b4e744452b116db6c20effe495c439c4e628818b6aa0d42b3",
-      "bytes": 1017
-    },
-    {
-      "path": "backend/control_plane/hardware_bridge.py",
-      "sha256": "ad753c3fffaa0beed5d66a7cf7be1da9e2a94583960a6ba680a23137fa2fc5f5",
-      "bytes": 343
-    },
-    {
       "path": "backend/control_plane/kca_registry.py",
       "sha256": "1799f41be798368d8bad4d63a79e67adbf923b869bc45f15fba4b13645442e5b",
       "bytes": 1026
-    },
-    {
-      "path": "backend/control_plane/knowledge.py",
-      "sha256": "16e667be750206d0c1c750b6983a17d049bdd1517ac26806f7ac5b758227e383",
-      "bytes": 1735
-    },
-    {
-      "path": "backend/control_plane/knowledge_graph.py",
-      "sha256": "e8a2dfc961d5fb0d0ecd3b75d7fe9564824307001a22ff007d07968ccbdc48d7",
-      "bytes": 2778
-    },
-    {
-      "path": "backend/control_plane/lineage.py",
-      "sha256": "c62fac3ea51ea77d282e5551d251b57242a8618da8b26d8e8e2fc713956560bd",
-      "bytes": 892
-    },
-    {
-      "path": "backend/control_plane/memory.py",
-      "sha256": "5741a7fcec0fb5b57e410e2886562442d2a7b64f9b6637aa0ea1ebb227667f20",
-      "bytes": 1525
-    },
-    {
-      "path": "backend/control_plane/model_router.py",
-      "sha256": "29e8b71edcef9d1c8d305d281ebc95f3adfabf8574800f2a64b0ed7243ac9c6f",
-      "bytes": 1150
-    },
-    {
-      "path": "backend/control_plane/model_runtime.py",
-      "sha256": "342b14d8fac8e4d49fe35c797d971c015cae1091d1e5c109120186141e08445f",
-      "bytes": 1014
-    },
-    {
-      "path": "backend/control_plane/multimodal.py",
-      "sha256": "a351ebf3d36f29089bb4fb188b7dce033a47137802ce5b5e9f8cb3712d460400",
-      "bytes": 1033
-    },
-    {
-      "path": "backend/control_plane/observability.py",
-      "sha256": "51b54070128b745eb9aaaeb7cb22b6072b6f26e5711f33c3e6eaf04db089f9de",
-      "bytes": 769
-    },
-    {
-      "path": "backend/control_plane/planner.py",
-      "sha256": "26b1c9107ceebcc104e58c61305fb0cf5c231dc32ad15921716ad8a23bcfd473",
-      "bytes": 3083
-    },
-    {
-      "path": "backend/control_plane/policy.py",
-      "sha256": "7fcc0effe208ea8721e5e82cf605c452ade0c20ddc6fba040916674fc9077a0a",
-      "bytes": 874
-    },
-    {
-      "path": "backend/control_plane/project_agent.py",
-      "sha256": "071ec02ebba51ff8832f7ec7f7ba52dced396720c27f0bf4bb9aa3f29bda3189",
-      "bytes": 2307
-    },
-    {
-      "path": "backend/control_plane/project_intelligence.py",
-      "sha256": "27900771f8b2ae7c8e5272a77900ee72a1dc833c274b9b07605f4ece86cf802a",
-      "bytes": 1096
-    },
-    {
-      "path": "backend/control_plane/project_io.py",
-      "sha256": "366f142060ec051f5254f85caf91bd40b3015995c82d5ba1cef82fd11a6f6bd5",
-      "bytes": 2835
-    },
-    {
-      "path": "backend/control_plane/provenance.py",
-      "sha256": "4fdf53fd387783fdf155b7183db91aa1b8a3ed7dea0035ef5b257de95c90be67",
-      "bytes": 1025
-    },
-    {
-      "path": "backend/control_plane/recovery.py",
-      "sha256": "87a6578e4f2f7942d8ffc776facdafce7f084041881a58ff37332cf0cec92da4",
-      "bytes": 1611
-    },
-    {
-      "path": "backend/control_plane/registry.py",
-      "sha256": "18b289c4c452300c175a4796b054e46e23a66c72ddc049e7caad4820c82975ff",
-      "bytes": 1542
-    },
-    {
-      "path": "backend/control_plane/release.py",
-      "sha256": "feb4984a6e8d05a0d831409fd6420d36859f7c885d95e0c7020e38d0addcbb37",
-      "bytes": 1660
-    },
-    {
-      "path": "backend/control_plane/reliability.py",
-      "sha256": "cd3ff1ec67d4e2ccaf688d7fc01937146f7e7ebe08509074d64d6505fd43dec9",
-      "bytes": 4133
-    },
-    {
-      "path": "backend/control_plane/requirements.py",
-      "sha256": "a231d209c5e318b0e779671cddca06564a176d99a8b6331dcd601681c16c73bb",
-      "bytes": 5920
-    },
-    {
-      "path": "backend/control_plane/retrieval.py",
-      "sha256": "2ad004ea6ff9184c989e97e2995222e9c9bd3242a5077ab7027bd5c4e46fe470",
-      "bytes": 1424
     },
     {
       "path": "backend/control_plane/router.py",
@@ -982,94 +722,9 @@
       "bytes": 5283
     },
     {
-      "path": "backend/control_plane/runtime_facade.py",
-      "sha256": "572a3761de4ff731dee3c582cfd6ad9a0dd78a69c4c00c1522310177c63423c8",
-      "bytes": 7079
-    },
-    {
-      "path": "backend/control_plane/scheduler.py",
-      "sha256": "9098b280a127d3f750ca07a4f768147b39af88cf5253bdaafa9583c806bca0d0",
-      "bytes": 1201
-    },
-    {
-      "path": "backend/control_plane/schemas.py",
-      "sha256": "7194a86918cc3049bffce290918f3bdadfd3a9bc2619157641af34b9125fdfd7",
-      "bytes": 3890
-    },
-    {
-      "path": "backend/control_plane/security_ext.py",
-      "sha256": "ee504e9f2debf7116c46f9fb446448c54ef0b47daff5c6e6526c697975f4363b",
-      "bytes": 1170
-    },
-    {
-      "path": "backend/control_plane/self_improvement.py",
-      "sha256": "e70c2f7767f5a9456078ce3b4901a3a574ebe46eef40a9998f119b595a2d2864",
-      "bytes": 1512
-    },
-    {
-      "path": "backend/control_plane/self_test.py",
-      "sha256": "882a9fc01592ae027d717956b74166f29024a3db0863198fa3a6f150ceb17d0c",
-      "bytes": 2875
-    },
-    {
       "path": "backend/control_plane/state_store.py",
       "sha256": "2ae1961581a986d388cc24cd96d5b2b15eff2d5f768f532be28e0923caa8bd4d",
       "bytes": 2264
-    },
-    {
-      "path": "backend/control_plane/store.py",
-      "sha256": "a0663fbf3455621e758761c4e5ae4b27889d7b2a64ed28a756c029c8be22366b",
-      "bytes": 3717
-    },
-    {
-      "path": "backend/control_plane/tools.py",
-      "sha256": "13078abe56d9134a6d470197cc0168d46d6a49c085405682124de562cd6acc68",
-      "bytes": 1794
-    },
-    {
-      "path": "backend/control_plane/training_bridge.py",
-      "sha256": "3c87a6920f9fb303430c49fe26e03735abedbed7513aa8adbfd3a2efdc92102d",
-      "bytes": 790
-    },
-    {
-      "path": "backend/control_plane/transaction.py",
-      "sha256": "a46090bab46b96ce02ad625de48317df41a26cb79291c96c5ac1b8dd3c6fee55",
-      "bytes": 710
-    },
-    {
-      "path": "backend/control_plane/vcs.py",
-      "sha256": "cb180e14c79e71ecaae3c7808fa4ba8a3bc54e87105da12b80ccb9e70f14b0e6",
-      "bytes": 1475
-    },
-    {
-      "path": "backend/control_plane/verification_ext.py",
-      "sha256": "aaeadd685f261776cdbc8e695ff764d899640f50a88e15b63fbd8a6def80ff6d",
-      "bytes": 882
-    },
-    {
-      "path": "backend/conversation_intelligence/__init__.py",
-      "sha256": "9285a474e7b6dab5b1eb039b9e70b06337482687b89f584cdc595d2871decef6",
-      "bytes": 49
-    },
-    {
-      "path": "backend/conversation_intelligence/behavior_training_v1.jsonl",
-      "sha256": "3bc27f95912fdb86bb11951a4eb349f3da6ef4675be24f898da93fda622c04ee",
-      "bytes": 5020
-    },
-    {
-      "path": "backend/conversation_intelligence/importer.py",
-      "sha256": "fbf74a0c8ae467e7085f819ac34eef8d6942210a87d4eac79f85fc2db3ad094c",
-      "bytes": 2656
-    },
-    {
-      "path": "backend/conversation_intelligence/language_adapter.py",
-      "sha256": "477fef9ecc39b9e1e81bb177ed7f47072b0d8762b1595bea210f92806f9124c7",
-      "bytes": 2428
-    },
-    {
-      "path": "backend/conversation_intelligence/v6_router.py",
-      "sha256": "f2121b08861452f7917b6a4b9476f27455ccff45afc4263c201a9a90ee16cb34",
-      "bytes": 5745
     },
     {
       "path": "backend/core/__init__.py",
@@ -1083,8 +738,8 @@
     },
     {
       "path": "backend/core/audit.py",
-      "sha256": "2d0ffbd681a6f95e5e05c44a716c6f9c959c36b31d965f95e46792e66780deed",
-      "bytes": 1137
+      "sha256": "27a4ccb2aa37c8d13cfebe2a02982ce63b91c55624b5bcd6637736c7123121a0",
+      "bytes": 877
     },
     {
       "path": "backend/core/context.py",
@@ -1117,11 +772,6 @@
       "bytes": 4927
     },
     {
-      "path": "backend/core/request_pipeline.py",
-      "sha256": "d89d039bd86f5902c36469997673ed0caa7c1160cce50bcc3432038eadc43ec8",
-      "bytes": 892
-    },
-    {
       "path": "backend/core/response_guard.py",
       "sha256": "fdec025a5149d93158826506f4d531e54add9294e0a9ac73833008b2406fe0b3",
       "bytes": 4838
@@ -1137,19 +787,9 @@
       "bytes": 1593
     },
     {
-      "path": "backend/core/state_machine.py",
-      "sha256": "46380bceb4a2d1144e40a7758f608b6f69c26838bded6f588cf08b67e4e5d62b",
-      "bytes": 1391
-    },
-    {
       "path": "backend/core/tool_protocol.py",
       "sha256": "a90f82d16454a734f1460d5ae7ac3c5709370e3c21b5a830aa6a7af7fe956b0e",
       "bytes": 3413
-    },
-    {
-      "path": "backend/core/verification.py",
-      "sha256": "54a5432c5c85a7912fa3008754da62d14903ef059639ddd037114e04b043869a",
-      "bytes": 778
     },
     {
       "path": "backend/core/workflow.py",
@@ -1235,31 +875,6 @@
       "path": "backend/database/schema.py",
       "sha256": "5c2847928d39e710064cb5ec12e2dcc58fa1ddc6f7373fd79d7e7d46085db678",
       "bytes": 4068
-    },
-    {
-      "path": "backend/dataset/__init__.py",
-      "sha256": "09682711395a398fe9567e3bc16434cc7b1a37e79247779e57494f89995c0b3a",
-      "bytes": 56
-    },
-    {
-      "path": "backend/dataset/policy.py",
-      "sha256": "21271793e60f9e66e348a1f77b97c2342dd2885c484ddda5504390308cb1649c",
-      "bytes": 976
-    },
-    {
-      "path": "backend/diagnostics/__init__.py",
-      "sha256": "2596c9793e669b76f9d29ebc712699ecd844de0b4256e2bbaa0f6e21086ece3a",
-      "bytes": 150
-    },
-    {
-      "path": "backend/diagnostics/engine.py",
-      "sha256": "3a03a1005ce4f4bf0137b8a4c4c5a6ae86be460b89e64a2e0ccabfaed2848fc0",
-      "bytes": 6305
-    },
-    {
-      "path": "backend/diagnostics/root_cause.py",
-      "sha256": "6a8a7880e713de2ec4e39793ea28634ef7a4b577870627db989046a9a202ab42",
-      "bytes": 1899
     },
     {
       "path": "backend/docs/AI_KCA_MASTER.md",
@@ -1637,11 +1252,6 @@
       "bytes": 117
     },
     {
-      "path": "backend/main.py",
-      "sha256": "0a848726c833e53a991efbc59f5c3bf36d84f89c56aed5ae4e23f1718f9f3212",
-      "bytes": 1836
-    },
-    {
       "path": "backend/memory/__init__.py",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "bytes": 1
@@ -1663,8 +1273,8 @@
     },
     {
       "path": "backend/model/__init__.py",
-      "sha256": "cba05088322eea3c9e12537070664d1619ab4f10ebad25435d42b5c76055611f",
-      "bytes": 108
+      "sha256": "612cc47c9f91e75eaa52db06e697c4f71255c2ecafbf5753bcb3b4e7bd5f370a",
+      "bytes": 595
     },
     {
       "path": "backend/model/ali_lm.py",
@@ -1675,16 +1285,6 @@
       "path": "backend/model/artifacts.py",
       "sha256": "cc1f658504365e5f74a40da5af3a6bfcb93c75d3d560373c46872ac38211bc9e",
       "bytes": 4361
-    },
-    {
-      "path": "backend/model/conversion.py",
-      "sha256": "f3a3c3c9fb606ec0aea72804c83fc5a18ca0961ae1d384a2026e4cf00e5377d2",
-      "bytes": 3114
-    },
-    {
-      "path": "backend/model/conversion_policy.py",
-      "sha256": "93d32b621ec4002865e4c4c2dd88920243f33bd1bfa00d07179befec5199b24c",
-      "bytes": 562
     },
     {
       "path": "backend/model/importer.py",
@@ -2367,26 +1967,6 @@
       "bytes": 11880
     },
     {
-      "path": "backend/runtime/__init__.py",
-      "sha256": "3d5733c29117a4e7edfbdf301c6611c99b5c6867be94f470b0701dce0d2bed08",
-      "bytes": 174
-    },
-    {
-      "path": "backend/runtime/device_policy.py",
-      "sha256": "d0928510df75e049e7495320866791669a9248cdf9f88084db3e3da4ffc953fe",
-      "bytes": 2830
-    },
-    {
-      "path": "backend/runtime/hardware.py",
-      "sha256": "ff49cbb38478fe5c0cccd871b75e1a0dfb65e7a0e0207a63e75a3b622aa8ebde",
-      "bytes": 6334
-    },
-    {
-      "path": "backend/runtime/resources.py",
-      "sha256": "44a53c6742b070a19ec759d03bba53f71834181f64dda06ae1fcff82fd63924b",
-      "bytes": 1464
-    },
-    {
       "path": "backend/scripts/benchmark_device.py",
       "sha256": "4230e760ae464719060c0a3ffc54977e2d29c99072fc4519191ac261032e2dec",
       "bytes": 931
@@ -2588,23 +2168,23 @@
     },
     {
       "path": "backend/security/__init__.py",
-      "sha256": "f55fbb135c4b87b593fe148e7fad37a946b5b7365a0e36ef34f097c2e33b2771",
-      "bytes": 254
+      "sha256": "b1f90159d185288f36056e184c4d034fb8457972c7f48a98638305436886873f",
+      "bytes": 602
     },
     {
       "path": "backend/security/commands.py",
-      "sha256": "38d5a39c9948f10cc8f9e3e9d03bba458115cf070ae7b8e1c999437ea8634b81",
-      "bytes": 1698
+      "sha256": "4703c5485315cf5718cdcc7d4e7de327271c63fb407aacfb215a88fab7129fc6",
+      "bytes": 4105
     },
     {
       "path": "backend/security/paths.py",
-      "sha256": "cc1acb187016233f5cc371272657000ad9fce2df6d8fa1e63f477a4cd782630a",
-      "bytes": 1121
+      "sha256": "37b2384a529cca74394cc17f07d6e109a4bca2d6d5dce0cde4de9c52fb9917fc",
+      "bytes": 3107
     },
     {
       "path": "backend/security/permissions.py",
-      "sha256": "4258d8be404819f0b39ec0d591918b0efe1bfd6cb2a3fcebda358789b4eecaf4",
-      "bytes": 2089
+      "sha256": "21b621b2cfa28a85fb46b95b7f9ea4068860ca88cf76da2367ef349e0738d95a",
+      "bytes": 5805
     },
     {
       "path": "backend/skills/README.md",
@@ -2645,11 +2225,6 @@
       "path": "backend/tests/test_adaptive_gpu_policy.py",
       "sha256": "7db9b13a405b843a5b5a92d9e1c255976ed0162d1bb719be574009d0d436361b",
       "bytes": 717
-    },
-    {
-      "path": "backend/tests/test_ali_control_plane.py",
-      "sha256": "5a6f07a9b5fa8ebfbb7cea3a5ef2685078b10863118f4e4fc27953c3d415b232",
-      "bytes": 1604
     },
     {
       "path": "backend/tests/test_config.py",
@@ -2722,11 +2297,6 @@
       "bytes": 4650
     },
     {
-      "path": "backend/tests/test_language_diagnostics_training.py",
-      "sha256": "c90790f49b10ad06f5c055e376e9d5395f4948fb499d83e559d91943a082d763",
-      "bytes": 3393
-    },
-    {
       "path": "backend/tests/test_llama_engine.py",
       "sha256": "4c81a6c28a87aa972501337434583759e653781a4e23127a1bbc3feb4e265cd5",
       "bytes": 580
@@ -2742,29 +2312,14 @@
       "bytes": 828
     },
     {
-      "path": "backend/tests/test_p50_runtime.py",
-      "sha256": "f7d4535748086b287325a6939b2ea5318c951499ac874e32bde87fec43fbe15c",
-      "bytes": 2448
-    },
-    {
       "path": "backend/tests/test_pipeline_relative_paths.py",
       "sha256": "51b0da4354b499a4bd3f725249df3871500eb3d6b72611625d165bef874edfda",
       "bytes": 2002
     },
     {
-      "path": "backend/tests/test_professional_additions.py",
-      "sha256": "d8c249dc6f152f0cae16ea3f1542825fa48be4af69dd446a48fcfc77a7162e7e",
-      "bytes": 1693
-    },
-    {
       "path": "backend/tests/test_professional_ai.py",
       "sha256": "739bff427b3628e1d9f5669113eb459184f01c7cea98a71859ed7c7c1ed83bab",
       "bytes": 11179
-    },
-    {
-      "path": "backend/tests/test_professional_control_plane.py",
-      "sha256": "51cb053eea5ba02a3a85f15d001b956d53c49a6bd9badef11aa0443281aedb9a",
-      "bytes": 2115
     },
     {
       "path": "backend/tests/test_rag_fallback.py",
@@ -2775,11 +2330,6 @@
       "path": "backend/tests/test_release_453.py",
       "sha256": "3ba6331cd7d9d376c6743356e5a4702359fd823e1fccad24d6fd1310aa8969ef",
       "bytes": 5643
-    },
-    {
-      "path": "backend/tests/test_request_pipeline_policy.py",
-      "sha256": "5e6036de0e720f55048917594c333fb72eb4125c4abacaa64a19dd1d6c824cdf",
-      "bytes": 827
     },
     {
       "path": "backend/tests/test_rtl_and_ui_contract.py",
@@ -2948,8 +2498,8 @@
     },
     {
       "path": "backend/training/__init__.py",
-      "sha256": "ec6e53d0a73472990b9abe936fae33cb0811534274cba9e647dd5c0bcc379272",
-      "bytes": 87
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1
     },
     {
       "path": "backend/training/accumulated_updates.py",
@@ -2962,19 +2512,9 @@
       "bytes": 704
     },
     {
-      "path": "backend/training/continual_dataset.py",
-      "sha256": "eae72020e582a097dc790dede94d1baf953ddb24211bdb69b3275551323e3df4",
-      "bytes": 1930
-    },
-    {
       "path": "backend/training/continuous_learning.py",
       "sha256": "6b008e97aad28c7f369dd4517afe8d7d31954d2031b90fcd0c82ed9d440656e4",
       "bytes": 58437
-    },
-    {
-      "path": "backend/training/controller.py",
-      "sha256": "1ace19c8aabefd36679529ba2cf827dd5c94bcf0ac7e1699a8d0a12a41fad799",
-      "bytes": 1397
     },
     {
       "path": "backend/training/conversation.py",
@@ -3022,16 +2562,6 @@
       "bytes": 11122
     },
     {
-      "path": "backend/training/job_manager.py",
-      "sha256": "6b91a39e8e4465c30d9f693e95bea5b0996e927808ba2f550d725fcecbbc950f",
-      "bytes": 1587
-    },
-    {
-      "path": "backend/training/lifecycle.py",
-      "sha256": "d201514b82c6f4826511cc537e9fbb03c71044dc7cdb040e35765730ad9c8430",
-      "bytes": 3119
-    },
-    {
       "path": "backend/training/lora.py",
       "sha256": "65e23494b42c9d186c179348d32e493189863cf725e4e5aae08e5c12e45c322d",
       "bytes": 4454
@@ -3048,8 +2578,8 @@
     },
     {
       "path": "backend/training/scaling.py",
-      "sha256": "7686c427878cc36d86f38b5c05d589befe7e1542aed0a1ac4f058894b944f82b",
-      "bytes": 2933
+      "sha256": "1a809b8bc670f4c39be4b4cd6860f4cbe0e459e335ff8b7df928f33d3e3d3cab",
+      "bytes": 2869
     },
     {
       "path": "backend/training/tool_calling.py",

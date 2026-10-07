@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Structured audit records with credential redaction."""
+"""Append-only local audit log in SQLite."""
 from __future__ import annotations
-from datetime import datetime,timezone
-import json,re
 from pathlib import Path
-SENSITIVE=re.compile(r"(?:password|passwd|secret|token|api[_-]?key|authorization|cookie|private[_-]?key)",re.I)
-BEARER=re.compile(r"(?i)(bearer\s+)[A-Za-z0-9._~+/=-]+")
-FLAG=re.compile(r"(?i)(--?(?:password|token|api[-_]?key|secret)=)\S+")
-def redact_value(key,value):
-    if SENSITIVE.search(str(key)): return "[REDACTED]"
-    if isinstance(value,str): return FLAG.sub(r"\1[REDACTED]",BEARER.sub(r"\1[REDACTED]",value))
-    return value
-def redact(mapping): return {k:redact_value(k,v) for k,v in dict(mapping or {}).items()}
+import sqlite3, json, time
+
 class AuditLog:
-    def __init__(self,path): self.path=Path(path); self.path.parent.mkdir(parents=True,exist_ok=True)
-    def write(self,event):
-        record={"timestamp":datetime.now(timezone.utc).isoformat(),**dict(event or {})}
-        if "kwargs" in record: record["kwargs"]=redact(record["kwargs"])
-        with self.path.open("a",encoding="utf-8") as f: f.write(json.dumps(record,ensure_ascii=False)+"\n")
+    def __init__(self, db_path: str | Path):
+        self.path=Path(db_path); self.path.parent.mkdir(parents=True,exist_ok=True)
+        c=sqlite3.connect(self.path); c.execute("CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY, ts REAL, event TEXT NOT NULL)"); c.commit(); c.close()
+    def write(self,event:dict):
+        c=sqlite3.connect(self.path); c.execute("INSERT INTO audit(ts,event) VALUES(?,?)",(time.time(),json.dumps(event,ensure_ascii=False))); c.commit(); c.close()
+    def recent(self,limit=200):
+        c=sqlite3.connect(self.path); c.row_factory=sqlite3.Row; r=[dict(x) for x in c.execute("SELECT * FROM audit ORDER BY id DESC LIMIT ?",(limit,)).fetchall()]; c.close(); return r
