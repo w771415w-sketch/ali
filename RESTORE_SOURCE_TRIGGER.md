@@ -1,1 +1,0 @@
-Operational trigger. Restore workflow will generate restored-project from source-export. Do not keep after merge.
