@@ -1,0 +1,41 @@
+{
+  "schema": "ALI-CONVERSATION-INTELLIGENCE-RELEASE-EVIDENCE",
+  "version": "6.1.0",
+  "generated_at": "2026-10-07",
+  "repository": "w771415w-sketch/ali",
+  "branch": "main",
+  "conversation_layer": {
+    "generator": "conversation-intelligence/generate_conversation_corpus_v6.py",
+    "generator_version": "6.1.0",
+    "family_count": 132,
+    "turn_pattern_count": 10,
+    "target_records": 10000000,
+    "deterministic": true,
+    "streaming_shards": true,
+    "mutable_knowledge_separated_from_behavior": true
+  },
+  "verification": {
+    "id_formula_checked_against_generator_axes": true,
+    "requested_count": 10000000,
+    "generated_id_count": 10000000,
+    "unique_id_count": 10000000,
+    "duplicate_id_count": 0,
+    "result": "PASS",
+    "method": "local deterministic 10M ID uniqueness run using published generator axes and ID formula",
+    "elapsed_seconds": 27.57
+  },
+  "source_publication": {
+    "source_export_files": 588,
+    "source_export_parts": 85,
+    "first_part": "source-export/part-001.md",
+    "last_part": "source-export/part-085.md",
+    "missing_parts": [],
+    "manifest_declares_lines": 84920,
+    "manifest_declares_bytes": 10318019
+  },
+  "scope": {
+    "hermes_active": false,
+    "binary_zip_uploaded": false,
+    "note": "The repository contains the complete text source-export publication and the V6.1 conversation-intelligence generator/metadata. The original 220MB binary ZIP, native Windows binaries, and binary model weights were not reconstructed or uploaded through this connector."
+  }
+}
