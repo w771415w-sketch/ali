@@ -15,12 +15,12 @@ from .provenance import ProvenanceTracker
 from .scheduler import PriorityScheduler
 from .cache import TTLCache
 from .capabilities import CapabilityInspector
-from .observability import Metrics,EventLog
+from .observability import Metrics,EventLog\nfrom config.settings_service import ProjectSettingsService\nfrom conversation_intelligence.language_adapter import ArabicLanguageAdapter\nfrom diagnostics.engine import DiagnosticsEngine
 class ProfessionalRuntime:
     def __init__(self,root,hardware=None,max_workers=1):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True);self.loop=AgentLoop(self.root/"agent",hardware_policy=hardware or {});self.agent=ProjectAgent(self.root/"project",self.loop.store);self.planner=Planner()
         self.rate=RateLimiter(30,60);self.idempotency=IdempotencyLedger(self.root/"runtime.db");self.retry=RetryPolicy();self.breakers={};self.lineage=LineageRegistry(self.root/"registry");self.graph=KnowledgeGraph(self.root/"knowledge_graph.json");self.release=ReleaseManager(self.root/"registry");self.provenance=ProvenanceTracker(self.root/"provenance.json");self.scheduler=PriorityScheduler(max_workers);self.cache=TTLCache();self.capabilities=CapabilityInspector();self.metrics=Metrics();self.events=EventLog(self.root/"runtime-events.jsonl");self.hardware=hardware or {}
-        self.training=TrainingBridge(self.root/"training-jobs.json");self.hardware_bridge=HardwareBridge()
+        self.training=TrainingBridge(self.root/"training-jobs.json");self.hardware_bridge=HardwareBridge();self.settings=ProjectSettingsService();self.language=ArabicLanguageAdapter(profile=self.settings.language.current_id());self.diagnostics=DiagnosticsEngine()
     def prepare(self,text,project_id=None):
         prev=None
         if project_id:
@@ -63,6 +63,16 @@ class ProfessionalRuntime:
         pre=self.training_preflight(scale,steps)
         if not pre["ok"]:return pre
         return {"ok":True,"status":"queued","job":self.training.create_job(name),"preflight":pre}
+    def settings_snapshot(self,model_metadata=None):
+        return self.settings.snapshot(self.hardware_bridge.snapshot()["hardware"],model_metadata)
+    def save_language_profile(self,profile_id):
+        saved=self.settings.save_language(profile_id);self.language=ArabicLanguageAdapter(profile=profile_id);return saved
+    def save_training_selection(self,method_id,conversion_id,model_metadata=None):
+        return self.settings.save_training(self.hardware_bridge.snapshot()["hardware"],method_id,conversion_id,model_metadata)
+    def adapt_language(self,text,preferred_profile=None):return self.language.adapt(text,preferred_profile)
+    def diagnose_file(self,path):return self.diagnostics.inspect_file(path)
+    def diagnose_archive(self,path):return self.diagnostics.inspect_archive(path)
+    def diagnose_project(self,path):return self.diagnostics.diagnose_project(path)
     def impact(self,changed_files):return self.agent.changes.analyze(self.agent.workspace.root,changed_files)
     def health(self):return {"capabilities":self.capabilities.inspect(),"hardware":self.hardware,"pending_jobs":self.scheduler.pending(),"training_jobs":self.training.snapshot(),"metrics":self.metrics.snapshot()}
     def close(self):self.loop.store.close();self.idempotency.close()
