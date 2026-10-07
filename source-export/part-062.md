@@ -180,6 +180,7 @@ class CreateProjectTool(Tool):
 
 from __future__ import annotations
 
+import re
 import logging
 from typing import Any, Dict, List, Optional, Type, Union
 
@@ -224,50 +225,80 @@ class ToolRegistry:
         self._audit_logger = fn
 
     # ------------------------------------------------------------ execution
+    def _audit_kwargs(self, kwargs: Dict[str, Any]) -> Dict[str, Any]:
+        """Return a log-safe copy of tool arguments."""
+        sensitive = re.compile(
+            r"(?:password|passwd|secret|token|api[_-]?key|authorization|cookie)",
+            re.I,
+        )
+        safe: Dict[str, Any] = {}
+        for key, value in kwargs.items():
+            if sensitive.search(str(key)):
+                safe[key] = "[REDACTED]"
+            elif key == "command" and isinstance(value, str):
+                # Avoid recording obvious inline credentials in shell commands.
+                redacted = re.sub(
+                    r"(?i)(bearer\s+)[A-Za-z0-9._~+/=-]+",
+                    r"\1[REDACTED]",
+                    value,
+                )
+                redacted = re.sub(
+                    r"(?i)(--?(?:password|token|api[-_]?key|secret)=)\S+",
+                    r"\1[REDACTED]",
+                    redacted,
+                )
+                safe[key] = redacted
+            else:
+                safe[key] = value
+        return safe
+
     def execute(self, name: str, ctx: Any, **kwargs: Any) -> ToolResult:
         """تنفيذ الأداة بعد فحص الصلاحيات والـ input."""
         tool = self._tools.get(name)
         if tool is None:
             return ToolResult.fail("unknown tool: " + name, code="UNKNOWN_TOOL")
 
-        # 1) فحص input
         err = tool.validate_input(kwargs)
         if err:
-            return ToolResult.fail(err, code="PARSE")
+            result = ToolResult.fail(err, code="PARSE")
+            self._audit(name, kwargs, result)
+            return result
 
-        # 2) فحص الصلاحيات
         if self._permission_manager is not None:
             decision = self._permission_manager.check(
                 user=None, tool_name=name,
                 permission=tool.permission, ctx=ctx, kwargs=kwargs,
             )
             if not decision.allowed:
-                return ToolResult.fail(
+                result = ToolResult.fail(
                     "permission denied: " + (decision.reason or ""),
                     code="DENIED",
                 )
+                self._audit(name, kwargs, result)
+                return result
 
-        # 3) التنفيذ
         try:
             result = tool.execute(ctx, **kwargs)
         except Exception as e:
             log.exception("Tool %s raised: %s", name, e)
             result = ToolResult.fail(str(e), code="INTERNAL")
 
-        # 4) Audit
-        if self._audit_logger is not None:
-            try:
-                self._audit_logger({
-                    "tool": name,
-                    "kwargs": kwargs,
-                    "ok": result.ok,
-                    "error_code": result.error_code,
-                })
-            except Exception:
-                pass
-
+        self._audit(name, kwargs, result)
         return result
 
+    def _audit(self, name: str, kwargs: Dict[str, Any], result: ToolResult) -> None:
+        if self._audit_logger is None:
+            return
+        try:
+            self._audit_logger({
+                "tool": name,
+                "kwargs": self._audit_kwargs(kwargs),
+                "ok": result.ok,
+                "error_code": result.error_code,
+            })
+        except Exception:
+            # Audit failures must never break tool execution.
+            pass
     def default_set(self) -> List[Union[Tool, Type[Tool]]]:
         """القائمة الافتراضية للأدوات المسجّلة عند البدء."""
         from tools.filesystem import (
