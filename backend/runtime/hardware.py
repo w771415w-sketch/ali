@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]; PROFILE_PATH=ROOT/"config"/"hardware_p
 @dataclass
 class HardwareInfo:
     os:str=""; python:str=""; cpu_cores:int=0; ram_gb:float=0.0; gpu_available:bool=False; gpu_name:str="CPU"; vram_gb:float=0.0; torch_cuda:bool=False; disk_free_gb:float=0.0; cuda_capability:tuple[int,int]|None=None; physical_cores:int=0; backend_hint:str=""; gpu_mem_used_gb:float=0.0; gpu_mem_free_gb:float=0.0; cuda_self_test:bool=False
-    device_name:str="Unknown"; model:str=""; os_name:str=""; cpu_model:str=""; cpu_threads:int=0; ram_available_gb:float=0.0; ram_used_percent:float=0.0; gpu_percent:float=0.0; temperature_c:float=0.0; battery_percent:float=-1.0; battery_minutes:int=-1; power_plugged:bool|None=None
+    device_name:str="Unknown"; model:str=""; os_name:str=""; cpu_model:str=""; cpu_threads:int=0; ram_available_gb:float=0.0; ram_used_percent:float=0.0; gpu_percent:float=0.0; cpu_percent:float=0.0; temperature_c:float=0.0; battery_percent:float=-1.0; battery_minutes:int=-1; power_plugged:bool|None=None
     def __post_init__(self):
         if not self.cpu_threads:self.cpu_threads=self.cpu_cores
         if not self.cpu_cores:self.cpu_cores=self.cpu_threads
