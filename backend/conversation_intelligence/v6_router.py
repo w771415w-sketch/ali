@@ -24,7 +24,7 @@ CORRECT=("هذا خطأ","غير صحيح","صحح","incorrect","wrong")
 FRESH=("الآن","الان","اليوم","الأحدث","آخر","حديث","latest","current","today","now","search")
 RISK=("احذف","دمر","overwrite","delete","publish","انشر","ارفع","deploy","أرسل","إرسال")
 def _domain(s):
- t=normalize(s); groups={"software":("python","javascript","react","electron","backend","frontend","كود","برمجة"),"ai":("llm","rag","lora","qlora","gguf","نموذج","تدريب","ذكاء اصطناعي"),"data":("sql","sqlite","postgres","csv","json","بيانات","قاعدة بيانات"),"git":("git","github","commit","branch","مستودع"),"security":("security","token","secret","permission","أمن","صلاحيات"),"windows":("windows","powershell","cmd","ويندوز"),"web":("http","https","browser","ويب")}
+ t=normalize(s); groups={"software":("python","javascript","react","electron","backend","frontend","كود","برمجة","مشروع","تطبيق","برنامج","اختبر","اختبار","عدل","عدّل"),"ai":("llm","rag","lora","qlora","gguf","نموذج","تدريب","ذكاء اصطناعي"),"data":("sql","sqlite","postgres","csv","json","بيانات","قاعدة بيانات"),"git":("git","github","commit","branch","مستودع"),"security":("security","token","secret","permission","أمن","صلاحيات"),"windows":("windows","powershell","cmd","ويندوز"),"web":("http","https","browser","ويب")}
  score={k:sum(w in t for w in ws) for k,ws in groups.items()}; k=max(score,key=score.get); return k if score[k] else "general"
 def frame(text,state=None):
  s=str(text or ""); t=normalize(s); cont=hit(s,CONT); conf=hit(s,CONF); corr=hit(s,CORRECT); cancel=hit(s,CANCEL); fresh=hit(s,FRESH)
