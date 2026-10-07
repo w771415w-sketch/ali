@@ -1553,16 +1553,16 @@ class App:
     def settings_dialog(self):
         w = tk.Toplevel(self.root)
         w.title("ALI AI 2.5 · Settings")
-        w.geometry("860x820")
+        w.geometry("860x900")
         w.configure(bg=C["BG"])
 
         internet = tk.BooleanVar(value=self.runtime.allow_internet)
         auto = tk.BooleanVar(value=bool(self.cfg.get("auto_improve", False)))
         mode = tk.StringVar(value=self.runtime.permission_manager.mode)
         language_profile = tk.StringVar(value=str(self.cfg.get("language_profile", "ar-SA")))
+        dataset_strategy = tk.StringVar(value=str(self.cfg.get("dataset_strategy", "cumulative_replay")))
         training_method = tk.StringVar(value=str(self.cfg.get("training_method", "lora_continue_cpu")))
         conversion_profile = tk.StringVar(value=str(self.cfg.get("conversion_profile", "q4_k_m")))
-        dataset_strategy = tk.StringVar(value=str(self.cfg.get("dataset_strategy", "cumulative_replay")))
 
         tk.Checkbutton(
             w, text="تفعيل البحث عبر الإنترنت داخل المحادثة (مع التحقق من المصادر)",
@@ -1578,24 +1578,54 @@ class App:
             ttk.Combobox(w, textvariable=var, values=values, state="readonly").pack(fill="x", padx=18)
 
         combo("لهجة/أسلوب الرد العربي", language_profile, ["ar-MSA","ar-SA","ar-YE","ar-EG"])
-        combo("طريقة التدريب", training_method, [
-            "lora_continue_cpu","lora_cpu","continued_sft_cpu","full_finetune_micro_cpu"
-        ])
-        combo("طريقة تحويل النموذج", conversion_profile, [
-            "q4_k_m","q5_k_m","q6_k","q8_0","f16","bf16"
-        ])
-        combo("استراتيجية البيانات الجديدة", dataset_strategy, ["cumulative_replay","delta_only"])
 
-        tk.Label(w, text="Permission mode", bg=C["BG"], fg=C["MUTED"]).pack(anchor="w", padx=18, pady=(12,2))
-        ttk.Combobox(w, textvariable=mode, values=[x[0] for x in PERM_MODES], state="readonly").pack(fill="x", padx=18)
+        try:
+            from config.settings_service import ProjectSettingsService
+            settings_service = ProjectSettingsService()
+            snapshot = settings_service.snapshot(self.hardware)
+            available_methods = [m for m in snapshot["training_methods"] if m.get("available")]
+            all_methods = snapshot["training_methods"]
+            conversions = [c for c in snapshot["conversion_profiles"] if c.get("enabled", True)]
+            method_ids = [m["id"] for m in available_methods] or ["lora_continue_cpu"]
+            conversion_ids = [c["id"] for c in conversions] or ["q4_k_m"]
+
+            if training_method.get() not in method_ids:
+                training_method.set(method_ids[0])
+            if conversion_profile.get() not in conversion_ids:
+                conversion_profile.set(next((c["id"] for c in conversions if c.get("recommended")), conversion_ids[0]))
+
+            combo("طريقة التدريب المتاحة للجهاز", training_method, method_ids)
+            combo("طريقة تحويل النموذج إلى GGUF", conversion_profile, conversion_ids)
+            combo("استراتيجية إضافة البيانات", dataset_strategy, [x["id"] for x in snapshot["dataset_strategies"]] or ["cumulative_replay"])
+
+            details = []
+            for m in all_methods:
+                status = "متاح" if m.get("available") else "غير متاح"
+                reason = m.get("disabled_reason") or m.get("reason") or ""
+                details.append(f"{m['id']} — {status}" + (f" — {reason}" if reason else ""))
+            tk.Label(
+                w, text="حالة طرق التدريب", bg=C["BG"], fg=C["MUTED"],
+                font=("Segoe UI Semibold", 8),
+            ).pack(anchor="w", padx=18, pady=(14,4))
+            tk.Label(
+                w, text="\n".join(details),
+                bg=C["BG"], fg=C["INK"], justify="left", anchor="w", wraplength=790,
+            ).pack(fill="x", padx=28)
+        except Exception as exc:
+            combo("طريقة التدريب", training_method, ["lora_continue_cpu"])
+            combo("طريقة تحويل النموذج", conversion_profile, ["q4_k_m"])
+            combo("استراتيجية إضافة البيانات", dataset_strategy, ["cumulative_replay"])
+            tk.Label(w, text=f"تعذر قراءة كتالوج التدريب: {exc}", bg=C["BG"], fg=C["AMBER"], wraplength=790).pack(anchor="w", padx=18, pady=10)
+
+        combo("Permission mode", mode, [x[0] for x in PERM_MODES])
 
         tk.Label(
             w,
             text=(
                 "P50: التدريب المحلي CPU-first بحد أقصى 6 خيوط ووظيفة ثقيلة واحدة. "
-                "QLoRA/GPU التدريب مغلق افتراضيًا لأن Quadro M1000M فيها 2GB VRAM. "
-                "استكمال التدريب يبدأ من Checkpoint/Adapter موثوق؛ GGUF مخرج تشغيل ولا يُستخدم كمصدر تدريب. "
-                "البيانات الجديدة تُراجع وتُزيل التكرار وتُقيّم قبل اعتمادها."
+                "QLoRA/GPU التدريب غير متاح تلقائيًا على Quadro M1000M 2GB. "
+                "استكمال التدريب يبدأ من Checkpoint/Adapter موثوق؛ GGUF مخرج تشغيل وليس مصدر تدريب. "
+                "البيانات الجديدة تمر عبر تنظيف وإزالة التكرار وCumulative Replay وتقييم Regression قبل اعتماد إصدار جديد."
             ),
             bg=C["BG"], fg=C["AMBER"], wraplength=790, justify="left",
         ).pack(anchor="w", padx=18, pady=18)
