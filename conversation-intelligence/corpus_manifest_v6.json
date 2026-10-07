@@ -8,7 +8,7 @@
   "storage": "streamed sharded output; do not commit generated multi-gigabyte corpus to the source repository",
   "uniqueness": "deterministic canonical id from generator version + seed + row index + semantic axes",
   "semantic_axes": {
-    "families": 125,
+    "families": 132,
     "topics": 96,
     "user_styles": 18,
     "language_modes": 6,
@@ -19,7 +19,7 @@
     "turn_patterns": 10,
     "repair_states": 6
   },
-  "documented_combinatorial_space": 77760000000,
+  "documented_combinatorial_space": 82114560000,
   "required_release_evidence": [
     "requested_count",
     "generated_count",
@@ -36,6 +36,7 @@
     "10 dialogue patterns including requirement change, multi-intent and final verification",
     "deterministic 10M target retained",
     "train/validation/test must remain disjoint",
-    "synthetic behavior data remains separate from mutable knowledge"
+    "synthetic behavior data remains separate from mutable knowledge",
+    "132 conversation/project/agent families verified in generator"
   ]
 }
