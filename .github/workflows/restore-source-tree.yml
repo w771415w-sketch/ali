@@ -1,11 +1,11 @@
-name: Restore Source Tree
+name: Restore ALI Source Tree
 
 on:
   push:
     paths:
       - "source-export/**"
       - "scripts/extract_project.py"
-      - "scripts/restore-source-tree.yml"
+      - ".github/workflows/restore-source-tree.yml"
   workflow_dispatch:
 
 permissions:
@@ -21,37 +21,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Restore 588-file source tree
+      - name: Restore source tree from export
         run: python scripts/extract_project.py
-      - name: Overlay verified runtime extensions
+      - name: Verify source record count
         run: |
-          set -e
-          mkdir -p restored-project/backend/config
-          mkdir -p restored-project/backend/conversation_intelligence
-          mkdir -p restored-project/backend/diagnostics
-          mkdir -p restored-project/backend/model
-          mkdir -p restored-project/backend/training
-          cp backend/config/language_profiles.json restored-project/backend/config/
-          cp backend/config/language_settings.py restored-project/backend/config/
-          cp backend/config/settings_service.py restored-project/backend/config/
-          cp backend/config/training_methods.json restored-project/backend/config/
-          cp backend/config/training_settings.py restored-project/backend/config/
-          cp backend/conversation_intelligence/language_adapter.py restored-project/backend/conversation_intelligence/
-          cp backend/conversation_intelligence/importer.py restored-project/backend/conversation_intelligence/
-          cp -R backend/diagnostics/. restored-project/backend/diagnostics/
-          cp backend/model/conversion.py restored-project/backend/model/
-          cp backend/model/conversion_policy.py restored-project/backend/model/
-          cp backend/training/continual_dataset.py restored-project/backend/training/
-          cp backend/training/lifecycle.py restored-project/backend/training/
-          cp backend/training/controller.py restored-project/backend/training/
-      - name: Overlay modern executable backend
-        run: |
-          mkdir -p restored-project/backend
-          cp -a backend/. restored-project/backend/
-      - name: Validate restored Python
+          test "$(find restored-project -type f | wc -l)" -eq 588
+      - name: Compile restored Python
         run: |
           python -m compileall -q restored-project/backend
-      - name: Record restore manifest
+      - name: Write deterministic manifest
         run: |
           python - <<'PY'
           import hashlib,json
@@ -61,15 +39,14 @@ jobs:
           rows=[]
           for p in sorted(files):
               rows.append({"path":str(p.relative_to(root)).replace("\\","/"),"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"bytes":p.stat().st_size})
-          Path("restored-project/MANIFEST.json").write_text(json.dumps({"files":len(rows),"entries":rows},ensure_ascii=False,indent=2),encoding="utf-8")
-          print("restored_files=",len(rows))
+          if len(rows)!=588:
+              raise SystemExit(f"expected 588 restored files, got {len(rows)}")
+          (root/"MANIFEST.json").write_text(json.dumps({"files":len(rows),"entries":rows},ensure_ascii=False,indent=2),encoding="utf-8")
           PY
-      - name: Commit restored tree
+      - name: Commit canonical restored tree
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add restored-project
-          git diff --cached --quiet || git commit -m "Restore full source tree [skip ci]"
+          git diff --cached --quiet || git commit -m "Sync canonical restored source tree [skip ci]"
           git push
-
-# trigger: restore full source tree audit
