@@ -1,5 +1,5 @@
 {
-  "version": "6.0.0",
+  "version": "6.1.0",
   "language_support": [
     "ar",
     "en",
@@ -100,6 +100,38 @@
       "refusal",
       "safe_alternative",
       "permission_boundary"
+    ],
+    "product": [
+      "product_thinking",
+      "user_stories",
+      "acceptance_criteria",
+      "requirements_traceability",
+      "customer_support",
+      "business_process"
+    ],
+    "ux": [
+      "ux_research",
+      "accessibility",
+      "localization",
+      "tone_adaptation",
+      "expertise_adaptation"
+    ],
+    "operations_extended": [
+      "observability",
+      "incident_response",
+      "disaster_recovery",
+      "backup_restore",
+      "capacity_planning",
+      "cost_optimization",
+      "workflow_automation",
+      "sandbox_execution"
+    ],
+    "quality": [
+      "source_quality",
+      "knowledge_provenance",
+      "fact_checking",
+      "regression_prevention",
+      "false_completion_recovery"
     ]
   },
   "speech_acts": [
@@ -115,7 +147,12 @@
     "continuation",
     "cancellation",
     "comparison",
-    "decision"
+    "decision",
+    "status_request",
+    "progress_request",
+    "request_for_artifact",
+    "approval",
+    "rejection"
   ],
   "language_modes": [
     "ar_fusha",
@@ -123,7 +160,8 @@
     "ar_colloquial",
     "en",
     "mixed_ar_en",
-    "technical_mixed"
+    "technical_mixed",
+    "ar_noisy"
   ],
   "difficulty": [
     "basic",
