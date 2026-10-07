@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 from .project_io import Workspace
 from .command_runner import CommandRunner
 from .acceptance import AcceptanceRunner, AcceptanceCheck
