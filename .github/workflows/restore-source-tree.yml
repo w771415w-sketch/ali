@@ -46,3 +46,5 @@ jobs:
           git add restored-project
           git diff --cached --quiet || git commit -m "Restore full source tree [skip ci]"
           git push
+
+# trigger: restore full source tree audit
