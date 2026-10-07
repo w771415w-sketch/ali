@@ -1,0 +1,1 @@
+Temporary trigger only: snapshot current main for local full audit. Do not merge.
