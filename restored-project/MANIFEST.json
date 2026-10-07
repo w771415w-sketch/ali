@@ -2453,8 +2453,8 @@
     },
     {
       "path": "backend/tests/test_v458_bundled_release.py",
-      "sha256": "9d7b44d12d2b1c1be8c4248b15ab52c1d45cb0f3765d8da06d289691e3f779d7",
-      "bytes": 3287
+      "sha256": "3e7bcdacea6dffdf66db7e6ac93fade936a9274eff16cddb2dccba1b012f1352",
+      "bytes": 3301
     },
     {
       "path": "backend/tests/test_web_chat_integration.py",
