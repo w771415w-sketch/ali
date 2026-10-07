@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 import re
 class MemoryManager:
     def __init__(self,store): self.store=store
