@@ -49,3 +49,15 @@ V6.1 expands the existing V6 layer with 132 scenario families and 10 dialogue pa
 The 10M corpus remains generated on demand in deterministic shards; generator + manifest are stored in the repository so Git history does not contain a multi-gigabyte synthetic dataset.
 
 The repository publication is a complete **text source-export** of the provided 588-file export in 85 ordered parts. It is not a claim that the original 220MB binary ZIP, Windows native binaries, or model-weight binaries were reconstructed from that markdown export.
+
+## Executable AI Control Plane
+
+The repository now contains a stdlib-first executable control-plane spine at `backend/ali_control_plane.py`. It provides a machine-readable task contract, requirement-gap and conflict detection, dependency-aware planning, persistent project state in SQLite, scoped memory, local knowledge ingestion/search with provenance, approval-gated project file/command execution, workspace containment, snapshots, model routing with fallback, optional multi-agent handoffs, and an AgentLoop with dry-run/verified states.
+
+Run a deterministic smoke test with:
+`PYTHONPATH=backend python backend/main.py --self-test`
+
+The P50 hardware/runtime policy remains separate and is checked with:
+`PYTHONPATH=backend python backend/main.py --target-p50`
+
+The control plane is an integration foundation, not a claim that the historical 588-file source export has been fully reconstructed into the native Windows desktop runtime. Native Electron/node-pty, real model/GGUF inference, SFT/LoRA resume, and full Windows end-to-end release validation remain separate gates.
