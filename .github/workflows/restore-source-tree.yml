@@ -44,9 +44,13 @@ jobs:
           cp backend/training/continual_dataset.py restored-project/backend/training/
           cp backend/training/lifecycle.py restored-project/backend/training/
           cp backend/training/controller.py restored-project/backend/training/
+      - name: Overlay modern executable backend
+        run: |
+          mkdir -p restored-project/backend
+          cp -a backend/. restored-project/backend/
       - name: Validate restored Python
         run: |
-          python -m compileall -q restored-project/backend || true
+          python -m compileall -q restored-project/backend
       - name: Record restore manifest
         run: |
           python - <<'PY'
