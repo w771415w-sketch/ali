@@ -61,3 +61,12 @@ Local verification after this integration: Python compileall PASS; full backend 
 ## Still not marked complete
 
 A real production-complete ALI application still requires native execution and integration of the existing desktop runtime, Electron/node-pty path, model loading/inference, GGUF/llama.cpp, real SFT/LoRA training and checkpoint resume, complete UI-driven filesystem/Git workflows, and the remaining multimodal/production acceptance suites. These are not inferred from documentation alone.
+
+
+## Professional pass additions
+
+The executable control-plane surface has been expanded with requirements/contracts, acceptance, planning/DAG, durable state/events, validated memory, knowledge ingestion/search/provenance, knowledge graph, tool registry, project/file execution, Git integration, recovery/checkpoints, reliability controls, scheduler, model routing, artifacts/lineage/provenance, governance/RBAC/network controls, observability, evaluation/release gates, dataset quality/leakage checks, self-improvement gating, project/code intelligence, model runtime/GGUF capability discovery, multimodal capability detection, local gateway, CI, and Windows/P50 native gate tooling.
+
+Local final evidence on the reconstructed working tree: compileall PASS; **25/25 backend tests PASS**; control-plane self-test PASS; canonical `main.py --self-test` PASS; deterministic P50 admission PASS; professional health PASS.
+
+These results certify the executable foundation only. Native Windows/Electron/node-pty/model-weight/GGUF/SFT-LoRA/multimodal/distributed-production gates remain pending until run in the target environment.
