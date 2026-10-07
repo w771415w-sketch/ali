@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 from collections import Counter
 import json,time
 from pathlib import Path
