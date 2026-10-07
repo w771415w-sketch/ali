@@ -1613,10 +1613,22 @@ class App:
                 "dataset_strategy":dataset_strategy.get(),
             })
             try:
-                from conversation_intelligence.language_adapter import ArabicLanguageAdapter
-                self.language_adapter=ArabicLanguageAdapter(profile=language_profile.get())
-            except Exception:
-                self.language_adapter=None
+                from config.settings_service import ProjectSettingsService
+                service = ProjectSettingsService()
+                service.save_language(language_profile.get())
+                service.save_training(self.hardware, training_method.get(), conversion_profile.get())
+                self.language_adapter = ArabicLanguageAdapter(profile=language_profile.get())
+            except Exception as exc:
+                messagebox.showwarning(
+                    "ALI Settings",
+                    f"تم حفظ الإعدادات الأساسية، لكن تعذر اعتماد إعداد التدريب/التحويل: {exc}",
+                    parent=w,
+                )
+                try:
+                    from conversation_intelligence.language_adapter import ArabicLanguageAdapter
+                    self.language_adapter = ArabicLanguageAdapter(profile=language_profile.get())
+                except Exception:
+                    self.language_adapter = None
             save_cfg(self.cfg);w.destroy();self._refresh_status()
         self._button(w,"حفظ الإعدادات",save,accent=True)
 
