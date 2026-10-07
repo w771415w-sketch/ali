@@ -1,0 +1,31 @@
+{
+  "release": "4.5.8",
+  "trained_model": "ALI-v1",
+  "base_model": "ALI-Bootstrap-v2.5",
+  "source_fixture_sha256": "371d2e0de7e109848ee8246801e4de80e1f339a9d3be9d0f5add36bc241087bb",
+  "parsed_sections": 216,
+  "unique_samples": 215,
+  "preseeded_training_qa_chunks": 215,
+  "training_steps": 13,
+  "evaluation_loss": 6.771079858144124,
+  "evaluation_perplexity": 872.2532954340983,
+  "quiz": {
+    "questions": 216,
+    "source_answer_match": "216/216"
+  },
+  "artifacts": {
+    "checkpoint_pt": "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/checkpoint.pt",
+    "internal_model_safetensors": "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/internal_model.safetensors",
+    "adapter_model_safetensors": "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/adapter_model.safetensors",
+    "merged_hf_model_safetensors": "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/merged_hf/model.safetensors",
+    "active_model_safetensors": "backend/models/active/ALI-v1/model.safetensors"
+  },
+  "gguf": {
+    "status": "pending_converter"
+  },
+  "native_windows": {
+    "status": "requires_windows_host",
+    "cuda": "requires_windows_self_test",
+    "electron_dotnet_conpty": "requires_windows_build_host"
+  }
+}

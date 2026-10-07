@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "root": "D:\\\\AI ALI\\\\Hermes",
+  "read_only": true,
+  "max_file_bytes": 2000000,
+  "max_context_chars": 8000,
+  "allow_database_reads": true,
+  "allow_api": false,
+  "allow_mcp": false
+}

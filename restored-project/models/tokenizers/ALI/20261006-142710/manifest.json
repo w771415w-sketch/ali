@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ALI:tokenizer:20261006-142710",
+  "artifact_type": "tokenizer",
+  "compatibility": {
+    "vocab_size": 2048
+  },
+  "created_at": 1791296830.577539,
+  "evaluation": {},
+  "files": [
+    {
+      "path": "special_tokens_map.json",
+      "sha256": "1bd43fafc5dc9b132a08feb83487bb41bf5f53bcf89a15b0aa782d148e78dac2",
+      "size": 202
+    },
+    {
+      "path": "tokenizer.model",
+      "sha256": "3d9d560cbcc0a73ce6db8a89a5c290bbe63d7288cacbd6ce5707df4de8e9f776",
+      "size": 274994
+    },
+    {
+      "path": "tokenizer.vocab",
+      "sha256": "5596ac489deb70f2415368648fd3a08a544107b77e71be8f9b10fe04b0a1310d",
+      "size": 34245
+    },
+    {
+      "path": "tokenizer_config.json",
+      "sha256": "9354c9e340899300c7a6ff94eb0dc271fe37a4d254e00dfd66785d4000873b92",
+      "size": 313
+    }
+  ],
+  "lineage": {
+    "corpus_hash": "72c5f8f688598e118d3dcb4f3f0332562f6870f3ca0fd7a0eef3574902c5c8d7",
+    "inputs": [
+      "/mnt/data/ALI_Studio_Pro_Windows_v4.5.8_CUMULATIVE/project/backend/models/generations/v4/cumulative/train.jsonl"
+    ]
+  },
+  "metadata": {
+    "actual_vocab_size": 2048,
+    "requested_vocab_size": 2048
+  },
+  "name": "ALI",
+  "path": "/mnt/data/ALI_Studio_Pro_Windows_v4.5.8_CUMULATIVE/project/models/tokenizers/ALI/20261006-142710",
+  "schema_version": 2,
+  "sha256": "855ec73474675763ea2f2f3ebf1e3c6b63d99ad25fa205a15d192aa3ae4848de",
+  "source": "local-training",
+  "training": {},
+  "version": "20261006-142710"
+}

@@ -1,0 +1,3 @@
+# ALI AI — DEVELOPMENT GUIDE
+
+## الإعداد

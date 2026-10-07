@@ -1,0 +1,33 @@
+{
+  "generation": "v2",
+  "parent_generation": "v1",
+  "source_reports": [
+    {
+      "source": "artifacts/continuous_learning/validated/06ba230d8cf9b575_ALI_Conversation_Training_Core_V2.md",
+      "exists": true,
+      "samples": 221,
+      "warnings": []
+    },
+    {
+      "source": "artifacts/continuous_learning/validated/094791a57c8c0572_ALI_behavior_training_V2_import_sample.md",
+      "exists": true,
+      "samples": 120,
+      "warnings": []
+    },
+    {
+      "source": "training/examples/ALI_Professional_QA_P50_V2.md",
+      "exists": true,
+      "samples": 36,
+      "warnings": []
+    }
+  ],
+  "delta_samples": 377,
+  "delta_duplicates_removed": 0,
+  "delta_hash": "779b52f73e6e282a1ed507a3065965b5159241309bf721465ed26e21d0e36d6f",
+  "cumulative_samples": 914,
+  "cumulative_duplicates_removed": 0,
+  "cumulative_hash": "2c00d259bd1e0d465dcac6ce301b9d504f4dc30da1d105021cfbb7b1a5d9a746",
+  "historical_model_weights_available": false,
+  "historical_model_lineage_status": "data_reconstructed_only",
+  "created_at": 1791296618.0305235
+}

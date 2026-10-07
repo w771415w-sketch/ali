@@ -1,0 +1,22 @@
+{
+  "name": "ALI Studio Pro Windows",
+  "version": "4.2.0",
+  "created_for": "Continuous Learning v1→vN",
+  "file_count": 394,
+  "files_sha256": "2592ba7494c75dd054aa8f33698da91f0d4d1ca04bdd7bbfac844d2378296df5",
+  "verification": {
+    "pytest": "148 passed, 34 skipped, 2 warnings",
+    "python_compile": "216 files / 0 failures",
+    "electron_syntax": "PASS",
+    "e2e": "v1 then v2 promoted successfully in temporary workspace",
+    "windows_native_package": "not executed in Linux"
+  },
+  "notable": {
+    "automatic_training_after_drop": true,
+    "immediate_rag_index": true,
+    "cross_file_sample_dedup": true,
+    "human_versions": "v1,v2,...",
+    "promotion_gate": true,
+    "rollback_via_registry": true
+  }
+}

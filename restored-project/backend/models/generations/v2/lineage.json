@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "generation": "v2",
+  "parent_generation": "v1",
+  "ancestors": [
+    "v1"
+  ],
+  "delta_dataset": {
+    "path": "/mnt/data/ALI_Studio_Pro_Windows_v4.5.8_CUMULATIVE/project/backend/models/generations/v2/delta/train.jsonl",
+    "sha256": "779b52f73e6e282a1ed507a3065965b5159241309bf721465ed26e21d0e36d6f",
+    "samples": 377
+  },
+  "cumulative_dataset": {
+    "path": "/mnt/data/ALI_Studio_Pro_Windows_v4.5.8_CUMULATIVE/project/backend/models/generations/v2/cumulative/train.jsonl",
+    "sha256": "2c00d259bd1e0d465dcac6ce301b9d504f4dc30da1d105021cfbb7b1a5d9a746",
+    "samples": 914
+  },
+  "historical_model_status": "not_reconstructed_from_missing_binary_weights",
+  "created_at": 1791296618.0306842
+}

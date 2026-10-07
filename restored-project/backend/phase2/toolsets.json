@@ -1,0 +1,45 @@
+{
+  "requested_toolsets": 58,
+  "catalog": {
+    "web": [
+      "web",
+      "search",
+      "x_search",
+      "browser",
+      "video_analyze",
+      "vision_analyze",
+      "homeassistant",
+      "feishu_doc",
+      "feishu_drive"
+    ],
+    "files_code": [
+      "file",
+      "terminal",
+      "code_execution",
+      "delegate_task"
+    ],
+    "creative_media": [
+      "image_gen",
+      "video_gen",
+      "tts",
+      "creative"
+    ],
+    "intelligence_control": [
+      "skills",
+      "todo",
+      "memory",
+      "session_search",
+      "cronjob",
+      "clarify"
+    ],
+    "planned": [
+      "voice",
+      "subagents",
+      "browser_use",
+      "computer_use"
+    ],
+    "enabled_by_default": false
+  },
+  "note": "The request states 58 toolsets while only the explicitly named toolsets are recorded here; no unnamed capabilities are fabricated.",
+  "enabled_by_default": false
+}

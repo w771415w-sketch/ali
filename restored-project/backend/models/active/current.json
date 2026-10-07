@@ -1,0 +1,8 @@
+{
+  "model": "ALI",
+  "active_generation": "v4",
+  "hf_dir": "models/active/ALI-v4",
+  "checkpoint": "models/active/ALI-v4",
+  "gguf": "",
+  "updated_at": 1791299824.4500115
+}

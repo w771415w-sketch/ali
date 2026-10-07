@@ -1,0 +1,40 @@
+{
+  "global_step": 60,
+  "micro_step": 480,
+  "best_val": 6.6361991246541345,
+  "tokens_seen": 37283,
+  "samples_seen": 480,
+  "config": {
+    "epochs": 1,
+    "batch_size": 1,
+    "grad_accum": 8,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.1,
+    "warmup_steps": 20,
+    "max_steps": 60,
+    "save_every": 100,
+    "eval_every": 100,
+    "max_seq_len": 128,
+    "seed": 42,
+    "device": "cpu",
+    "gradient_checkpointing": true,
+    "max_grad_norm": 1.0,
+    "train_mode": "full",
+    "lora_rank": 8,
+    "lora_alpha": 16.0,
+    "lora_dropout": 0.05,
+    "amp": true,
+    "dtype": "float16",
+    "cpu_amp": false,
+    "cpu_threads": 0,
+    "use_compile": false,
+    "dataset_mode": "causal",
+    "curriculum": true,
+    "distributed_backend": "auto",
+    "world_size": 1
+  },
+  "meta": {
+    "last_loss": 6.3332366943359375,
+    "val_loss": 6.6361991246541345
+  }
+}

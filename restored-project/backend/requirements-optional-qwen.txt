@@ -1,0 +1,6 @@
+# Optional stronger local base / LoRA training
+# The Qwen model card currently requires transformers support for qwen2.
+transformers>=4.43.1,<5
+peft>=0.12,<2
+accelerate>=0.33,<2
+safetensors>=0.7,<1

@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "generation": "v4",
+  "parent_generation": "v3",
+  "ancestors": [
+    "v1",
+    "v2",
+    "v3"
+  ],
+  "historical_model_status": "not_reconstructed_from_missing_binary_weights",
+  "delta_dataset": {
+    "path": "models/generations/v4/delta/train.jsonl",
+    "sha256": "afe6e3feb0d5e3f6f06c5266873fb65b460226308f0cff9b1eafb991eecf2fd3",
+    "samples": 84
+  },
+  "cumulative_dataset": {
+    "path": "models/generations/v4/cumulative/train.jsonl",
+    "sha256": "90f96c89541770624c60f416a1ce02f42dc9557c11dd5e06737219f32878cdcd",
+    "samples": 1532
+  },
+  "parent_model": {
+    "generation": "v3",
+    "available_in_source_bundle": false
+  },
+  "final_model": {
+    "hf_dir": "models/active/ALI-v4",
+    "sha256": "aa12180223a7e1e542b1fd1d7e479f9ac092c0a0678c1f4c227145bd887dd1dc"
+  },
+  "gguf": {
+    "status": "pending_converter",
+    "reason": "Windows llama.cpp converter binary not included"
+  }
+}

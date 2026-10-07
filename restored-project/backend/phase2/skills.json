@@ -1,0 +1,89 @@
+{
+  "requested_total": 58,
+  "categories": {
+    "apple": [
+      "notes",
+      "reminders",
+      "findmy",
+      "imessage"
+    ],
+    "autonomous-ai-agents": [
+      "claude-code",
+      "codex",
+      "computer-use",
+      "ALI-agent",
+      "opencode"
+    ],
+    "creative": [
+      "architecture-diagram",
+      "ascii-video",
+      "baoyu-infographic",
+      "claude-design",
+      "design-md",
+      "humanizer",
+      "manim-video",
+      "p5js",
+      "popular-web-designs",
+      "songwriting"
+    ],
+    "devops": [
+      "sdlc-review"
+    ],
+    "email": [
+      "inbox-triage",
+      "himalaya"
+    ],
+    "media": [
+      "gif-search",
+      "songsee",
+      "youtube-content"
+    ],
+    "note-taking": [
+      "obsidian"
+    ],
+    "productivity": [
+      "airtable",
+      "box",
+      "docx",
+      "google-workspace",
+      "maps",
+      "meeting-action-items",
+      "notion",
+      "pdf",
+      "powerpoint",
+      "product-price-monitor",
+      "teams-meeting-pipeline",
+      "weekly-review",
+      "xlsx",
+      "document-to-action-items"
+    ],
+    "research": [
+      "arxiv",
+      "competitor-news",
+      "grounded-citations",
+      "llm-wiki"
+    ],
+    "social-media": [
+      "xurl"
+    ],
+    "software-development": [
+      "codebase-inspection",
+      "dogfood",
+      "github",
+      "ALI-skill-authoring",
+      "inspecting-dom",
+      "node-inspect",
+      "python-debugpy",
+      "requesting-code-review",
+      "simplify-code",
+      "spike",
+      "systematic-debugging",
+      "tdd"
+    ],
+    "web": [
+      "blocked-page-recovery"
+    ]
+  },
+  "listed_total": 58,
+  "enabled_by_default": false
+}

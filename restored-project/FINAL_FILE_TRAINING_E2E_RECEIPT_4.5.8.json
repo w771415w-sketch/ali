@@ -1,0 +1,133 @@
+{
+  "release": "4.5.7",
+  "fixture": "ALI_User_Understanding_Bundle_V4.md",
+  "fixture_sha256": "371d2e0de7e109848ee8246801e4de80e1f339a9d3be9d0f5add36bc241087bb",
+  "actual_conversation_headings": 216,
+  "unique_samples": 215,
+  "duplicate_exact_qa_samples": 1,
+  "duplicate_question_groups": 3,
+  "unique_questions": 213,
+  "postfix_regression": {
+    "relative_base_checkpoint_tokenizer_reuse": "fixed_and_passed",
+    "tokenizer_long_input": "65 passed in 1.89s"
+  },
+  "import": {
+    "status": "validated",
+    "sample_count": 215,
+    "routed_to_rag": true,
+    "warnings": [
+      "declared_conversation_count_mismatch:50!=216",
+      "duplicate_samples_in_file:1"
+    ]
+  },
+  "training": {
+    "run_id": "continuous-v1-20261004-224649-e71dab",
+    "generation": "v1",
+    "status": "success",
+    "base_version": "2.5.0-bootstrap-micro",
+    "device": "cpu",
+    "steps": 13,
+    "samples_seen": 208,
+    "tokens_seen": 26624,
+    "last_loss": 7.509772777557373,
+    "evaluation": {
+      "loss": 6.771079858144124,
+      "perplexity": 872.2532954340983,
+      "samples": 60
+    },
+    "new_data_holdout": {
+      "loss": 7.454573845863342,
+      "perplexity": 1727.7475515931083,
+      "samples": 20
+    },
+    "promoted_active": true,
+    "tokenizer_lineage": {
+      "reused_base_tokenizer": true,
+      "base_tokenizer_sha256": "5c1ca7b2eb4a855452c133adbdc52d15306ee2dcdf2590cdf78102ba1c5a3d4b",
+      "merged_tokenizer_sha256": "5c1ca7b2eb4a855452c133adbdc52d15306ee2dcdf2590cdf78102ba1c5a3d4b"
+    }
+  },
+  "quiz": {
+    "questions": 216,
+    "unique_questions": 213,
+    "training_qa_mode": 216,
+    "source_answer_match": 216,
+    "failures": 0
+  },
+  "streaming": {
+    "mode": "training_qa",
+    "exact_answer": true
+  },
+  "reimport": {
+    "status": "duplicate",
+    "reason": "duplicate_source"
+  },
+  "model_manager_reload": {
+    "pass": true,
+    "version": "v1",
+    "engine": "LocalInference"
+  },
+  "artifacts": {
+    "checkpoint_pt": "backend/models/runs/20261004-224649-233144/checkpoints/final-000013",
+    "internal_model_safetensors": "backend/models/runs/20261004-224649-233144/checkpoints/final-000013/model.safetensors",
+    "adapter_safetensors": "backend/models/runs/20261004-224649-233144/checkpoints/final-000013/adapter/adapter_model.safetensors",
+    "merged_model_safetensors": "backend/models/runs/20261004-224649-233144/checkpoints/final-000013/merged_hf/model.safetensors"
+  },
+  "artifact_hashes": {
+    "checkpoint.pt": {
+      "size_bytes": 16216409,
+      "sha256": "67d6d4297242854e8268b32dd775372eb5c02e70144ee5132b89492fececa5d0"
+    },
+    "model.safetensors": {
+      "size_bytes": 15006408,
+      "sha256": "b8ce83adb606742998ad7841ecd5905239b0d52831ce0bc9a4aa998362ae024c"
+    },
+    "adapter_model.safetensors": {
+      "size_bytes": 570696,
+      "sha256": "66430925b5f6d6f270a9def44ea52fb90adca14381186dbbb031b5078f4e8938"
+    },
+    "merged_model.safetensors": {
+      "size_bytes": 14435744,
+      "sha256": "50b9c5ec66a1cd19035d93f969c412cc7fc87922e03b0a557d5d565ab5123eca"
+    },
+    "checkpoint_pt": {
+      "size_bytes": 16216409,
+      "sha256": "67d6d4297242854e8268b32dd775372eb5c02e70144ee5132b89492fececa5d0"
+    },
+    "internal_model_safetensors": {
+      "size_bytes": 15006408,
+      "sha256": "b8ce83adb606742998ad7841ecd5905239b0d52831ce0bc9a4aa998362ae024c"
+    },
+    "adapter_safetensors": {
+      "size_bytes": 570696,
+      "sha256": "66430925b5f6d6f270a9def44ea52fb90adca14381186dbbb031b5078f4e8938"
+    },
+    "merged_model_safetensors": {
+      "size_bytes": 14435744,
+      "sha256": "50b9c5ec66a1cd19035d93f969c412cc7fc87922e03b0a557d5d565ab5123eca"
+    }
+  },
+  "merge_equivalence": {
+    "logit_max_diff": 0.016632080078125,
+    "logit_mean_diff": 0.0008416299242526293,
+    "weight_formula_max_diff": 0.0,
+    "weight_disk_max_diff": 0.0,
+    "argmax_equal": true,
+    "pass": true,
+    "logit_note": "Logit difference is due to float32 operation-order associativity; the stored merged Q projection weight exactly equals base + B@A*scale (max diff 0.0), and the serialized merged weight equals the in-memory merged weight (max diff 0.0)."
+  },
+  "gguf": {
+    "status": "pending_converter",
+    "reason": "No Windows llama.cpp converter/quantizer is bundled or executable in this Linux container."
+  },
+  "native_windows": {
+    "electron_net_conpty_cuda": "not executed in Linux container"
+  },
+  "initial_bug_fixed": {
+    "description": "Relative base-checkpoint paths were resolved from process CWD during continuation-tokenizer lookup, causing tokenizer retraining and a possible embedding index mismatch. The lookup is now anchored to the pipeline root and covered by regression tests."
+  },
+  "test_suite": {
+    "pytest": "239 passed, 34 skipped, 2 warnings",
+    "release_audit": "PASS"
+  }
+}

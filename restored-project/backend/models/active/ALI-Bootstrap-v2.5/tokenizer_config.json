@@ -1,0 +1,10 @@
+{
+  "model_type": "llama",
+  "add_bos_token": true,
+  "add_eos_token": false,
+  "bos_token": "<s>",
+  "eos_token": "</s>",
+  "pad_token": "<pad>",
+  "unk_token": "<unk>",
+  "chat_template": "<s>{% for message in messages %}<|{{ message['role'] }}|>\n{{ message['content'] }}<|eot|>\n{% endfor %}<|assistant|>\n"
+}

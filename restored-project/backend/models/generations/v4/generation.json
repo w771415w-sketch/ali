@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "generation": "v4",
+  "parent_generation": "v3",
+  "ancestors": [
+    "v1",
+    "v2",
+    "v3"
+  ],
+  "delta_dataset": {
+    "path": "models/generations/v4/delta/train.jsonl",
+    "sha256": "afe6e3feb0d5e3f6f06c5266873fb65b460226308f0cff9b1eafb991eecf2fd3",
+    "samples": 84
+  },
+  "cumulative_dataset": {
+    "path": "models/generations/v4/cumulative/train.jsonl",
+    "sha256": "90f96c89541770624c60f416a1ce02f42dc9557c11dd5e06737219f32878cdcd",
+    "samples": 1532
+  },
+  "historical_model_status": "not_reconstructed_from_missing_binary_weights",
+  "created_at": 1791296618.2290323,
+  "status": "active",
+  "artifacts": {
+    "merged_hf": "models/active/ALI-v4",
+    "checkpoint": "models/active/ALI-v4",
+    "adapter": "",
+    "gguf_f16": "",
+    "gguf_q4_k_m": ""
+  },
+  "gguf": {
+    "status": "pending_converter"
+  }
+}

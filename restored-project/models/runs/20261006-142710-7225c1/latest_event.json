@@ -1,0 +1,13 @@
+{
+  "run_id": "20261006-142710-7225c1",
+  "stage": "complete",
+  "status": "success",
+  "checkpoint": "models/runs/20261006-142710-7225c1/checkpoints/final-000060",
+  "hf_dir": "models/runs/20261006-142710-7225c1/checkpoints/final-000060/hf",
+  "adapter": "",
+  "evaluation": {
+    "loss": 6.969683837890625,
+    "perplexity": 1063.8863368118753,
+    "samples": 60
+  }
+}

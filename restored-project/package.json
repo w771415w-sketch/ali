@@ -1,0 +1,15 @@
+{
+  "name": "ali-studio-pro",
+  "version": "4.5.8",
+  "description": "نسخة سطح مكتب احترافية من ALI مبنية على فصل واضح بين الـLauncher والواجهة ومحرك الذكاء الاصطناعي.",
+  "main": "index.js",
+  "scripts": {
+    "verify": "python scripts/FINAL_RELEASE_AUDIT.py",
+    "test": "python -m pytest -q backend",
+    "build:desktop": "cmd /c scripts\\BUILD_DESKTOP.bat",
+    "build:portable": "cmd /c scripts\\BUILD_PORTABLE.bat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

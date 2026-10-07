@@ -1,0 +1,26 @@
+{
+  "phase": "2-preparation",
+  "status": "catalog-ready-not-activated",
+  "stages": [
+    "provider adapters",
+    "search router",
+    "MCP gateway",
+    "skill marketplace/loader",
+    "tool gateway",
+    "browser/CDP automation",
+    "computer-use with confirmation",
+    "cron scheduler",
+    "subagent orchestration",
+    "messaging connectors",
+    "education/skill learning loop",
+    "voice IO",
+    "multimodal"
+  ],
+  "safety_defaults": {
+    "internet": false,
+    "external_connectors": false,
+    "computer_control": false,
+    "scheduler": false,
+    "model_remote_download": false
+  }
+}

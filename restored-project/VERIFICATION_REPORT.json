@@ -1,0 +1,14 @@
+{
+  "project": "ALI Studio Pro Windows",
+  "version": "4.0.0",
+  "python_compileall": "PASS",
+  "electron_main_syntax": "PASS",
+  "electron_preload_syntax": "PASS",
+  "electron_dev_script_syntax": "PASS",
+  "project_manifests": "PASS",
+  "launcher_xml": "PASS",
+  "backend_pytest": "145 passed, 34 skipped, 2 warnings in 15.73s",
+  "dotnet_build": "DEFERRED: .NET SDK not installed in this execution environment",
+  "electron_build": "DEFERRED: npm dependencies/node_modules not installed and network access unavailable",
+  "gui_runtime": "DEFERRED: native Windows GUI not available in this execution environment"
+}

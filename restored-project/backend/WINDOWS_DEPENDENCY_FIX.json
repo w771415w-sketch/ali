@@ -1,0 +1,7 @@
+{
+  "fix": "torch-preflight-and-self-healing-startup",
+  "torch": "2.10.0",
+  "cpu_index": "https://download.pytorch.org/whl/cpu",
+  "python": "3.13.x x64 recommended",
+  "status": "source patched"
+}

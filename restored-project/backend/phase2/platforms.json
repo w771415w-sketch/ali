@@ -1,0 +1,7 @@
+{
+  "messaging_platform_slots": 22,
+  "defined_names": [],
+  "status": "prepared_for_phase_2",
+  "enabled_by_default": false,
+  "reason": "The request specifies 22 messaging platforms but does not provide their names."
+}

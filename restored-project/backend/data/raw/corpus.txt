@@ -1,0 +1,177 @@
+مرحبا بك في ALI Studio
+السلام عليكم ورحمة الله وبركاته
+ALI Studio هو مشروع ذكاء اصطناعي مستقل
+يعمل بدون اتصال بالإنترنت
+يمكنه قراءة الملفات وكتابة الأكواد
+البرنامج مبني بلغة Python
+يقوم بتحليل النصوص العربية والإنجليزية
+يدعم نظام أذونات متكامل
+يمكنك تشغيل الأوامر بحذر
+الصين دولة كبيرة في قارة آسيا
+مصر دولة عربية في قارة أفريقيا
+اليمن في جنوب الجزيرة العربية
+الذكاء الاصطناعي مجال واسع
+التعلم الآلي جزء من الذكاء الاصطناعي
+الشبكات العصبية تقليد للدماغ البشري
+تحويل النص إلى أرقام يسمى Tokenization
+تحويل الأرقام إلى نص يسمى Decode
+نستخدم خوارزمية BPE
+نحتاج إلى corpus كبير للتدريب
+نبدأ بـ corpus صغير للاختبار
+النصوص يجب أن تكون متنوعة
+Arabic text mixed with English text
+Hello world from ALI Studio
+This is a test of the tokenizer
+We are building a language model
+It supports Arabic and English
+Mixed text: مرحبا ALI Studio — 2026
+Numbers: 1234567890
+Code: print("hello world")
+Path: C:\Users\ALI\project\file.py
+Path: C:/project/file.py
+Path: /home/ali/project/file.py
+Python code example:
+def hello(name):
+    print(f"Hello {name}")
+    return name
+
+class ALI:
+    def __init__(self, name):
+        self.name = name
+
+    def run(self):
+        return self.name + " is running"
+
+Special tokens: <USER> <ASSISTANT> <BOS> <EOS>
+Punctuation test: !@#$%^&*()_+-=[]{}|;:'",./<>?
+Multiple spaces: hello   world
+Tab test: hello	world
+Newline test:
+line1
+line2
+The quick brown fox jumps over the lazy dog
+A journey of a thousand miles begins with a single step
+To be or not to be that is the question
+All that glitters is not gold
+Where there is a will there is a way
+Practice makes perfect
+Knowledge is power
+Time is money
+Love conquers all
+Better late than never
+Actions speak louder than words
+The pen is mightier than the sword
+Rome was not built in one day
+God helps those who help themselves
+Live and let live
+Do not judge a book by its cover
+The early bird catches the worm
+Two heads are better than one
+Many hands make light work
+Discipline is the bridge between goals and accomplishment
+Imagination is more important than knowledge
+The only thing we have to fear is fear itself
+In the middle of every difficulty lies opportunity
+Life is what happens when you are busy making other plans
+The future belongs to those who believe in the beauty of their dreams
+Strive not to be a success but rather to be of value
+The mind is everything what you think you become
+弱者不敗
+天下無难事只怕有心人
+LIFE IS SHORT
+artificial intelligence is the future
+machine learning needs data
+deep learning uses neural networks
+transformer models changed everything
+attention is all you need
+self supervised learning is powerful
+reinforcement learning teaches agents
+natural language processing understands text
+computer vision sees images
+speech recognition hears sound
+robotics builds machines that move
+data science extracts knowledge
+big data requires big infrastructure
+cloud computing provides scalability
+edge computing brings compute closer
+quantum computing promises speed
+neural networks mimic the brain
+gradient descent optimizes weights
+backpropagation computes gradients
+loss functions measure error
+optimizers update parameters
+learning rate controls step size
+batch size affects convergence
+epochs determine iterations
+validation set prevents overfitting
+test set measures generalization
+regularization reduces complexity
+dropout prevents co-adaptation
+batch normalization stabilizes training
+residual connections help gradients flow
+embedding layers represent tokens
+positional encoding adds order
+attention weights focus on context
+multi head attention captures relations
+feed forward networks transform representations
+layer normalization stabilizes activations
+greedy decoding picks best token
+beam search explores alternatives
+sampling adds randomness
+temperature controls creativity
+top k filtering limits choices
+top p nucleus sampling
+repetition penalty discourages loops
+stop tokens terminate generation
+bos token marks beginning
+eos token marks end
+pad token fills sequences
+unk token represents unknowns
+special tokens guide behavior
+hello world hello world hello world
+test test test test test test
+1 2 3 4 5 6 7 8 9 0
+0 1 2 3 4 5 6 7 8 9 0
+1.5 2.7 3.14 0.99
+2025 2026 2027
+الأرقام العربية: ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠
+أحرف خاصة: !@#$%^&*()
+underscore_test snake_case_names camelCaseNames PascalCaseNames
+version-1.2.3 final.final.final
+hyphen-test slash/test back\slash
+أحمد محمد علي حسن حسين عمر خالد
+قرأ كتب فهم تعلم عمل برمج
+شمس قمر نجم سماء بحر جبل
+With diacritics: مَرْحَبًا بِكَ
+With alef variants: أحمد إبراهيم إسلام آدم
+With yaa variants: مصطفى موسى يوسف
+With taa marbuta: مكة المدينة جامعة كلمة
+Code indentation:
+    if x:
+        y = 1
+    else:
+        y = 2
+SQL example:
+SELECT * FROM users WHERE id = 1;
+JSON example:
+{"name": "ALI", "version": "0.7", "active": true}
+HTML example:
+<div class="app"><h1>Title</h1></div>
+Shell commands:
+ls -la
+git status
+git commit -m "update"
+python -m pytest
+pip install torch
+Emoji test: 🙂 🚀 ✓ © ™
+Chinese: 你好世界
+Japanese: こんにちは
+Korean: 안녕하세요
+Russian: Привет мир
+Greek: Γειά σου Κόσμε
+Hebrew: שלום עולם
+URL: https://example.com/path?q=1&p=2
+Email: user@example.com
+IP: 192.168.1.1
+Date: 2026-09-30
+Time: 12:34:56

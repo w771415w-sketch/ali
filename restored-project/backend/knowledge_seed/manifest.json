@@ -1,0 +1,10 @@
+{
+  "files": [
+    "ALI_CURRENT_STATUS_4.5.2.md",
+    "THINKPAD_P50_COMPLETE_USER_PROFILE.md",
+    "THINKPAD_P50_USER_PROFILE.md",
+    "ALI_V4_4_COMPLETE_REPORT.md",
+    "ALI_V4_5_REBUILD_REFERENCE.md"
+  ],
+  "policy": "seed-on-startup-if-not-present"
+}

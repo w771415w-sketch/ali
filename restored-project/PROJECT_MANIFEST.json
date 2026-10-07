@@ -1,0 +1,97 @@
+{
+  "name": "ALI Studio Pro",
+  "version": "4.5.8",
+  "ui_reference": "supplied ALI Studio screenshot",
+  "launcher": {
+    "language": "C#",
+    "framework": ".NET 8"
+  },
+  "desktop": {
+    "electron": "40.10.2",
+    "react": "19",
+    "node": "22",
+    "styling": [
+      "Tailwind CSS",
+      "PostCSS"
+    ],
+    "terminal": [
+      "xterm.js",
+      "node-pty",
+      "ConPTY"
+    ]
+  },
+  "backend": {
+    "language": "Python 3.11.9",
+    "source": "ALI AI 2.6 Hermes Replacement"
+  },
+  "release_assets": [
+    "Build-time Electron node_modules",
+    "Build-time Embedded Python 3.11.9",
+    "Build-time Windows Python wheelhouse"
+  ],
+  "included_model": "ALI-v1 (bundled trained merged HF) with ALI-Bootstrap-v2.5 fallback",
+  "release": "Professional Final · Bundled trained weights · Grounded local QA · adaptive GPU · continuous learning",
+  "architecture": [
+    "C# .NET 8 Launcher",
+    "Electron 40.10.2",
+    "React 19",
+    "Python 3.11.9",
+    "node-pty/ConPTY"
+  ],
+  "continuous_learning": {
+    "generation_format": "vN",
+    "auto_train_after_valid_import": true,
+    "accepted_training_formats": [
+      ".csv",
+      ".json",
+      ".jsonl",
+      ".markdown",
+      ".md",
+      ".txt"
+    ],
+    "immediate_rag_index": true,
+    "new_samples_only": true,
+    "cross_file_dedup": true,
+    "promotion_required": true,
+    "rollback_preserved": true,
+    "markdown_conversation_bundle": "supported"
+  },
+  "verification": {
+    "python_compile": "PASS",
+    "pytest": "239 passed, 34 skipped, 2 warnings in Linux validation",
+    "desktop_source": "PASS",
+    "native_windows_build": "REQUIRES_WINDOWS_HOST",
+    "clean_release_registry": "bootstrap active only",
+    "bundled_qwen_gguf": "NOT_BUNDLED_IN_THIS_LINUX_VALIDATION_ENV",
+    "bundled_windows_runtime": "NOT_BUNDLED_IN_THIS_LINUX_VALIDATION_ENV",
+    "node_syntax": "PASS",
+    "arabic_rag_e2e": "PASS",
+    "dynamic_port": "PASS",
+    "training_progress_e2e": "PASS (isolated run reached step 25/31; full evaluation requires longer isolated run)",
+    "gpu_training": "REQUIRES_WINDOWS_CUDA_SELF_TEST"
+  },
+  "training_update": "v1 bundled and verified end-to-end",
+  "training_examples": 215,
+  "trained_artifacts": [
+    "backend/models/active/ALI-v1",
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013"
+  ],
+  "target": "Windows x64",
+  "training": "continuous versioned LoRA",
+  "recommended_model": "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf (398 MB; optional Windows download)",
+  "runtime_seed_knowledge": [
+    "knowledge_seed/ALI_CORE_QA_AR.md",
+    "knowledge_seed/ALI_CURRENT_STATUS_4.5.2.md",
+    "knowledge_seed/ALI_V4_4_COMPLETE_REPORT.md",
+    "knowledge_seed/THINKPAD_P50_ARABIC_REFERENCE.md",
+    "knowledge_seed/THINKPAD_P50_COMPLETE_USER_PROFILE.md"
+  ],
+  "e2e_training_fixture": "backend/data/training/testdata/ALI_User_Understanding_Bundle_V4.md",
+  "e2e_training_fixture_samples": 215,
+  "e2e_quiz_questions": 216,
+  "e2e_quiz_exact_source_answer_match": "216/216",
+  "native_windows_build": "REQUIRES_WINDOWS_HOST",
+  "bundled_runtime_knowledge": "backend/runtime_knowledge.sqlite3",
+  "bundled_training_data": "backend/models/runs/ALI-v1-20261004-224649-233144/training",
+  "bundled_qwen_gguf": "NOT_BUNDLED_NO_NETWORK_AVAILABLE_DURING_BUILD"
+}

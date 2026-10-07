@@ -1,0 +1,29 @@
+{
+  "image_providers": [
+    "openai",
+    "openai-codex",
+    "deepinfra",
+    "fal",
+    "krea",
+    "openrouter",
+    "xai"
+  ],
+  "video_providers": [
+    "xai",
+    "deepinfra",
+    "fal"
+  ],
+  "search_providers": [
+    "brave_free",
+    "ddgs",
+    "exa",
+    "firecrawl",
+    "keenable",
+    "parallel",
+    "searxng",
+    "tavily",
+    "xai"
+  ],
+  "policy": "catalog-only; credentials are never bundled",
+  "enabled_by_default": false
+}

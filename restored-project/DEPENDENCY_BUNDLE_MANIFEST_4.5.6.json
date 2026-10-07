@@ -1,0 +1,30 @@
+{
+  "version": "4.5.6",
+  "target": "Windows x64",
+  "desktop": {
+    "node": "22.x",
+    "electron": "40.10.2",
+    "react": "19.1.1",
+    "vite": "7.1.1",
+    "node_pty": "1.1.0",
+    "xterm": "5.3.0"
+  },
+  "python": {
+    "target": "3.11.9",
+    "runtime_layout": "runtime/python",
+    "required_core": "backend/requirements-windows.txt",
+    "legacy_gpu": "backend/requirements-windows-legacy-gpu.txt"
+  },
+  "optional_local_inference": {
+    "model": "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf",
+    "model_setup": "scripts/SETUP_QWEN_LOCAL.bat",
+    "cpu_llama_cpp": "scripts/DOWNLOAD_LLAMA_CPP_WIN_CPU.ps1",
+    "cuda_llama_cpp": "scripts/DOWNLOAD_LLAMA_CPP_WIN_CUDA12.ps1"
+  },
+  "offline": {
+    "wheelhouse_generator": "scripts/PREPARE_OFFLINE_WHEELHOUSE.ps1",
+    "embedded_runtime_generator": "scripts/PREPARE_EMBEDDED_PYTHON_3119.ps1",
+    "portable_builder": "scripts/BUILD_PORTABLE.bat"
+  },
+  "validation_note": "Windows binary artifacts are generated on a Windows release host; this Linux validation environment cannot execute native Windows, ConPTY or CUDA binaries."
+}
