@@ -3,73 +3,38 @@
 Current project source export: ALI Studio Pro Design4 4.6.0.
 
 ## Repository layout
-- `source-export/part-001.md` … `source-export/part-085.md`: ordered slices of the full source export.
-- `SOURCE_MANIFEST.json`: source metadata and part ordering.
-- `scripts/reassemble_source.py`: local reassembly helper.
-- `scripts/extract_project.py`: restores the 588-file text source tree locally.
+- source-export/part-001.md … source-export/part-085.md: ordered slices of the full source export.
+- SOURCE_MANIFEST.json: source metadata and part ordering.
+- scripts/reassemble_source.py: local reassembly helper.
+- scripts/extract_project.py: restores the 588-file text source tree locally.
 
-Hermes integration is intentionally inactive in this release and remains a later-phase integration.
-
-## Source completeness
-The repository currently contains all 85 ordered source-export parts. The final part contains the `588/588` marker, matching the manifest's 588-file declaration. This is a text source export publication, not the original binary ZIP.
-
-## Conversation Intelligence V5
-The repository retains the existing V5 conversation layer.
-
-## Conversation Intelligence V6
-V6 extends V5 with a structured dialogue-state layer and a deterministic synthetic corpus generator:
-- `conversation-intelligence/V6_CONVERSATION_INTELLIGENCE.md`
-- `conversation-intelligence/intent_taxonomy_v6.json`
-- `conversation-intelligence/dialogue_state_schema_v6.json`
-- `conversation-intelligence/response_policy_v6.json`
-- `conversation-intelligence/v6_router.py`
-- `conversation-intelligence/generate_conversation_corpus_v6.py`
-- `conversation-intelligence/corpus_manifest_v6.json`
-- `conversation-intelligence/test_v6_router.py`
-
-The V6 generator is configured for a default target of 10,000,000 JSONL records and uses deterministic compositional axes. The repository stores the generator and manifest rather than a multi-gigabyte generated corpus.
-
-V6 covers intent hierarchy, speech acts, references/pronouns, dialogue state, user-goal modeling, ambiguity and risk, multi-intent planning, corrections/recovery, research and evidence, memory boundaries, tool planning, output-format preferences, Arabic/mixed-language handling, and measurable verification.
-
-The source export remains preserved; V6 is published as an additive integration layer and should be wired into the restored runtime through the documented integration boundary before claiming runtime-wide integration.
-
-## Validation
-Use:
-`python conversation-intelligence/test_v6_router.py`
-
-For a 10M corpus:
-`python conversation-intelligence/generate_conversation_corpus_v6.py --count 10000000`
-
-Generated shards should be kept outside Git history unless a dedicated large-dataset storage/release mechanism is used.
+Hermes integration is intentionally inactive in this release.
 
 ## Conversation Intelligence V6.1
+The repository retains the V6/V6.1 conversation layer with structured dialogue state, intent taxonomy, deterministic scenario generation, Arabic/noisy/mixed-language handling, memory boundaries, tool planning and measurable verification.
 
-V6.1 expands the existing V6 layer with 132 scenario families and 10 dialogue patterns while retaining the deterministic 10,000,000-record generator. Added coverage includes product/UX research, acceptance criteria, collaboration/handoffs, release/change management, cost/capacity planning, observability/incident response, backup/restore, sandbox execution, source provenance, and additional Arabic/noisy/mixed request variants.
+## Professional Control Plane
+The executable control plane now surrounds the model with:
+requirements/contracts -> memory/RAG -> project state -> dependency-aware planning -> policy/approval -> tools/files/Git -> verification/evaluation -> recovery/checkpoints -> delivery -> lineage/observability/governance.
 
-The 10M corpus remains generated on demand in deterministic shards; generator + manifest are stored in the repository so Git history does not contain a multi-gigabyte synthetic dataset.
+The package at backend/control_plane includes requirements extraction, acceptance criteria, durable SQLite state, memory validation/consolidation, document ingestion, lexical/hybrid retrieval with provenance, knowledge graph, tools, workspace-safe execution, command safety, Git checkpoints/rollback, recovery, reliability controls, scheduling, model routing/fallback, artifact/lineage tracking, governance/RBAC/network policy, project/code intelligence, dataset controls, controlled self-improvement, model/GGUF capability discovery, multimodal capability detection, local loopback gateway, training preflight, CI and native P50 validation tooling.
 
-The repository publication is a complete **text source-export** of the provided 588-file export in 85 ordered parts. It is not a claim that the original 220MB binary ZIP, Windows native binaries, or model-weight binaries were reconstructed from that markdown export.
+## Validation
+Local reconstructed working tree:
+- compileall: PASS
+- backend tests: 29/29 PASS
+- control-plane self-test: PASS
+- main.py --self-test: PASS
+- main.py --target-p50: PASS
+- main.py --professional-health: PASS
 
-## Executable AI Control Plane
+Useful commands:
+- PYTHONPATH=backend python backend/main.py --self-test
+- PYTHONPATH=backend python backend/main.py --target-p50
+- PYTHONPATH=backend python backend/main.py --professional-health
 
-The repository now contains a stdlib-first executable control-plane spine at `backend/ali_control_plane.py`. It provides a machine-readable task contract, requirement-gap and conflict detection, dependency-aware planning, persistent project state in SQLite, scoped memory, local knowledge ingestion/search with provenance, approval-gated project file/command execution, workspace containment, snapshots, model routing with fallback, optional multi-agent handoffs, and an AgentLoop with dry-run/verified states.
+## Hardware policy
+The Lenovo ThinkPad P50 profile remains CPU-first for heavy training: maximum six training threads, one heavy local job, AC/power/thermal/RAM admission, no GPU training target for the 2 GB Quadro, and optional GPU inference offload.
 
-Run a deterministic smoke test with:
-`PYTHONPATH=backend python backend/main.py --self-test`
-
-The P50 hardware/runtime policy remains separate and is checked with:
-`PYTHONPATH=backend python backend/main.py --target-p50`
-
-The control plane is an integration foundation, not a claim that the historical 588-file source export has been fully reconstructed into the native Windows desktop runtime. Native Electron/node-pty, real model/GGUF inference, SFT/LoRA resume, and full Windows end-to-end release validation remain separate gates.
-
-
-## Professional Control Plane — 2026-10-07
-
-The executable control plane now includes structured requirements/contracts, acceptance criteria, dependency-aware planning, persistent project state, scoped memory, local knowledge/RAG indexing with provenance, a knowledge graph, versioned tools, safe project/filesystem execution, Git checkpoints/rollback, failure recovery, budgets/rate limits/circuit breakers/retry/idempotency/cancellation, scheduling, model routing/fallback, artifact lineage, governance/RBAC/network policy, observability, categorized evaluation, release quality gates, dataset validation, controlled self-improvement, code/project intelligence, model/GGUF capability inspection, a local service gateway, and a native Windows/P50 validation script.
-
-Run:
-- `PYTHONPATH=backend python backend/main.py --self-test`
-- `PYTHONPATH=backend python backend/main.py --target-p50`
-- `PYTHONPATH=backend python backend/main.py --professional-health`
-
-The repository remains honest about native gates: actual Electron/node-pty, real model/GGUF/llama.cpp inference, real SFT/LoRA checkpoint resume, full Windows UI-driven execution, multimodal processing, and distributed production HA/DR must be exercised in the target environment before being marked complete.
+## Native completion boundary
+The repository does not claim that the historical 588-file text export has become a fully native Windows production application merely from these additions. Real Electron/node-pty, real model weights and GGUF/llama.cpp inference, real SFT/LoRA checkpoint resume, complete UI-driven project build/test/debug/rollback, multimodal execution and distributed production HA/DR remain gates until exercised in the real target environment.
