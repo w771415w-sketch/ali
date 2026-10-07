@@ -15,12 +15,16 @@ from .provenance import ProvenanceTracker
 from .scheduler import PriorityScheduler
 from .cache import TTLCache
 from .capabilities import CapabilityInspector
-from .observability import Metrics,EventLog\nfrom config.settings_service import ProjectSettingsService\nfrom conversation_intelligence.language_adapter import ArabicLanguageAdapter\nfrom diagnostics.engine import DiagnosticsEngine
+from .observability import Metrics,EventLog
+from config.settings_service import ProjectSettingsService
+from conversation_intelligence.language_adapter import ArabicLanguageAdapter
+from diagnostics.engine import DiagnosticsEngine
 class ProfessionalRuntime:
     def __init__(self,root,hardware=None,max_workers=1):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True);self.loop=AgentLoop(self.root/"agent",hardware_policy=hardware or {});self.agent=ProjectAgent(self.root/"project",self.loop.store);self.planner=Planner()
         self.rate=RateLimiter(30,60);self.idempotency=IdempotencyLedger(self.root/"runtime.db");self.retry=RetryPolicy();self.breakers={};self.lineage=LineageRegistry(self.root/"registry");self.graph=KnowledgeGraph(self.root/"knowledge_graph.json");self.release=ReleaseManager(self.root/"registry");self.provenance=ProvenanceTracker(self.root/"provenance.json");self.scheduler=PriorityScheduler(max_workers);self.cache=TTLCache();self.capabilities=CapabilityInspector();self.metrics=Metrics();self.events=EventLog(self.root/"runtime-events.jsonl");self.hardware=hardware or {}
-        self.training=TrainingBridge(self.root/"training-jobs.json");self.hardware_bridge=HardwareBridge();self.settings=ProjectSettingsService();self.language=ArabicLanguageAdapter(profile=self.settings.language.current_id());self.diagnostics=DiagnosticsEngine()
+        self.training=TrainingBridge(self.root/"training-jobs.json")
+        self.hardware_bridge=HardwareBridge();self.settings=ProjectSettingsService();self.language=ArabicLanguageAdapter(profile=self.settings.language.current_id());self.diagnostics=DiagnosticsEngine()
     def prepare(self,text,project_id=None):
         prev=None
         if project_id:
