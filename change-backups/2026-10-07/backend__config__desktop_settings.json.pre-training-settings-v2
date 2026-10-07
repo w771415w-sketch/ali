@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "allow_internet": true,
+  "language": "ar",
+  "ai": {
+    "training": {
+      "method": "lora_continue_cpu",
+      "profile": "micro_or_small",
+      "device": "cpu",
+      "continue_from": "latest_checkpoint",
+      "preserve_previous_versions": true,
+      "keep_source_dataset": true,
+      "keep_checkpoints": 2,
+      "keep_adapters": 2,
+      "ac_required": true
+    },
+    "conversion": {
+      "profile": "q4_k_m",
+      "source": "verified_hf_artifact",
+      "keep_previous_gguf": 2,
+      "delete_intermediates_after_verified_export": false
+    }
+  }
+}
