@@ -2303,8 +2303,8 @@
     },
     {
       "path": "backend/tests/test_no_lovable.py",
-      "sha256": "87aca7effdf5e3a366d447bed50baecdcea5044d217f391261eb46fa8c246b22",
-      "bytes": 1966
+      "sha256": "241c8ada5500b3c8cc49f91726c5a4cbc455a6831c509f7eae9e0abb7d102d77",
+      "bytes": 2036
     },
     {
       "path": "backend/tests/test_p50_profile.py",
