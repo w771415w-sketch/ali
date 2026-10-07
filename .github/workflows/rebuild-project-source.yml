@@ -1,0 +1,27 @@
+name: Rebuild ALI Source Tree
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore 588-file source tree
+        run: python scripts/extract_project.py
+      - name: Verify restored source count
+        run: |
+          test "$(find restored-project -type f | wc -l)" -eq 588
+      - name: Upload restored source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALI-Studio-Pro-Design4-4.6.0-restored-source
+          path: restored-project/
+          if-no-files-found: error
+          retention-days: 30
