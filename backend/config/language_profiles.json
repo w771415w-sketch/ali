@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "default_profile": "ar-SA",
+  "profiles": {
+    "ar-MSA": {"label_ar":"العربية الفصحى","style":"formal","enabled":true,"normalization":"conservative"},
+    "ar-SA": {"label_ar":"العربية السعودية","style":"natural","enabled":true,"normalization":"conservative","markers":["أبغى","ابغى","وش","وشو","سوي","سوّي","الحين","مره","مرة"]},
+    "ar-YE": {"label_ar":"العربية اليمنية","style":"natural","enabled":true,"normalization":"conservative","markers":["أشتي","اشتي","إيش","ايش","عاد","قده","معي","حق","فين"]},
+    "ar-EG": {"label_ar":"العربية المصرية","style":"natural","enabled":true,"normalization":"conservative","markers":["عايز","عاوزه","إيه","ايه","ليه","ازاي","دلوقتي","كده","مش"]}
+  }
+}
