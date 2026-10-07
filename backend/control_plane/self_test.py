@@ -20,8 +20,7 @@ def run():
         dry=rt.execute("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات",project_id=prep["project_id"],dry_run=True)
         gate=rt.execute("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات",project_id=prep["project_id"],operations=[{"path":"main.py","content":"print('ALI_OK')\n"}],approved=False)
         real=rt.execute("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات",project_id=prep["project_id"],operations=[{"path":"main.py","content":"print('ALI_OK')\n"}],checks=[f"{sys.executable} main.py"],approved=True,idempotency_key="confirmed")
-        replay=rt.execute("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات",project_id=prep["project_id"],operations=[{"path":"main.py","content":"print('ALI_OK')
-"}],checks=[f"{sys.executable} main.py"],approved=True,idempotency_key="confirmed")
+        replay=rt.execute("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات",project_id=prep["project_id"],operations=[{"path":"main.py","content":"print('ALI_OK')\n"}],checks=[f"{sys.executable} main.py"],approved=True,idempotency_key="confirmed")
         kg=KnowledgeGraph(root/"kg.json");kg.upsert_entity("project","Project",{"version":"1"},source="user");kg.upsert_entity("backend","Backend",{"version":"2"},source="system");kg.relate("project","contains","backend",source="user")
         out={"prepared":bool(prep["tasks"]),"dry_run":dry["ok"],"approval_gate":gate["status"]=="approval_required","real_execution":real["ok"],"idempotent_replay":replay["status"]=="idempotent_replay","kg_relation":len(kg.neighbors("project"))==1,"quality_gate":QualityGate().check({"coding":.9,"arabic":.9,"tool_use":.9,"safety":.99,"regression":1.0})["passed"],"rbac":RBAC().allowed(Principal("u",frozenset({"developer"})),"write"),"network_allowlist":NetworkPolicy(["example.com"]).allowed("https://example.com/api")}
         rt.close();out["checks_passed"]=all(out.values());return out
