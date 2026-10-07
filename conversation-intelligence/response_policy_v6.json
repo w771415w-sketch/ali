@@ -1,5 +1,5 @@
 {
-  "version": "6.0.0",
+  "version": "6.1.1",
   "priority_order": [
     "user_goal",
     "explicit_constraints",
@@ -77,5 +77,18 @@
     "repetition": "compress prior context and regenerate",
     "malformed_output": "sanitize then regenerate",
     "ambiguity": "ask one targeted question or use a low-risk explicit assumption"
+  },
+  "p50_execution_policy": {
+    "training_device": "cpu",
+    "max_training_threads": 6,
+    "max_concurrent_heavy_jobs": 1,
+    "require_ac_power": true,
+    "battery_guard_percent": 45,
+    "battery_hard_stop_percent": 25,
+    "thermal_guard_c": 80,
+    "thermal_hard_stop_c": 88,
+    "min_free_ram_gb": 4,
+    "gpu_training": false,
+    "gpu_inference": "optional-offload"
   }
 }
