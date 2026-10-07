@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 from collections import defaultdict, deque
 from .schemas import Task, new_id
 class DependencyError(ValueError): pass
