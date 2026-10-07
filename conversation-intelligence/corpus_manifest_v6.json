@@ -32,7 +32,6 @@
   ],
   "training_policy": "synthetic records teach behavior and task patterns; mutable factual knowledge must come from RAG/web evidence",
   "enhancements": [
-    "125 behavior/project/agent families",
     "10 dialogue patterns including requirement change, multi-intent and final verification",
     "deterministic 10M target retained",
     "train/validation/test must remain disjoint",
