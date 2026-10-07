@@ -13,6 +13,7 @@ on:
       - "backend/conversation_intelligence/**"
       - "backend/diagnostics/**"
       - "backend/model/**"
+      - "restored-project/backend/**"
   pull_request:
     paths:
       - "backend/control_plane/**"
@@ -27,6 +28,7 @@ on:
       - "backend/model/**"
       - "source-export/**"
       - "scripts/**"
+      - "restored-project/backend/**"
   workflow_dispatch:
 
 jobs:
