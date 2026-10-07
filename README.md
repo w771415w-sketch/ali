@@ -41,3 +41,11 @@ For a 10M corpus:
 `python conversation-intelligence/generate_conversation_corpus_v6.py --count 10000000`
 
 Generated shards should be kept outside Git history unless a dedicated large-dataset storage/release mechanism is used.
+
+## Conversation Intelligence V6.1
+
+V6.1 expands the existing V6 layer with 125 scenario families and 10 dialogue patterns while retaining the deterministic 10,000,000-record generator. Added coverage includes product/UX research, acceptance criteria, collaboration/handoffs, release/change management, cost/capacity planning, observability/incident response, backup/restore, sandbox execution, source provenance, and additional Arabic/noisy/mixed request variants.
+
+The 10M corpus remains generated on demand in deterministic shards; generator + manifest are stored in the repository so Git history does not contain a multi-gigabyte synthetic dataset.
+
+The repository publication is a complete **text source-export** of the provided 588-file export in 85 ordered parts. It is not a claim that the original 220MB binary ZIP, Windows native binaries, or model-weight binaries were reconstructed from that markdown export.
