@@ -17,7 +17,7 @@ class ResourceManager:
     def admission(self,policy):
         s=self.snapshot(); reasons=[]
         if not policy.get("training_enabled",True): reasons.append(policy.get("runtime_mode","training disabled"))
-        if s["ram_available_gb"] and s["ram_available_gb"]<policy["min_free_ram_gb"]: reasons.append("low available RAM")
+        if s["ram_available_gb"] and s["ram_available_gb"]<policy.get("min_free_ram_gb",4.0): reasons.append("low available RAM")
         if s["power_plugged"] is False: reasons.append("AC power required")
-        if s["temperature_c"]>=policy["thermal_guard_c"]: reasons.append("thermal guard")
+        if s["temperature_c"]>=policy.get("thermal_guard_c",80.0): reasons.append("thermal guard")
         return {"allowed":not reasons,"reasons":reasons,"snapshot":s}
