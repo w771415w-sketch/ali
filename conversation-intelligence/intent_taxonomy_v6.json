@@ -1,0 +1,196 @@
+{
+  "version": "6.0.0",
+  "language_support": [
+    "ar",
+    "en",
+    "mixed"
+  ],
+  "top_level": {
+    "conversation": [
+      "follow_up",
+      "clarification",
+      "confirmation",
+      "correction",
+      "cancellation",
+      "status",
+      "progress",
+      "topic_switch",
+      "memory"
+    ],
+    "knowledge": [
+      "question",
+      "definition",
+      "explanation",
+      "fact_check",
+      "research",
+      "citation",
+      "source_request"
+    ],
+    "transformation": [
+      "translation",
+      "rewrite",
+      "proofread",
+      "summarize",
+      "extract",
+      "classify",
+      "format"
+    ],
+    "decision": [
+      "comparison",
+      "recommendation",
+      "decision_support",
+      "tradeoff_analysis"
+    ],
+    "learning": [
+      "teaching",
+      "tutoring",
+      "quiz",
+      "practice",
+      "feedback"
+    ],
+    "software": [
+      "creation",
+      "modification",
+      "code_generation",
+      "code_review",
+      "debugging",
+      "project_analysis",
+      "architecture",
+      "testing",
+      "deployment",
+      "release"
+    ],
+    "data": [
+      "analysis",
+      "cleaning",
+      "conversion",
+      "database",
+      "spreadsheet",
+      "report"
+    ],
+    "operations": [
+      "file",
+      "terminal",
+      "git",
+      "github",
+      "automation",
+      "workflow",
+      "system_configuration"
+    ],
+    "ai": [
+      "model_selection",
+      "training",
+      "fine_tuning",
+      "lora",
+      "qlora",
+      "rag",
+      "embedding",
+      "evaluation",
+      "checkpoint",
+      "conversion",
+      "inference"
+    ],
+    "multimodal": [
+      "image_analysis",
+      "document_analysis",
+      "media_understanding"
+    ],
+    "safety": [
+      "safety_review",
+      "refusal",
+      "safe_alternative",
+      "permission_boundary"
+    ]
+  },
+  "speech_acts": [
+    "question",
+    "request",
+    "command",
+    "correction",
+    "confirmation",
+    "rejection",
+    "clarification",
+    "preference",
+    "feedback",
+    "continuation",
+    "cancellation",
+    "comparison",
+    "decision"
+  ],
+  "language_modes": [
+    "ar_fusha",
+    "ar_simple",
+    "ar_colloquial",
+    "en",
+    "mixed_ar_en",
+    "technical_mixed"
+  ],
+  "difficulty": [
+    "basic",
+    "intermediate",
+    "advanced",
+    "expert",
+    "multi_stage",
+    "long_horizon"
+  ],
+  "ambiguity": [
+    "none",
+    "low",
+    "medium",
+    "high",
+    "dangerous"
+  ],
+  "risk": [
+    "none",
+    "low",
+    "medium",
+    "high",
+    "external_side_effect"
+  ],
+  "output_preferences": [
+    "answer",
+    "steps",
+    "code",
+    "patch",
+    "table",
+    "json",
+    "yaml",
+    "markdown",
+    "report",
+    "comparison",
+    "sources",
+    "artifact"
+  ],
+  "user_goals": [
+    "understand",
+    "decide",
+    "create",
+    "fix",
+    "change",
+    "verify",
+    "research",
+    "learn",
+    "execute",
+    "monitor",
+    "publish",
+    "remember",
+    "forget"
+  ],
+  "constraints": [
+    "language",
+    "format",
+    "length",
+    "deadline",
+    "platform",
+    "hardware",
+    "compatibility",
+    "backward_compatibility",
+    "no_ui_change",
+    "no_external_network",
+    "privacy",
+    "budget",
+    "performance",
+    "safety",
+    "reversibility"
+  ]
+}
