@@ -2,12 +2,14 @@
 """Zero-dependency smoke verification for Conversation Intelligence V5."""
 from pathlib import Path
 import importlib.util
+import sys
 
 HERE = Path(__file__).resolve().parent
 source = HERE / "v5_router.py"
 spec = importlib.util.spec_from_file_location("ali_ci_v5", source)
 mod = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
+sys.modules[spec.name] = mod
 spec.loader.exec_module(mod)
 
 cases = [
