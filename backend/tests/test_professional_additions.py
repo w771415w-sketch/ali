@@ -28,3 +28,12 @@ def test_project_search(tmp_path):
 ",encoding="utf-8")
     (tmp_path/"b.txt").write_text("hello world",encoding="utf-8")
     assert "a.py" in CodeIntelligence().search(tmp_path,"hello")
+
+
+def test_training_bridge(tmp_path):
+    from control_plane.training_bridge import TrainingBridge
+    bridge=TrainingBridge(tmp_path/"jobs.json")
+    plan=bridge.plan({"ram_gb":32,"vram_gb":2,"cpu_threads":8},"micro",5)
+    assert plan["ok"] and plan["plan"]["training"]["scale"]=="micro"
+    job=bridge.create_job("demo")
+    assert job["status"] in {"running","queued"}
