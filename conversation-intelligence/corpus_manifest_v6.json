@@ -1,6 +1,6 @@
 {
-  "version": "6.1.0",
-  "corpus_name": "ALI Conversation Intelligence Synthetic Composition V6.1",
+  "version": "6.1.1",
+  "corpus_name": "ALI Conversation Intelligence Synthetic Composition V6.1.1",
   "minimum_target_records": 10000000,
   "default_seed": 6061007,
   "generator": "conversation-intelligence/generate_conversation_corpus_v6.py",
@@ -36,6 +36,8 @@
     "deterministic 10M target retained",
     "train/validation/test must remain disjoint",
     "synthetic behavior data remains separate from mutable knowledge",
-    "132 conversation/project/agent families verified in generator"
-  ]
+    "132 conversation/project/agent families verified in generator",
+    "V6.1.1 includes family-aware natural-language variation and 12 deterministic behavior variants"
+  ],
+  "id_scheme": "CI-V6.1.1-{sha256(seed,row,semantic_axes)[:24]}"
 }
