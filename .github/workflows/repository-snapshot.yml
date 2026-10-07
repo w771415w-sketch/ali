@@ -1,0 +1,22 @@
+name: ALI Repository Snapshot
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create source snapshot
+        run: |
+          git archive --format=zip --output=ALI-source-snapshot.zip HEAD
+      - name: Upload source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: ali-source-snapshot
+          path: ALI-source-snapshot.zip
+          retention-days: 7
