@@ -14,6 +14,7 @@ except ImportError:
     from control_plane.security_ext import RBAC,Principal,NetworkPolicy
 
 def run():
+    # CI entrypoint: verifies the canonical professional control plane.
     with tempfile.TemporaryDirectory(prefix="ali-professional-") as td:
         root=Path(td);rt=ProfessionalRuntime(root)
         prep=rt.prepare("أريد برنامج مخزن على ويندوز Python فيه مخزون ومبيعات")
