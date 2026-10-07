@@ -1,0 +1,12 @@
+{
+  "certification_schema": "1.0",
+  "date": "2026-10-07",
+  "purpose": "Trigger and record canonical control-plane CI on current main",
+  "claims": {
+    "executable_control_plane": "present",
+    "native_windows_validation": "pending_physical_target",
+    "real_model_weights": "pending_target_artifact",
+    "real_sft_lora": "pending_physical_target",
+    "distributed_ha_dr": "pending_production_environment"
+  }
+}
