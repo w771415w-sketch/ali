@@ -8,6 +8,11 @@ on:
       - "backend/runtime/**"
       - "backend/tests/**"
       - "backend/main.py"
+      - "backend/config/**"
+      - "backend/training/**"
+      - "backend/conversation_intelligence/**"
+      - "backend/diagnostics/**"
+      - "backend/model/**"
   pull_request:
     paths:
       - "backend/control_plane/**"
@@ -15,6 +20,13 @@ on:
       - "backend/runtime/**"
       - "backend/tests/**"
       - "backend/main.py"
+      - "backend/config/**"
+      - "backend/training/**"
+      - "backend/conversation_intelligence/**"
+      - "backend/diagnostics/**"
+      - "backend/model/**"
+      - "source-export/**"
+      - "scripts/**"
   workflow_dispatch:
 
 jobs:
