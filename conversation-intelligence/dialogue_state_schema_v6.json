@@ -1,0 +1,104 @@
+{
+  "version": "6.0.0",
+  "request_frame": {
+    "intent": "string",
+    "sub_intent": "string|null",
+    "speech_act": "string",
+    "confidence": "0..1",
+    "mode": "answer|research|create|edit|execute|verify|clarify|recover|memory",
+    "language": "ar|en|mixed|unknown",
+    "domain": "string",
+    "user_goal": "understand|decide|create|fix|change|verify|research|learn|execute|monitor|publish|remember|forget",
+    "freshness_required": "boolean",
+    "risk_level": "none|low|medium|high|external_side_effect",
+    "ambiguity_level": "none|low|medium|high|dangerous",
+    "requested_depth": "brief|normal|detailed|deep",
+    "output_format": "string|null",
+    "constraints": [
+      "string"
+    ],
+    "entities": [
+      {
+        "id": "string",
+        "type": "string",
+        "value": "string",
+        "source": "current|context|memory|tool|rag|web"
+      }
+    ],
+    "references": [
+      {
+        "text": "string",
+        "resolved_to": "string",
+        "confidence": "0..1"
+      }
+    ],
+    "required_tools": [
+      "string"
+    ],
+    "evidence_required": "boolean",
+    "confirmation_required": "boolean",
+    "postcondition": "string|null"
+  },
+  "dialogue_state": {
+    "active_goal": "string|null",
+    "active_domain": "string|null",
+    "stage": "discover|clarify|plan|execute|verify|recover|complete|cancelled",
+    "subgoals": [
+      "string"
+    ],
+    "known_requirements": [
+      "string"
+    ],
+    "missing_requirements": [
+      "string"
+    ],
+    "constraints": [
+      "string"
+    ],
+    "decisions": [
+      {
+        "topic": "string",
+        "decision": "string",
+        "turn": "number"
+      }
+    ],
+    "rejected_options": [
+      {
+        "option": "string",
+        "reason": "string"
+      }
+    ],
+    "active_entities": [
+      {
+        "type": "string",
+        "value": "string"
+      }
+    ],
+    "pending_confirmation": "string|null",
+    "pending_tool_action": "string|null",
+    "last_verified_result": "string|null",
+    "unresolved_risks": [
+      "string"
+    ],
+    "corrections": [
+      {
+        "target": "string",
+        "old": "string",
+        "new": "string",
+        "verified": "boolean"
+      }
+    ]
+  },
+  "user_model": {
+    "language_preference": "string|null",
+    "verbosity_preference": "string|null",
+    "expertise_level": "unknown|beginner|intermediate|advanced|expert",
+    "response_style": "string|null",
+    "recurring_preferences": [
+      "string"
+    ],
+    "explicit_constraints": [
+      "string"
+    ]
+  }
+}
