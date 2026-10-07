@@ -108,20 +108,37 @@
             return
         self.entry.delete("1.0", "end")
 
+        # Keep the exact user wording in the transcript, but normalize/correct it
+        # before routing and model inference so typos and Arabic variants are understood.
+        adapted = self.language_adapter.adapt(text, preferred_profile=self.cfg.get("language_profile", "ar-SA")) if self.language_adapter else {"normalized": text, "corrections": [], "detected": {"profile": "unknown"}}
+        processing_text = str(adapted.get("normalized") or text)
+        self._last_language_adaptation = adapted
+
         self.chat.add_message("user", text, on_copy=self._copy)
         self.history.append({"role": "user", "content": text})
-        self.sessions.save_message(self.current_thread, "user", text)
+        self.sessions.save_message(
+            self.current_thread, "user", text,
+            meta={"normalized": processing_text, "corrections": adapted.get("corrections", []), "detected_profile": adapted.get("detected", {}).get("profile")}
+        )
+        if adapted.get("corrections"):
+            self._append_system(
+                "تصحيح/تطبيع لغوي: " + ", ".join(
+                    f"{x.get('from')} → {x.get('to')}" for x in adapted["corrections"]
+                ),
+                meta="language-adaptation",
+            )
 
         try:
             envelope = RequestEnvelope(
-                raw_text=text, project_dir=self.project_dir, session_id=self.current_thread,
-                language="auto", channel="desktop", metadata={"mode": self.ai_mode.get()},
+                raw_text=processing_text, project_dir=self.project_dir, session_id=self.current_thread,
+                language="auto", channel="desktop",
+                metadata={"mode": self.ai_mode.get(), "language_profile": adapted.get("detected", {}).get("profile")}
             )
             kca_state = self.kca_router.build_state(envelope)
             self.intent_lbl.configure(
                 text=f"{kca_state.intent} · {kca_state.confidence:.0%} · KCA"
             )
-            plan = self.orchestrator.make_plan(text)
+            plan = self.orchestrator.make_plan(processing_text)
             self.activity.event(
                 f"تم تحليل الطلب: {kca_state.intent} · {kca_state.confidence:.0%}",
                 phase="routing", progress=.08, status="ok"
@@ -135,7 +152,7 @@
             self._append_system(f"KCA routing fallback: {exc}", meta="kca-warning")
 
         try:
-            hroute = self.hermes_router.route(text)
+            hroute = self.hermes_router.route(processing_text)
             self._hermes_prompt_context = hroute.get("prompt_context", "") if hroute.get("used") else ""
             if hroute.get("used"):
                 self._append_system("HERMES CONTEXT\n" + self._hermes_prompt_context, meta="hermes")
@@ -168,8 +185,15 @@
         web_docs: list[dict] = []
         try:
             self._ensure_active_model_loaded()
+            model_history = []
+            for message in self.history:
+                if message.get("role") == "user" and self.language_adapter:
+                    fixed = self.language_adapter.correct_spelling(message.get("content", ""))
+                    model_history.append({"role": "user", "content": fixed.get("text", message.get("content", ""))})
+                else:
+                    model_history.append(dict(message))
             for ev in self.runtime.stream_answer(
-                self.history,
+                model_history,
                 self.project_dir,
                 system_prompt=self._system_prompt(),
             ):
