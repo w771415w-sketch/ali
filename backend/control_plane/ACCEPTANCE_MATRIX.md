@@ -27,3 +27,8 @@
 | Production infrastructure | gateway/worker/queue/HA/DR | pending |
 
 Pending rows are deliberately not marked complete from documentation alone.
+
+
+## Final audit marker — 2026-10-07
+
+The repository cleanup removed generated Python bytecode and added persistent ignore rules. This marker intentionally triggers the Control Plane CI on the current `main` tree after cleanup.
