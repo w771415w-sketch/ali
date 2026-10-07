@@ -102,3 +102,14 @@ The canonical `backend/control_plane/` package now covers: schemas, requirements
 
 ### Native gates deliberately still open
 The real physical Windows P50 remains required for Electron/node-pty, native UI integration, real model weights and GGUF/llama.cpp inference, real SFT/LoRA training/resume, full user-project E2E build/test/debug/rollback, multimodal execution, and distributed production HA/DR. These are not marked complete from code/docs alone.
+
+
+## Final professional foundation pass
+
+The control plane has been expanded beyond the initial P50 spine. The canonical package now includes requirements/contracts, acceptance and planning, durable state/events/failure memory, scoped memory, document ingestion, lexical/hybrid retrieval, knowledge graph, tool registry, safe workspace execution, command policy, Git checkpoints/rollback, recovery, reliability controls, scheduling, model routing/fallback, artifact/provenance/lineage, governance/RBAC/network/tenant scope, observability, categorized evaluation, release gates, dataset quality/leakage controls, controlled self-improvement, project/code intelligence, model/GGUF capability discovery, multimodal capability detection, local JSON gateway, transaction wrapper, and P50-aware training preflight.
+
+Additional operational assets include CI for Python 3.11/3.12, a native Windows P50 validation script, architecture/security/acceptance/feature-matrix documentation, and the canonical control-plane self-test.
+
+Final local evidence: compileall PASS; backend tests 29/29 PASS; control-plane self-test PASS; main.py self-test PASS; deterministic P50 admission PASS; professional health PASS.
+
+Native target gates remain open until physically executed on the ThinkPad P50: Electron/node-pty integration, real model weights and GGUF/llama.cpp inference, real SFT/LoRA training and resume, complete UI-driven project E2E build/test/debug/rollback, actual multimodal execution where dependencies are absent, and distributed production HA/DR.
