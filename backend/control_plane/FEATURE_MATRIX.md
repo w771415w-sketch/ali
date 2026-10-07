@@ -8,9 +8,9 @@
 | State | project state, events, failures | store.py |
 | Memory | scoped validation/consolidation | memory.py |
 | RAG | ingestion, chunks, lexical retrieval, citations | knowledge.py |
-| Knowledge graph | entities, relations, observations, conflicts | knowledge_graph.py |
+| Document ingestion | TXT/MD/code/JSON/CSV/XML/HTML + optional PDF/DOCX/XLSX/PPTX parsers | document_ingestion.py |\n| Knowledge graph | entities, relations, observations, conflicts | knowledge_graph.py |
 | Tools | registry, versions, permissions, risk, timeout | tools.py |
-| Project execution | writes, patches, delete, snapshots | project_io.py, project_agent.py |
+| Project intelligence | repository inventory, Python AST symbols/imports, manifest/test discovery | code_intelligence.py, project_intelligence.py |\n| Project execution | writes, patches, delete, snapshots | project_io.py, project_agent.py |
 | Safety | command policy, approval, containment | policy.py, backend/security/* |
 | Recovery | classification, failure memory, checkpoints | recovery.py |
 | Reliability | budgets, retries, rate, circuit breaker, idempotency, cancellation | reliability.py |
