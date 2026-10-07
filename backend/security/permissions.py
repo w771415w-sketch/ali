@@ -27,7 +27,7 @@ class PermissionManager:
         if p not in RANK: return Decision.deny(f"invalid tool permission: {p}")
         if mode not in RANK: return Decision.deny(f"invalid permission mode: {mode}")
         if mode==PermMode.READ_ONLY.value and RANK[p]>RANK[mode]: return Decision.deny(f"read-only mode forbids '{tool_name}'")
-        if tool_name in self._always_allow: return Decision.allow("always_allow")
+        if tool_name in self._always_allow and mode==PermMode.FULL_ACCESS.value: return Decision.allow("always_allow")
         if mode==PermMode.FULL_ACCESS.value: return Decision.allow("full-access")
         if p==PermMode.READ_ONLY.value: return Decision.allow("mode permits")
         return Decision.ask(f"tool '{tool_name}' requires '{p}' in '{mode}' mode")
