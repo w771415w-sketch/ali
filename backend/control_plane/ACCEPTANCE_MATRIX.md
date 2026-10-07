@@ -32,3 +32,8 @@ Pending rows are deliberately not marked complete from documentation alone.
 ## Final audit marker — 2026-10-07
 
 The repository cleanup removed generated Python bytecode and added persistent ignore rules. This marker intentionally triggers the Control Plane CI on the current `main` tree after cleanup.
+
+
+## Final verified state — 2026-10-07
+
+The latest main tree is generated from the source export without Python bytecode. The final local verification recorded 31/31 modern backend tests and 8/8 targeted historical integration tests passed, with four explicit artifact-related skips. GitHub CI passed Control Plane, Conversation Intelligence V5, Conversation Intelligence V6, and source restoration on the preceding source commit; this commit exists to re-run those gates against the final main tree.
