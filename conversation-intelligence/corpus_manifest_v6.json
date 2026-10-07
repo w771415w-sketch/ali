@@ -1,6 +1,6 @@
 {
-  "version": "6.0.0",
-  "corpus_name": "ALI Conversation Intelligence Synthetic Composition V6",
+  "version": "6.1.0",
+  "corpus_name": "ALI Conversation Intelligence Synthetic Composition V6.1",
   "minimum_target_records": 10000000,
   "default_seed": 6061007,
   "generator": "conversation-intelligence/generate_conversation_corpus_v6.py",
@@ -8,7 +8,7 @@
   "storage": "streamed sharded output; do not commit generated multi-gigabyte corpus to the source repository",
   "uniqueness": "deterministic canonical id from generator version + seed + row index + semantic axes",
   "semantic_axes": {
-    "families": 48,
+    "families": 125,
     "topics": 96,
     "user_styles": 18,
     "language_modes": 6,
@@ -16,10 +16,10 @@
     "ambiguity": 5,
     "risk": 5,
     "response_formats": 8,
-    "turn_patterns": 7,
+    "turn_patterns": 10,
     "repair_states": 6
   },
-  "documented_combinatorial_space": 20901888000,
+  "documented_combinatorial_space": 77760000000,
   "required_release_evidence": [
     "requested_count",
     "generated_count",
@@ -30,5 +30,12 @@
     "seed",
     "generator_version"
   ],
-  "training_policy": "synthetic records teach behavior and task patterns; mutable factual knowledge must come from RAG/web evidence"
+  "training_policy": "synthetic records teach behavior and task patterns; mutable factual knowledge must come from RAG/web evidence",
+  "enhancements": [
+    "125 behavior/project/agent families",
+    "10 dialogue patterns including requirement change, multi-intent and final verification",
+    "deterministic 10M target retained",
+    "train/validation/test must remain disjoint",
+    "synthetic behavior data remains separate from mutable knowledge"
+  ]
 }
