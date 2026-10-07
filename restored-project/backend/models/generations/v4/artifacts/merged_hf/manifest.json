@@ -1,0 +1,84 @@
+{
+  "artifact_id": "ALI:hf:20261006-142710-7225c1",
+  "artifact_type": "base",
+  "compatibility": {},
+  "created_at": 1791296849.646673,
+  "evaluation": {},
+  "files": [
+    {
+      "path": "ali_metadata.json",
+      "sha256": "098fd4176e1aace95c065b1ab0881ce1b922fd4f5ca3c67570fcf5cfc8a690d2",
+      "size": 9088
+    },
+    {
+      "path": "config.json",
+      "sha256": "7e47fcdb9da0c7d230e1b0727f7656c584f1da876d2812e00469677d0fa8ffda",
+      "size": 559
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "2a19ae517fbc3c171d24dc56f80de161baf403231709944668dce4491a515f82",
+      "size": 12594064
+    },
+    {
+      "path": "special_tokens_map.json",
+      "sha256": "1bd43fafc5dc9b132a08feb83487bb41bf5f53bcf89a15b0aa782d148e78dac2",
+      "size": 202
+    },
+    {
+      "path": "tokenizer.model",
+      "sha256": "3d9d560cbcc0a73ce6db8a89a5c290bbe63d7288cacbd6ce5707df4de8e9f776",
+      "size": 274994
+    },
+    {
+      "path": "tokenizer_config.json",
+      "sha256": "9354c9e340899300c7a6ff94eb0dc271fe37a4d254e00dfd66785d4000873b92",
+      "size": 313
+    }
+  ],
+  "lineage": {
+    "base_checkpoint": "",
+    "dataset_hash": "90f96c89541770624c60f416a1ce02f42dc9557c11dd5e06737219f32878cdcd",
+    "stage": "base",
+    "tokenizer_hash": "855ec73474675763ea2f2f3ebf1e3c6b63d99ad25fa205a15d192aa3ae4848de"
+  },
+  "metadata": {
+    "run_id": "20261006-142710-7225c1",
+    "stage": "base"
+  },
+  "name": "ALI",
+  "path": "/mnt/data/ALI_Studio_Pro_Windows_v4.5.8_CUMULATIVE/project/models/runs/20261006-142710-7225c1/checkpoints/final-000060/hf",
+  "schema_version": 2,
+  "sha256": "7dabe9015700a199b883c4d808c2f035b8d158f383de7c144c1eaa6c47eb3195",
+  "source": "training-export",
+  "training": {
+    "amp": true,
+    "batch_size": 1,
+    "cpu_amp": false,
+    "cpu_threads": 0,
+    "curriculum": true,
+    "dataset_mode": "causal",
+    "device": "cpu",
+    "distributed_backend": "auto",
+    "dtype": "float16",
+    "epochs": 1,
+    "eval_every": 100,
+    "grad_accum": 8,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "lora_alpha": 16.0,
+    "lora_dropout": 0.05,
+    "lora_rank": 8,
+    "max_grad_norm": 1.0,
+    "max_seq_len": 128,
+    "max_steps": 60,
+    "save_every": 100,
+    "seed": 42,
+    "train_mode": "full",
+    "use_compile": false,
+    "warmup_steps": 20,
+    "weight_decay": 0.1,
+    "world_size": 1
+  },
+  "version": "20261006-142710-7225c1"
+}

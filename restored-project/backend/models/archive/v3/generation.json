@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "generation": "v3",
+  "parent_generation": "v2",
+  "ancestors": [
+    "v1",
+    "v2"
+  ],
+  "delta_dataset": {
+    "path": "models/generations/v3/delta/train.jsonl",
+    "sha256": "03dde2e4b189fb819a63838d702cef2e1acb019b1e75c72586ad0e526801f2da",
+    "samples": 791
+  },
+  "cumulative_dataset": {
+    "path": "models/generations/v3/cumulative/train.jsonl",
+    "sha256": "1bc812e7dcd5cacce10694793ba166f73e732eb4502bf39180c3b4d21276c319",
+    "samples": 1448
+  },
+  "historical_model_status": "not_reconstructed_from_missing_binary_weights",
+  "created_at": 1791296618.1503508,
+  "status": "dataset-ready",
+  "artifacts": {}
+}

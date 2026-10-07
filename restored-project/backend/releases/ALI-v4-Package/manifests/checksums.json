@@ -1,0 +1,15 @@
+{
+  "datasets/cumulative_report.json": "0feedfadf8d20cb0ce539faeae187f0447f9668d7d6a611345d3a4486de105bc",
+  "datasets/cumulative_train.jsonl": "90f96c89541770624c60f416a1ce02f42dc9557c11dd5e06737219f32878cdcd",
+  "datasets/delta_train.jsonl": "afe6e3feb0d5e3f6f06c5266873fb65b460226308f0cff9b1eafb991eecf2fd3",
+  "evaluation/diagnostic_validation.jsonl": "b328e1a795e2a14ce8e5298d6f5f22f8cc219af5ecc7d39e57fba2cfc317078a",
+  "manifests/generation.json": "fed53612a4fe57665746ad13a77d749ddca08fbbb937749e828898c9c1028e05",
+  "manifests/lineage.json": "a9e672a066bbc17223fda16e954bc165b3233cbdbf90a8aeb18e7dadd930cb8c",
+  "model/ALI-v4/ali_metadata.json": "098fd4176e1aace95c065b1ab0881ce1b922fd4f5ca3c67570fcf5cfc8a690d2",
+  "model/ALI-v4/config.json": "7e47fcdb9da0c7d230e1b0727f7656c584f1da876d2812e00469677d0fa8ffda",
+  "model/ALI-v4/manifest.json": "f5b54755025381c127a93eaed71714e5fffb1c92e1b3caf2ba5c0db313ace31b",
+  "model/ALI-v4/model.safetensors": "2a19ae517fbc3c171d24dc56f80de161baf403231709944668dce4491a515f82",
+  "model/ALI-v4/special_tokens_map.json": "1bd43fafc5dc9b132a08feb83487bb41bf5f53bcf89a15b0aa782d148e78dac2",
+  "model/ALI-v4/tokenizer.model": "3d9d560cbcc0a73ce6db8a89a5c290bbe63d7288cacbd6ce5707df4de8e9f776",
+  "model/ALI-v4/tokenizer_config.json": "9354c9e340899300c7a6ff94eb0dc271fe37a4d254e00dfd66785d4000873b92"
+}

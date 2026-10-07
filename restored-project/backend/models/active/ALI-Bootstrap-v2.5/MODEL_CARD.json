@@ -1,0 +1,17 @@
+{
+  "name": "ALI-Bootstrap-v2.5",
+  "version": "2.5.0-bootstrap-micro",
+  "type": "hf_local",
+  "status": "active-bootstrap",
+  "training": "from-scratch micro model",
+  "steps": 20,
+  "purpose": [
+    "desktop startup smoke test",
+    "local development",
+    "training pipeline validation"
+  ],
+  "quality_note": "This is a functional tiny bootstrap checkpoint, not a production-quality general assistant model.",
+  "source_dataset": "data/training/device_p50/chat_train.jsonl",
+  "validation_dataset": "data/training/device_p50/chat_validation.jsonl",
+  "created_by": "ALI AI build process"
+}

@@ -1,0 +1,29 @@
+{
+  "generation": "v1",
+  "base_version": "2.5.0-bootstrap-micro",
+  "run_id": "continuous-v1-20261004-224649-e71dab",
+  "train_path": "/mnt/data/ali_v457_postfix2_e2e/backend/artifacts/continuous_learning/runs/continuous-v1-20261004-224649-e71dab/train_new.jsonl",
+  "validation_path": "/mnt/data/ali_v457_postfix2_e2e/backend/artifacts/continuous_learning/runs/continuous-v1-20261004-224649-e71dab/stable_validation.jsonl",
+  "hf_dir": "/mnt/data/ali_v457_postfix2_e2e/backend/models/runs/20261004-224649-233144/checkpoints/final-000013/merged_hf",
+  "adapter": "/mnt/data/ali_v457_postfix2_e2e/backend/models/runs/20261004-224649-233144/checkpoints/final-000013/adapter",
+  "evaluation": {
+    "loss": 6.771079858144124,
+    "perplexity": 872.2532954340983,
+    "samples": 60,
+    "new_data_holdout": {
+      "loss": 7.454573845863342,
+      "perplexity": 1727.7475515931083,
+      "samples": 20
+    }
+  },
+  "gate": {
+    "promote": true,
+    "reason": "first learned generation with valid evaluation"
+  },
+  "gguf": {
+    "status": "pending_converter",
+    "llama_dir": "/mnt/data/ali_v457_postfix2_e2e/backend/vendor/llama.cpp"
+  },
+  "status": "active",
+  "created_at": 1791154027.9529731
+}

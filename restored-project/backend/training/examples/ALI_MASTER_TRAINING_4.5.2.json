@@ -1,0 +1,12 @@
+{
+  "version": "4.5.2",
+  "sources": [
+    "ALI_Conversation_Training_Core_V2.md",
+    "ALI_Conversation_Training_V1.md",
+    "ALI_Professional_QA_P50_V2.md"
+  ],
+  "new_curated_cases": 30,
+  "unique_conversation_blocks": 791,
+  "dedup": "exact+normalized",
+  "sensitive_machine_ids": "kept in knowledge profile only"
+}

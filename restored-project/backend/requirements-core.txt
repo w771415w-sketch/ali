@@ -1,0 +1,8 @@
+# ALI AI core — Windows adaptive CPU/GPU
+# Keep the core install small and reproducible.
+torch==2.14.0
+numpy>=2.0,<3
+psutil>=7,<8
+safetensors>=0.7,<1
+sentencepiece>=0.2,<1
+pytest>=9,<10

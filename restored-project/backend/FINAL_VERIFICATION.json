@@ -1,0 +1,22 @@
+{
+  "version": "4.2.0",
+  "release": "Professional Assistant P50 · Accumulated Training",
+  "source_tests": {
+    "gui": "174 passed, 3 skipped",
+    "compileall": "PASS",
+    "kca_doctor": "100/100 PASS",
+    "release_check": "PASS"
+  },
+  "model_smoke": {
+    "status": "PASS",
+    "model": "ALI-Bootstrap-v2.5",
+    "training": "20-step from-scratch micro bootstrap",
+    "note": "Functional startup/inference checkpoint; not production-scale quality."
+  },
+  "package": {
+    "zip_entries": 391,
+    "required_payloads_present": true,
+    "private_credential_files_excluded": true
+  },
+  "windows_native_test": "Not executed in this Linux container; the project includes Windows setup/launcher/build scripts for the native test."
+}

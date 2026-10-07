@@ -1,0 +1,11 @@
+{
+  "name": "ALI Studio Pro",
+  "version": "4.4.0",
+  "purpose": "training-progress-and-hot-load-fix",
+  "files": 437,
+  "notes": [
+    "Transparent training telemetry",
+    "Automatic runtime reload after promotion",
+    "Version consistency 4.4.0"
+  ]
+}

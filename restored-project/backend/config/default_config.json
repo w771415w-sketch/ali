@@ -1,0 +1,82 @@
+{
+  "app": {
+    "name": "ALI AI",
+    "version": "4.5.2"
+  },
+  "device": {
+    "policy": "auto-safe",
+    "prefer_cpu_for_training_on_legacy_gpu": false,
+    "max_cpu_threads": 6,
+    "ram_reserve_gb": 5.0,
+    "vram_reserve_gb": 0.45,
+    "profile": "p50-auto",
+    "cpu_threads": 6,
+    "interop_threads": 1,
+    "pause_below_available_ram_gb": 3.0,
+    "pause_below_battery_percent": 15
+  },
+  "agent": {
+    "mode": "professional",
+    "max_steps": 12,
+    "verify_after_tool": true,
+    "auto_repair": true,
+    "allow_internet": true,
+    "kca_control_plane": true,
+    "auto_learning": true,
+    "auto_learning_min_new_samples": 32,
+    "auto_learning_scale": "micro",
+    "auto_learning_steps": 1
+  },
+  "security": {
+    "permission_mode": "default"
+  },
+  "training": {
+    "profile": "p50-auto",
+    "mode": "continuous_lora",
+    "train_mode": "lora",
+    "dataset_mode": "chat",
+    "epochs": 1,
+    "max_steps": 0,
+    "seq_len": 256,
+    "batch_size": 1,
+    "grad_accum": 16,
+    "learning_rate": 0.0003,
+    "warmup_steps": 20,
+    "save_every": 50,
+    "eval_every": 50,
+    "gradient_checkpointing": true,
+    "amp": false,
+    "resume_checkpoints": true,
+    "scale": "small",
+    "bootstrap_scale": "micro",
+    "cpu_threads": 6,
+    "lora_rank": 16,
+    "lora_alpha": 32
+  },
+  "paths": {
+    "workspace": "",
+    "last_dir": ""
+  },
+  "runtime": {
+    "backend": "auto",
+    "context": 384,
+    "max_new_tokens": 192,
+    "temperature": 0.65
+  },
+  "online": {
+    "enabled": true,
+    "ingest_to_weights": false
+  },
+  "scaling": {
+    "distributed": false,
+    "world_size": 1,
+    "remote_training": false
+  },
+  "kca": {
+    "master_version": "3.0",
+    "function_registry": "control_plane/function_registry.json",
+    "record_structured_state": true,
+    "require_verification_for_tools": true
+  },
+  "version": "4.5.2"
+}

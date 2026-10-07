@@ -1,0 +1,59 @@
+{
+  "release": "4.5.8",
+  "artifacts": {
+    "backend/models/active/ALI-v1/model.safetensors": {
+      "sha256": "50b9c5ec66a1cd19035d93f969c412cc7fc87922e03b0a557d5d565ab5123eca",
+      "size_bytes": 14435744
+    },
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/checkpoint.pt": {
+      "sha256": "67d6d4297242854e8268b32dd775372eb5c02e70144ee5132b89492fececa5d0",
+      "size_bytes": 16216409
+    },
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/internal_model.safetensors": {
+      "sha256": "b8ce83adb606742998ad7841ecd5905239b0d52831ce0bc9a4aa998362ae024c",
+      "size_bytes": 15006408
+    },
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/adapter_model.safetensors": {
+      "sha256": "66430925b5f6d6f270a9def44ea52fb90adca14381186dbbb031b5078f4e8938",
+      "size_bytes": 570696
+    },
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/adapter/adapter_model.safetensors": {
+      "sha256": "66430925b5f6d6f270a9def44ea52fb90adca14381186dbbb031b5078f4e8938",
+      "size_bytes": 570696
+    },
+    "backend/models/runs/ALI-v1-20261004-224649-233144/checkpoints/final-000013/merged_hf/model.safetensors": {
+      "sha256": "50b9c5ec66a1cd19035d93f969c412cc7fc87922e03b0a557d5d565ab5123eca",
+      "size_bytes": 14435744
+    },
+    "backend/data/training/testdata/ALI_User_Understanding_Bundle_V4.md": {
+      "sha256": "371d2e0de7e109848ee8246801e4de80e1f339a9d3be9d0f5add36bc241087bb",
+      "size_bytes": 1007239
+    },
+    "backend/runtime_knowledge.sqlite3": {
+      "sha256": "f7b81746c8b131437904890c108548fb6205fd06111c4b9b334297c6cd914988",
+      "size_bytes": 6262784
+    },
+    "backend/models/models.sqlite3": {
+      "sha256": "30495891e486d6bd699ffd4b2958913c6099d1ef9a41233da225b41e61017773",
+      "size_bytes": 12288
+    },
+    "PROJECT_MANIFEST.json": {
+      "sha256": "44f462b625e25e48bce2a5d50958e15251d4a182bc3f8e76a85224f3f55a6ca0",
+      "size_bytes": 3284
+    },
+    "PROJECT_VERSION.json": {
+      "sha256": "08ad87c563a12a01fabd4c7a4b5e43a0b596a96038cb7e3da73f8d79ba9eb283",
+      "size_bytes": 763
+    }
+  },
+  "knowledge_db": {
+    "trained_bundle_docs": 1,
+    "training_qa_chunks": 215,
+    "absolute_paths": 0
+  },
+  "verification": {
+    "pytest": "242 passed, 34 skipped, 2 warnings",
+    "release_audit": "PASS",
+    "api_quiz": "216/216"
+  }
+}

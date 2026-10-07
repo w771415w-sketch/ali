@@ -1,0 +1,9 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ALI Studio Local</title>
+<style>body{margin:0;background:#0b0f14;color:#e7edf4;font:14px system-ui}header{padding:14px 18px;border-bottom:1px solid #26303b}main{max-width:1100px;margin:auto;padding:18px}.grid{display:grid;grid-template-columns:1fr 300px;gap:14px}.card{background:#111820;border:1px solid #26303b;border-radius:10px;padding:14px}textarea,input,button{box-sizing:border-box;width:100%;background:#0b0f14;color:#e7edf4;border:1px solid #344150;border-radius:8px;padding:10px}button{cursor:pointer;margin-top:8px}.msg{padding:10px;border-bottom:1px solid #202a34;white-space:pre-wrap}.muted{color:#9ba8b7}</style>
+<header><b>ALI Studio Pro</b><span class="muted"> — Local Web UI / same local ALI core</span></header><main><div class="grid"><section class="card"><div id="chat"></div><textarea id="q" rows="5" placeholder="اكتب رسالتك..."></textarea><button onclick="send()">إرسال</button></section><aside class="card"><b>System</b><pre id="hw" class="muted">loading...</pre><hr><div class="muted">This UI talks only to localhost.</div></aside></div></main>
+<script>
+async function j(url,opt){let r=await fetch(url,opt);return r.json()}
+async function load(){document.getElementById('hw').textContent=JSON.stringify(await j('/api/hardware'),null,2)}
+async function send(){let q=document.getElementById('q').value.trim();if(!q)return;let c=document.getElementById('chat');c.innerHTML+=`<div class="msg"><b>أنت</b>\n${q.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}</div>`;let x=await j('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:q}]})});c.innerHTML+=`<div class="msg"><b>ALI</b>\n${(x.text||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}</div>`;document.getElementById('q').value=''} load();
+</script>
+</html>

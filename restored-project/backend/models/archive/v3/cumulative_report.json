@@ -1,0 +1,21 @@
+{
+  "generation": "v3",
+  "parent_generation": "v2",
+  "source_reports": [
+    {
+      "source": "training/examples/ALI_MASTER_TRAINING_4.5.2.md",
+      "exists": true,
+      "samples": 791,
+      "warnings": []
+    }
+  ],
+  "delta_samples": 791,
+  "delta_duplicates_removed": 0,
+  "delta_hash": "03dde2e4b189fb819a63838d702cef2e1acb019b1e75c72586ad0e526801f2da",
+  "cumulative_samples": 1448,
+  "cumulative_duplicates_removed": 257,
+  "cumulative_hash": "1bc812e7dcd5cacce10694793ba166f73e732eb4502bf39180c3b4d21276c319",
+  "historical_model_weights_available": false,
+  "historical_model_lineage_status": "data_reconstructed_only",
+  "created_at": 1791296618.150192
+}

@@ -1,0 +1,9 @@
+{
+  "generation": "v4",
+  "parent_generation": "v3",
+  "delta_samples": 84,
+  "cumulative_samples": 1532,
+  "cumulative_hash": "90f96c89541770624c60f416a1ce02f42dc9557c11dd5e06737219f32878cdcd",
+  "error_correction_samples": 1,
+  "status": "dataset-ready"
+}

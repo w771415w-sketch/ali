@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "base_version": "2.5.0-bootstrap-micro",
+  "dataset_hash": "9c5d81476f79db6cf6200969c11ef514c6b7c95f4935bb9fee91c34c19e88d3d",
+  "steps": 200,
+  "merged_lora_layers": 28,
+  "parameter_count": 3607872,
+  "source": "ALI Studio trained-from-scratch",
+  "architecture": "LlamaForCausalLM"
+}

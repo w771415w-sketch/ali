@@ -1,0 +1,3 @@
+# Core dependencies used by the ALI AI desktop/training path.
+# Optional document/media/packaging dependencies live in requirements-optional.txt.
+-r requirements-core.txt

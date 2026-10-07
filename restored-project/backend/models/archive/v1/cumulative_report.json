@@ -1,0 +1,27 @@
+{
+  "generation": "v1",
+  "parent_generation": null,
+  "source_reports": [
+    {
+      "source": "training/updates/v1/docs/CONVERSATIONS_V1.md",
+      "exists": true,
+      "samples": 504,
+      "warnings": []
+    },
+    {
+      "source": "training/examples/ALI_Professional_QA_P50_V1.md",
+      "exists": true,
+      "samples": 33,
+      "warnings": []
+    }
+  ],
+  "delta_samples": 537,
+  "delta_duplicates_removed": 0,
+  "delta_hash": "a22ead8955c220fbbabbd239e54d525e118c42e87a50f73b9b221b205a2d991d",
+  "cumulative_samples": 537,
+  "cumulative_duplicates_removed": 0,
+  "cumulative_hash": "a22ead8955c220fbbabbd239e54d525e118c42e87a50f73b9b221b205a2d991d",
+  "historical_model_weights_available": false,
+  "historical_model_lineage_status": "data_reconstructed_only",
+  "created_at": 1791296617.9662566
+}

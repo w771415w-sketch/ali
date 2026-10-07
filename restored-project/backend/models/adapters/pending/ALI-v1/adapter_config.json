@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "base_version": "2.5.0-bootstrap-micro",
+  "rank": 16,
+  "alpha": 32.0,
+  "learning_rate": 0.0005,
+  "max_steps": 200,
+  "max_seq_len": 96,
+  "dataset": "ALI_training_update_v1"
+}

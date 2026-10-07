@@ -1,0 +1,94 @@
+{
+  "schema": "ALI-TRAINING-UPDATE-1",
+  "version": "v1",
+  "base_version": "2.5.0-bootstrap-micro",
+  "artifact": "LoRA + merged HF",
+  "training_steps": 200,
+  "files": [
+    {
+      "path": "README.md",
+      "size": 544,
+      "sha256": "de1e8432283559504036b48ab0411552291f6a6592b08fc850edd4754424b232"
+    },
+    {
+      "path": "data/test.jsonl",
+      "size": 78684,
+      "sha256": "5054c792db4e3e36514a7ee9fc1d9b2380a87c360524519d8a9e254e3da38559"
+    },
+    {
+      "path": "data/train.jsonl",
+      "size": 544316,
+      "sha256": "9c5d81476f79db6cf6200969c11ef514c6b7c95f4935bb9fee91c34c19e88d3d"
+    },
+    {
+      "path": "data/validation.jsonl",
+      "size": 77106,
+      "sha256": "08e691f9cca930fe6cdaa097c517b30b8dfc7e2c5c52bba2d89c95d387218425"
+    },
+    {
+      "path": "docs/CONVERSATIONS_COVERAGE.md",
+      "size": 1950,
+      "sha256": "81195ae6ea83efa3267ef1d08688c5056824dca10f7a2e2f9b1bb29e4e8b8e33"
+    },
+    {
+      "path": "docs/CONVERSATIONS_V1.md",
+      "size": 191641,
+      "sha256": "be80273b935f6850adb2ef34fe66e943583bee4838227ec5c06bf81a1c30a03a"
+    },
+    {
+      "path": "docs/EVALUATION.json",
+      "size": 216,
+      "sha256": "60c2969207b22e89bfb0bdf1c37a64cd3c73dca41b902ec5d96d1c1e96fb156a"
+    },
+    {
+      "path": "docs/EVALUATION_REPORT.md",
+      "size": 1061,
+      "sha256": "8bd5ee74a8126fa341cda114ea1106914849b90c44232e7a8e66eeb997b25930"
+    },
+    {
+      "path": "tools/install_update_v1.py",
+      "size": 2215,
+      "sha256": "519561b4d671145d4d587a6dc2f7f70508c55b288cb6ad14d95febeb0288bcb4"
+    },
+    {
+      "path": "weights/adapter/adapter_config.json",
+      "size": 202,
+      "sha256": "7ae90f694046b7b5997acdb7ac8c26d0e3d5f2e6cfbef969951dc65b68156f97"
+    },
+    {
+      "path": "weights/adapter/adapter_model.safetensors",
+      "size": 1136032,
+      "sha256": "9fe99160fccc155778645e50df482f48e2ce86cfe8176257feabede160104d3c"
+    },
+    {
+      "path": "weights/merged_hf/ali_metadata.json",
+      "size": 309,
+      "sha256": "c9f059452ef5f4891409457fd557cf3fb50069568af71be319a246836dbddfec"
+    },
+    {
+      "path": "weights/merged_hf/config.json",
+      "size": 559,
+      "sha256": "e6e75d9063f2a29514729487b62acba158a2fa80c46c92180b5762b8518df302"
+    },
+    {
+      "path": "weights/merged_hf/model.safetensors",
+      "size": 14435744,
+      "sha256": "b9dc30fce50305e8b4e3069ebf9ba6bb2cf144b994f14f17e56e4ed1db3ba436"
+    },
+    {
+      "path": "weights/merged_hf/special_tokens_map.json",
+      "size": 202,
+      "sha256": "1bd43fafc5dc9b132a08feb83487bb41bf5f53bcf89a15b0aa782d148e78dac2"
+    },
+    {
+      "path": "weights/merged_hf/tokenizer.model",
+      "size": 284865,
+      "sha256": "5c1ca7b2eb4a855452c133adbdc52d15306ee2dcdf2590cdf78102ba1c5a3d4b"
+    },
+    {
+      "path": "weights/merged_hf/tokenizer_config.json",
+      "size": 313,
+      "sha256": "9354c9e340899300c7a6ff94eb0dc271fe37a4d254e00dfd66785d4000873b92"
+    }
+  ]
+}
