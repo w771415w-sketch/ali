@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ali-studio-pro-runtime"
+version = "1.0.0"
+description = "Professional runtime, security, diagnostics and orchestration boundary for ALI Studio Pro"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+ali-pro = "ALI.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ALI*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
