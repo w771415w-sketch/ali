@@ -39,3 +39,25 @@ The following require reconstruction/synchronization and execution on the real W
 - Full 160-layer acceptance suite, including multimodal/audio/multi-agent/production infrastructure features
 
 No feature is marked complete merely because its documentation exists; completion requires an executable artifact plus a passing postcondition.
+
+## Control-plane integration added after the initial P50 gate
+
+The verified `backend/ali_control_plane.py` now provides an executable stdlib-first foundation for the requested agent loop:
+
+- Structured Task Contract: goal, platform, technology, features, constraints, missing requirements, conflicts, assumptions.
+- Acceptance criteria generation and requirement-gap clarification.
+- Dependency-aware project planning and cycle detection.
+- Persistent Project State and event storage in SQLite/WAL.
+- Scoped memory with relevance/source/version validation.
+- Local knowledge ingestion, chunking, lexical retrieval, and provenance citations.
+- Approval-gated filesystem and command execution with workspace containment.
+- Pre-change project snapshots and timeout handling.
+- Model routing with healthy-model fallback.
+- Multi-agent role registry with timeout and loop detection.
+- AgentLoop dry-run versus verified completion states.
+
+Local verification after this integration: Python compileall PASS; full backend suite 22/22 passed; control-plane self-test PASS; deterministic P50 admission PASS.
+
+## Still not marked complete
+
+A real production-complete ALI application still requires native execution and integration of the existing desktop runtime, Electron/node-pty path, model loading/inference, GGUF/llama.cpp, real SFT/LoRA training and checkpoint resume, complete UI-driven filesystem/Git workflows, and the remaining multimodal/production acceptance suites. These are not inferred from documentation alone.
