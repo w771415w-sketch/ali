@@ -133,7 +133,7 @@ DIFFICULTIES = ["basic","intermediate","advanced","expert","multi_stage"]
 AMBIGUITIES = ["none","low","medium","high","dangerous"]
 RISKS = ["none","low","medium","high","external_side_effect"]
 FORMATS = ["answer","steps","code","patch","table","json","markdown","sources"]
-TURN_PATTERNS = ["single","two_turn","three_turn","clarify","correction","project","tool_recovery"]
+TURN_PATTERNS = ["single","two_turn","three_turn","clarify","correction","project","tool_recovery","requirement_change","multi_intent","final_verification"]
 REPAIR_STATES = ["clean","typo","missing_context","wrong_assumption","tool_failure","user_correction"]
 
 AR_TOPIC = {
@@ -265,6 +265,12 @@ def build_record(seed: int, row: int) -> dict:
         messages.append({"role":"user","content":"حوّل ذلك إلى خطة تنفيذ ثم اختبر كل مرحلة قبل إعلان اكتمالها."})
     if turns=="tool_recovery":
         messages.append({"role":"user","content":"حدث فشل في أداة التنفيذ؛ حافظ على الحالة الناجحة وأصلح الجزء المتأثر فقط."})
+    if turns=="requirement_change":
+        messages.append({"role":"user","content":"أضفت شرطًا جديدًا بعد بدء التنفيذ. حدّث الخطة والآثار المتأثرة ولا تهدم ما تحقق."})
+    if turns=="multi_intent":
+        messages.append({"role":"user","content":"لدي عدة أهداف في نفس الرسالة؛ رتبها إلى مراحل وحافظ على القيود المشتركة."})
+    if turns=="final_verification":
+        messages.append({"role":"user","content":"قبل التسليم النهائي، راجع المتطلبات والاختبارات والأدلة واذكر ما لم يتحقق."})
     if turns=="clarify":
         messages[0]["content"] += " ولا تفترض تفاصيل غير مذكورة."
     record = {
