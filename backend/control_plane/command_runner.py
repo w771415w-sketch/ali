@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 import os, subprocess, time
 from dataclasses import dataclass
 from .policy import Policy
