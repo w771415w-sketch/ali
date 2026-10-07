@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 import re
 from .schemas import Requirement, AcceptanceCriterion, ProjectContract, new_id
 
