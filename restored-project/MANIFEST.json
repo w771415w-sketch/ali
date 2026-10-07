@@ -2438,8 +2438,8 @@
     },
     {
       "path": "backend/tests/test_v20_lifecycle.py",
-      "sha256": "3b57619740a6e10cc564f08f5beb1dad33a47f003d8f903eec6914fc009ed1b4",
-      "bytes": 2976
+      "sha256": "64cdd664caca178813cee0973d09cc6e0fbd4bf517eee196b14e4ff7e68e44da",
+      "bytes": 2990
     },
     {
       "path": "backend/tests/test_v456_finalization.py",
