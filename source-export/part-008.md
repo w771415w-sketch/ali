@@ -479,6 +479,9 @@ def load_cfg() -> dict:
         "allow_internet": True,
         "auto_improve": True,
         "perm_mode": "default",
+        "language_profile": "ar-SA",
+        "training_method": "lora_continue_cpu",
+        "conversion_profile": "q4_k_m",
         "model": "ALI",
         "runtime": {"context": 384, "max_new_tokens": 384, "temperature": .65},
         "ui": {"right_tab": 0},
@@ -526,6 +529,11 @@ class App:
         self.model_profile = model_profile(self.hardware)
         self.device_profile = recommend_for_hardware(self.hardware)
         self.resources = ResourceManager(self.hardware)
+        try:
+            from conversation_intelligence.language_adapter import ArabicLanguageAdapter
+            self.language_adapter = ArabicLanguageAdapter(profile=self.cfg.get("language_profile", "ar-SA"))
+        except Exception:
+            self.language_adapter = None
 
         self.registry = ModelRegistry(ROOT / "models" / "models.sqlite3")
         # Heavy model/training services are lazy-loaded so the desktop shell stays responsive.
