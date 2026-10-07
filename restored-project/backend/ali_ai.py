@@ -1497,37 +1497,52 @@ class App:
     def settings_dialog(self):
         w = tk.Toplevel(self.root)
         w.title("ALI AI 2.5 · Settings")
-        w.geometry("760x620")
+        w.geometry("860x820")
         w.configure(bg=C["BG"])
 
         internet = tk.BooleanVar(value=self.runtime.allow_internet)
         auto = tk.BooleanVar(value=bool(self.cfg.get("auto_improve", False)))
         mode = tk.StringVar(value=self.runtime.permission_manager.mode)
+        language_profile = tk.StringVar(value=str(self.cfg.get("language_profile", "ar-SA")))
+        training_method = tk.StringVar(value=str(self.cfg.get("training_method", "lora_continue_cpu")))
+        conversion_profile = tk.StringVar(value=str(self.cfg.get("conversion_profile", "q4_k_m")))
+        dataset_strategy = tk.StringVar(value=str(self.cfg.get("dataset_strategy", "cumulative_replay")))
 
         tk.Checkbutton(
-            w, text="تفعيل البحث عبر الإنترنت داخل المحادثة (مصادر مدمجة مع الإجابة)",
+            w, text="تفعيل البحث عبر الإنترنت داخل المحادثة (مع التحقق من المصادر)",
             variable=internet, bg=C["BG"], fg=C["INK"], selectcolor=C["PANEL"],
-        ).pack(anchor="w", padx=18, pady=10)
+        ).pack(anchor="w", padx=18, pady=8)
         tk.Checkbutton(
             w, text="Enable gated automatic improvement scheduler",
             variable=auto, bg=C["BG"], fg=C["INK"], selectcolor=C["PANEL"],
-        ).pack(anchor="w", padx=18, pady=10)
-        tk.Label(w, text="Permission mode", bg=C["BG"], fg=C["MUTED"]).pack(anchor="w", padx=18, pady=(12, 2))
-        ttk.Combobox(
-            w, textvariable=mode,
-            values=[x[0] for x in PERM_MODES],
-            state="readonly",
-        ).pack(fill="x", padx=18)
+        ).pack(anchor="w", padx=18, pady=8)
+
+        def combo(title, var, values, pady=(10,2)):
+            tk.Label(w, text=title, bg=C["BG"], fg=C["MUTED"]).pack(anchor="w", padx=18, pady=pady)
+            ttk.Combobox(w, textvariable=var, values=values, state="readonly").pack(fill="x", padx=18)
+
+        combo("لهجة/أسلوب الرد العربي", language_profile, ["ar-MSA","ar-SA","ar-YE","ar-EG"])
+        combo("طريقة التدريب", training_method, [
+            "lora_continue_cpu","lora_cpu","continued_sft_cpu","full_finetune_micro_cpu"
+        ])
+        combo("طريقة تحويل النموذج", conversion_profile, [
+            "q4_k_m","q5_k_m","q6_k","q8_0","f16","bf16"
+        ])
+        combo("استراتيجية البيانات الجديدة", dataset_strategy, ["cumulative_replay","delta_only"])
+
+        tk.Label(w, text="Permission mode", bg=C["BG"], fg=C["MUTED"]).pack(anchor="w", padx=18, pady=(12,2))
+        ttk.Combobox(w, textvariable=mode, values=[x[0] for x in PERM_MODES], state="readonly").pack(fill="x", padx=18)
 
         tk.Label(
             w,
             text=(
-                "ALI keeps raw data, tokenizers, checkpoints, adapters, merged models, "
-                "memory, RAG and execution audit logs separate. A model becomes active only "
-                "after evaluation and regression checks."
+                "P50: التدريب المحلي CPU-first بحد أقصى 6 خيوط ووظيفة ثقيلة واحدة. "
+                "QLoRA/GPU التدريب مغلق افتراضيًا لأن Quadro M1000M فيها 2GB VRAM. "
+                "استكمال التدريب يبدأ من Checkpoint/Adapter موثوق؛ GGUF مخرج تشغيل ولا يُستخدم كمصدر تدريب. "
+                "البيانات الجديدة تُراجع وتُزيل التكرار وتُقيّم قبل اعتمادها."
             ),
-            bg=C["BG"], fg=C["AMBER"], wraplength=680, justify="left",
-        ).pack(anchor="w", padx=18, pady=22)
+            bg=C["BG"], fg=C["AMBER"], wraplength=790, justify="left",
+        ).pack(anchor="w", padx=18, pady=18)
 
         def save():
             self.runtime.allow_internet = bool(internet.get())
@@ -1537,12 +1552,21 @@ class App:
                 "auto_improve": bool(auto.get()),
                 "perm_mode": mode.get(),
                 "ai_mode": self.ai_mode.get(),
+                "language_profile": language_profile.get(),
+                "training_method": training_method.get(),
+                "conversion_profile": conversion_profile.get(),
+                "dataset_strategy": dataset_strategy.get(),
             })
+            try:
+                from conversation_intelligence.language_adapter import ArabicLanguageAdapter
+                self.language_adapter = ArabicLanguageAdapter(profile=language_profile.get())
+            except Exception:
+                self.language_adapter = None
             save_cfg(self.cfg)
             w.destroy()
             self._refresh_status()
 
-        self._button(w, "Save Settings", save, accent=True)
+        self._button(w, "حفظ الإعدادات", save, accent=True)
 
     # ---------- compatibility ----------
     def _ai_mode_menu(self, parent=None):
