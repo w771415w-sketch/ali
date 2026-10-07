@@ -1,0 +1,1 @@
+Temporary snapshot trigger; remove from branch after artifact creation.
