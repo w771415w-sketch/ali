@@ -1,0 +1,65 @@
+{
+  "version": "6.0.0",
+  "record_types": [
+    "dialogue",
+    "multi_turn",
+    "clarification",
+    "repair",
+    "pairwise_preference",
+    "tool_trace",
+    "project_journey",
+    "research_evidence",
+    "memory_boundary",
+    "safety_boundary"
+  ],
+  "required_fields": [
+    "id",
+    "messages",
+    "metadata"
+  ],
+  "metadata_required": [
+    "generator_version",
+    "family",
+    "topic",
+    "language_mode",
+    "difficulty",
+    "ambiguity",
+    "risk",
+    "turn_pattern",
+    "repair_state",
+    "synthetic",
+    "eligible_for_behavior_training"
+  ],
+  "behavior_targets": [
+    "understand_user_goal",
+    "preserve_context",
+    "resolve_references",
+    "follow_constraints",
+    "choose_response_mode",
+    "ask_one_targeted_question",
+    "avoid_unsupported_claims",
+    "recover_from_errors",
+    "verify_execution",
+    "use_evidence_for_fresh_facts",
+    "respect_memory_boundaries",
+    "adapt_language_and_style",
+    "decompose_multi_stage_tasks"
+  ],
+  "pairwise_preference": {
+    "fields": [
+      "prompt",
+      "chosen",
+      "rejected",
+      "preference_reason"
+    ],
+    "preference_reason_examples": [
+      "more_correct",
+      "better_context_use",
+      "better_constraint_coverage",
+      "less_hallucination",
+      "clearer_structure",
+      "better_verification",
+      "better_language_match"
+    ]
+  }
+}
