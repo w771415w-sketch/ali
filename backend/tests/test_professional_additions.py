@@ -23,9 +23,7 @@ def test_runtime_capabilities_are_explicit(tmp_path):
     assert isinstance(caps,dict) and "PIL" in caps
 
 def test_project_search(tmp_path):
-    (tmp_path/"a.py").write_text("def hello():
-    return 1
-",encoding="utf-8")
+    (tmp_path/"a.py").write_text("def hello():\n    return 1\n",encoding="utf-8")
     (tmp_path/"b.txt").write_text("hello world",encoding="utf-8")
     assert "a.py" in CodeIntelligence().search(tmp_path,"hello")
 
