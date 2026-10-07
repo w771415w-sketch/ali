@@ -1,18 +1,19 @@
 {
   "schema": "ALI-CONVERSATION-INTELLIGENCE-RELEASE-EVIDENCE",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "generated_at": "2026-10-07",
   "repository": "w771415w-sketch/ali",
   "branch": "main",
   "conversation_layer": {
     "generator": "conversation-intelligence/generate_conversation_corpus_v6.py",
-    "generator_version": "6.1.0",
+    "generator_version": "6.1.1",
     "family_count": 132,
     "turn_pattern_count": 10,
     "target_records": 10000000,
     "deterministic": true,
     "streaming_shards": true,
-    "mutable_knowledge_separated_from_behavior": true
+    "mutable_knowledge_separated_from_behavior": true,
+    "id_prefix": "CI-V6.1.1-"
   },
   "verification": {
     "id_formula_checked_against_generator_axes": true,
@@ -22,7 +23,12 @@
     "duplicate_id_count": 0,
     "result": "PASS",
     "method": "local deterministic 10M ID uniqueness run using published generator axes and ID formula",
-    "elapsed_seconds": 27.57
+    "elapsed_seconds": 27.57,
+    "notes": [
+      "10,000,000-ID uniqueness PASS was executed against the published V6.1 deterministic axis formula before the prefix-only V6.1.1 ID rename.",
+      "The V6.1.1 semantic-diversity update does not change the ID input tuple or deterministic axis dimensions, so the uniqueness result remains applicable.",
+      "The 10M corpus is generated on demand as streaming shards; it is not stored as a multi-gigabyte Git object."
+    ]
   },
   "source_publication": {
     "source_export_files": 588,
