@@ -2,6 +2,8 @@ from __future__ import annotations
 import hashlib,json,time
 from pathlib import Path
 from .agent_loop import AgentLoop
+from .training_bridge import TrainingBridge
+from .hardware_bridge import HardwareBridge
 from .project_agent import ProjectAgent
 from .requirements import extract_contract,clarification_questions
 from .planner import Planner
@@ -18,6 +20,7 @@ class ProfessionalRuntime:
     def __init__(self,root,hardware=None,max_workers=1):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True);self.loop=AgentLoop(self.root/"agent",hardware_policy=hardware or {});self.agent=ProjectAgent(self.root/"project",self.loop.store);self.planner=Planner()
         self.rate=RateLimiter(30,60);self.idempotency=IdempotencyLedger(self.root/"runtime.db");self.retry=RetryPolicy();self.breakers={};self.lineage=LineageRegistry(self.root/"registry");self.graph=KnowledgeGraph(self.root/"knowledge_graph.json");self.release=ReleaseManager(self.root/"registry");self.provenance=ProvenanceTracker(self.root/"provenance.json");self.scheduler=PriorityScheduler(max_workers);self.cache=TTLCache();self.capabilities=CapabilityInspector();self.metrics=Metrics();self.events=EventLog(self.root/"runtime-events.jsonl");self.hardware=hardware or {}
+        self.training=TrainingBridge(self.root/"training-jobs.json");self.hardware_bridge=HardwareBridge()
     def prepare(self,text,project_id=None):
         prev=None
         if project_id:
@@ -52,6 +55,14 @@ class ProfessionalRuntime:
             self.idempotency.complete(key,out);return out
         except Exception as exc:
             self.idempotency.fail(key,str(exc));self.events.emit("runtime_failure",{"error":str(exc)});return {"ok":False,"status":"failed","error":str(exc)}
+    def training_preflight(self,scale="small",steps=0):
+        snap=self.hardware_bridge.snapshot()
+        if not snap["admission"]["allowed"]:return {"ok":False,"status":"training_blocked","hardware":snap}
+        return {**self.training.plan(snap["hardware"],scale,steps),"hardware":snap}
+    def create_training_job(self,name,scale="small",steps=0):
+        pre=self.training_preflight(scale,steps)
+        if not pre["ok"]:return pre
+        return {"ok":True,"status":"queued","job":self.training.create_job(name),"preflight":pre}
     def impact(self,changed_files):return self.agent.changes.analyze(self.agent.workspace.root,changed_files)
-    def health(self):return {"capabilities":self.capabilities.inspect(),"hardware":self.hardware,"pending_jobs":self.scheduler.pending(),"metrics":self.metrics.snapshot()}
+    def health(self):return {"capabilities":self.capabilities.inspect(),"hardware":self.hardware,"pending_jobs":self.scheduler.pending(),"training_jobs":self.training.snapshot(),"metrics":self.metrics.snapshot()}
     def close(self):self.loop.store.close();self.idempotency.close()
