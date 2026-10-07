@@ -45,3 +45,20 @@ if __name__ == "__main__":
     ]
     for t in tests: t()
     print("V6 router tests passed")
+
+def test_high_risk_database_confirmation():
+    f = frame("احذف قاعدة البيانات بالكامل")
+    assert f.confirmation_required is True
+    assert f.risk_level in {"high","external_side_effect"}
+
+
+def test_multi_intent_and_final_verification_signals():
+    f = frame("عدّل المشروع ثم اختبره ثم تحقق من النتيجة")
+    assert f.multi_intent is True
+    assert f.required_tools
+
+
+def test_context_reference_needs_state():
+    f = frame("عدّل هذا المشروع السابق")
+    assert f.references
+    assert f.ambiguity_level in {"high","dangerous","none","medium"}
