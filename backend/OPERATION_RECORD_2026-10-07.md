@@ -76,3 +76,29 @@ The control plane does not treat an unverified action as completed. High-impact 
 
 ### Remaining native gates
 The GitHub repository still publishes the historical 588-file source export; the native Windows/Electron/.NET/node-pty/model-binary stack has not been reconstructed and executed end-to-end in this non-Windows connector runtime. The remaining work therefore stays explicitly tracked instead of being marked complete by documentation alone.
+
+
+## Professional completion pass — 2026-10-07
+
+### Added executable modules
+The canonical `backend/control_plane/` package now covers: schemas, requirements, planner, durable state store, memory, local knowledge/RAG, knowledge graph, tools, policy, workspace/project execution, acceptance, recovery/checkpoints, reliability, registry/lineage, provenance, scheduler, RBAC/network/tenant scope, observability, evaluation, release gates, dataset governance, self-improvement, capabilities, code/project intelligence, model runtime/GGUF capability detection, multimodal capability detection, local HTTP gateway, transaction wrapper, and the ProfessionalRuntime facade.
+
+### Operational controls
+- High-impact or externally visible actions remain approval-gated.
+- Workspace escapes and unsafe command patterns are rejected.
+- Stateful tasks use SQLite/WAL plus checkpoints and event logs.
+- Retries are bounded with idempotency, budgets, rate limiting and circuit-breaker primitives.
+- New model/dataset/tool/agent/artifact versions can be tracked with provenance/lineage and promotion gates.
+- Self-improvement is candidate/evaluation/regression/approval based rather than uncontrolled production mutation.
+
+### Verification
+- compileall: PASS
+- backend tests: **25/25 PASS**
+- control-plane self-test: PASS
+- canonical main self-test: PASS
+- P50 deterministic admission: PASS
+- professional health: PASS
+- CI workflow added for Python 3.11 and 3.12.
+
+### Native gates deliberately still open
+The real physical Windows P50 remains required for Electron/node-pty, native UI integration, real model weights and GGUF/llama.cpp inference, real SFT/LoRA training/resume, full user-project E2E build/test/debug/rollback, multimodal execution, and distributed production HA/DR. These are not marked complete from code/docs alone.
