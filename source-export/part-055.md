@@ -45,7 +45,11 @@ class PermissionManager:
         self.mode = mode
 
     def grant(self, tool_name: str, session: bool = True) -> None:
-        """إضافة أداة لـ always_allow (لجلسة واحدة على الأقل)."""
+        """إضافة أداة إلى الاستثناءات الحالية.
+
+        لا تلغي هذه القائمة وضع read-only؛ الانتقال إلى read-only يجب أن
+        يبقى حاجزاً نهائياً حتى لو مُنحت الأداة سابقاً.
+        """
         self._always_allow.add(tool_name)
 
     def revoke(self, tool_name: str) -> None:
@@ -58,48 +62,48 @@ class PermissionManager:
     def check(self, *, tool_name: str, permission: Any,
               ctx: Any = None, kwargs: Optional[Dict[str, Any]] = None,
               user: Any = None) -> Decision:
-        """يرجع القرار النهائي لطلب تشغيل الأداة.
-
-        يستخدم ctx.perm_mode أولاً (إن وُجد) ثم self.mode.
-        """
-        # مصدر الحقيقة للوضع الحالي: ctx أولاً، ثم PM الخاص.
+        """يرجع القرار النهائي لطلب تشغيل الأداة."""
         effective_mode = self.mode
         if ctx is not None and getattr(ctx, "perm_mode", None):
             effective_mode = ctx.perm_mode
 
-        # 0) إذا في always_allow → اسمح مباشرة.
+        if effective_mode not in _PERM_RANK:
+            return Decision.deny(f"invalid permission mode: {effective_mode}")
+
+        permission_value = (
+            permission.value if hasattr(permission, "value") else str(permission)
+        )
+        if permission_value not in _PERM_RANK:
+            return Decision.deny(
+                f"invalid tool permission: {permission_value}"
+            )
+
+        tool_rank = _PERM_RANK[permission_value]
+        user_rank = _PERM_RANK[effective_mode]
+
+        # read-only is an absolute boundary and cannot be bypassed by grants.
+        if effective_mode == PermMode.READ_ONLY.value and tool_rank > user_rank:
+            return Decision.deny(
+                f"read-only mode forbids '{tool_name}' "
+                f"(requires '{permission_value}')"
+            )
+
+        # Explicitly granted tools are allowed only after the hard boundary above.
         if tool_name in self._always_allow:
             return Decision.allow("always_allow")
 
-        tool_rank = _PERM_RANK.get(permission.value
-                                   if hasattr(permission, "value")
-                                   else str(permission), 0)
-
-        # 1) read-only يرفض كل شيء فوق READ_ONLY فوراً (لا حاجة للسؤال).
-        if effective_mode == PermMode.READ_ONLY.value:
-            user_rank = _PERM_RANK[effective_mode]
-            if user_rank < tool_rank:
-                return Decision.deny(
-                    f"read-only mode forbids '{tool_name}' "
-                    f"(requires '{permission.value}')"
-                )
-
-        # 2) فحص الصلاحية العامة.
-        user_rank = _PERM_RANK[effective_mode]
-
-        if user_rank >= tool_rank:
-            return Decision.allow("mode permits")
-
-        # 3) full-access اسمح بكل شيء لا يحتاج ask.
         if effective_mode == PermMode.FULL_ACCESS.value:
             return Decision.allow("full-access")
 
-        # 4) default لا يكفي → اسأل المستخدم.
-        return Decision.ask(
-            f"tool '{tool_name}' requires '{permission.value}' "
-            f"but current mode is '{effective_mode}'"
-        )
+        if permission_value == PermMode.READ_ONLY.value:
+            return Decision.allow("mode permits")
 
+        # In default mode, DEFAULT and FULL_ACCESS actions require an explicit
+        # user approval unless that tool was granted for the session.
+        return Decision.ask(
+            f"tool '{tool_name}' requires '{permission_value}' "
+            f"and current mode is '{effective_mode}'"
+        )
 
 # Singleton helper (اختياري — يمكن إنشاء instance محلي أيضاً).
 _PM_SINGLETON: Optional[PermissionManager] = None
