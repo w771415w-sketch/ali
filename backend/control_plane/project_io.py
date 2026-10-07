@@ -14,8 +14,9 @@ class Workspace:
     def write(self,relative,text,expected_sha256=None):
         p=self.resolve(relative); old=p.read_text(encoding="utf-8",errors="replace") if p.exists() else ""
         if expected_sha256 is not None and hashlib.sha256(old.encode("utf-8")).hexdigest()!=expected_sha256: raise ValueError("file changed since plan; refusing stale write")
+        created = not p.exists()
         p.parent.mkdir(parents=True,exist_ok=True); p.write_text(str(text),encoding="utf-8")
-        return {"path":str(p.relative_to(self.root)),"sha256":hashlib.sha256(str(text).encode("utf-8")).hexdigest(),"created":not p.exists()}
+        return {"path":str(p.relative_to(self.root)),"sha256":hashlib.sha256(str(text).encode("utf-8")).hexdigest(),"created":created}
     def patch(self,relative,old_text,new_text,expected_count=1):
         current=self.read(relative); count=current.count(old_text)
         if count!=expected_count: raise ValueError(f"patch precondition failed: found {count}, expected {expected_count}")
