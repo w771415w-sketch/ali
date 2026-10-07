@@ -436,6 +436,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import pytest
 
 from knowledge.store import KnowledgeStore
 from model.manager import ModelManager
