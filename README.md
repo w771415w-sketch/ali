@@ -44,7 +44,7 @@ Generated shards should be kept outside Git history unless a dedicated large-dat
 
 ## Conversation Intelligence V6.1
 
-V6.1 expands the existing V6 layer with 125 scenario families and 10 dialogue patterns while retaining the deterministic 10,000,000-record generator. Added coverage includes product/UX research, acceptance criteria, collaboration/handoffs, release/change management, cost/capacity planning, observability/incident response, backup/restore, sandbox execution, source provenance, and additional Arabic/noisy/mixed request variants.
+V6.1 expands the existing V6 layer with 132 scenario families and 10 dialogue patterns while retaining the deterministic 10,000,000-record generator. Added coverage includes product/UX research, acceptance criteria, collaboration/handoffs, release/change management, cost/capacity planning, observability/incident response, backup/restore, sandbox execution, source provenance, and additional Arabic/noisy/mixed request variants.
 
 The 10M corpus remains generated on demand in deterministic shards; generator + manifest are stored in the repository so Git history does not contain a multi-gigabyte synthetic dataset.
 
