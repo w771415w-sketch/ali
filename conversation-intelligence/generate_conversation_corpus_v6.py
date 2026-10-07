@@ -159,11 +159,40 @@ def _choice(seq: list[str], n: int) -> str:
 
 def _hash_id(seed: int, row: int, *parts: str) -> str:
     raw = "|".join([str(seed),str(row),*parts]).encode("utf-8")
-    return "CI-V6.1-" + hashlib.sha256(raw).hexdigest()[:24]
+    return "CI-V6.1.1-" + hashlib.sha256(raw).hexdigest()[:24]
 
 
 def _user(topic: str, style: str, lang_mode: str, family: str, row: int) -> str:
     name = AR_TOPIC.get(topic, topic)
+    scenario = family.replace("_", " ")
+    variants_ar = [
+        "مع الحفاظ على ما تم الاتفاق عليه سابقاً.",
+        "وبأقل تغيير ممكن على الأجزاء السليمة.",
+        "مع إعطاء النتيجة أولاً ثم الخطوات الضرورية.",
+        "مع توضيح ما يحتاج تحققاً قبل اعتباره صحيحاً.",
+        "وبطريقة تناسب العمل داخل مشروع قائم.",
+        "مع مراعاة أن بعض المعلومات قد تكون ناقصة.",
+        "مع فصل ما هو مؤكد عما هو افتراض.",
+        "مع إظهار ما يجب تنفيذه وما يجب اختباره.",
+        "مع الحفاظ على اللغة والأسلوب المطلوبين.",
+        "مع تتبع التأثير على الملفات أو المكونات المرتبطة.",
+        "مع اقتراح مسار بديل عند فشل الخطة الأولى.",
+        "ومع عدم إعلان الاكتمال دون دليل.",
+    ]
+    variants_en = [
+        "while preserving previously agreed constraints.",
+        "with the smallest safe change to working parts.",
+        "putting the result first, followed by necessary steps.",
+        "and clearly marking what still needs verification.",
+        "in a way that fits an existing project.",
+        "while accounting for possibly missing information.",
+        "separating verified facts from assumptions.",
+        "showing what should be executed and what should be tested.",
+        "while preserving the requested language and style.",
+        "tracking impact on related files or components.",
+        "with an alternative path if the first plan fails.",
+        "without claiming completion without evidence.",
+    ]
     ar = [
         f"أريد المساعدة في {name}. ما الطريقة الأفضل؟",
         f"عندي مشكلة في {name} وأريد حلاً عملياً خطوة بخطوة.",
@@ -187,6 +216,11 @@ def _user(topic: str, style: str, lang_mode: str, family: str, row: int) -> str:
     base = en[row % len(en)] if lang_mode=="en" else ar[row % len(ar)]
     if lang_mode in {"mixed_ar_en","technical_mixed"}:
         base = ar[row % len(ar)] + f" استخدم {topic} terminology where useful."
+    variant = variants_en[row % len(variants_en)] if lang_mode == "en" else variants_ar[row % len(variants_ar)]
+    if lang_mode == "en":
+        base += f" Scenario family: {scenario}. {variant}"
+    else:
+        base += f" نوع الحالة: {scenario}. {variant}"
     if style=="very_short":
         return ["اشرحها","كمل","عدّلها","راجعها","حل المشكلة","ابحث عنها"][row % 6] + " في " + name
     if style=="typo_noisy":
@@ -204,6 +238,7 @@ def _user(topic: str, style: str, lang_mode: str, family: str, row: int) -> str:
 
 def _assistant(topic: str, fmt: str, family: str, row: int) -> str:
     name = AR_TOPIC.get(topic, topic)
+    scenario = family.replace("_", " ")
     opening = {
       "qa":f"سأجيب مباشرة عن {name} مع توضيح النقاط التي قد تؤثر في النتيجة.",
       "clarification":f"السياق الحالي لا يحدد الهدف في {name} بشكل كافٍ، لذا سأطلب متغيراً واحداً مؤثراً فقط.",
@@ -226,7 +261,7 @@ def _assistant(topic: str, fmt: str, family: str, row: int) -> str:
       "correction_recovery":f"سأعتبر التصحيح إشارة لإعادة التحقق من الجزء المتأثر في {name} ثم أتابع من الحالة المصححة.",
       "safety_confirmation":f"قبل الإجراء عالي الأثر في {name} سأثبت الهدف والنطاق وأتحقق من الحاجة إلى موافقة صريحة.",
     }
-    text = opening.get(family, f"سأتعامل مع طلب {name} وفق الهدف والسياق والقيود.")
+    text = opening.get(family, f"سأتعامل مع طلب {name} ضمن سيناريو {scenario} وفق الهدف والسياق والقيود.")
     if fmt=="steps": text += " سأعرضه كخطوات مرتبة."
     elif fmt=="code": text += " وسأضع الكود في كتلة مستقلة."
     elif fmt=="table": text += " وسأستخدم جدولاً عندما يفيد المقارنة."
@@ -277,8 +312,8 @@ def build_record(seed: int, row: int) -> dict:
         "id":uid,
         "messages":messages,
         "metadata":{
-            "generator_version":"6.1.0",
-            "source":"synthetic_composition_v6_1",
+            "generator_version":"6.1.1",
+            "source":"synthetic_composition_v6_1_1",
             "seed":seed,
             "row":row,
             "family":family,
@@ -321,7 +356,7 @@ def generate(count:int, seed:int, out_dir:Path, shard_size:int=100_000) -> dict:
     finally:
         if fh: fh.close()
     manifest={
-        "generator_version":"6.1.0",
+        "generator_version":"6.1.1",
         "seed":seed,
         "requested_count":count,
         "generated_count":generated,
