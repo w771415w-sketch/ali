@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 import json,sqlite3,time
 from pathlib import Path
 class StateStore:
