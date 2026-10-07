@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "allow_internet": true,
   "language": "ar",
   "ai": {
@@ -7,7 +7,8 @@
       "method": "lora_continue_cpu",
       "profile": "micro_or_small",
       "device": "cpu",
-      "continue_from": "latest_checkpoint",
+      "continue_from": "latest_checkpoint_or_adapter",
+      "dataset_strategy": "cumulative_replay",
       "preserve_previous_versions": true,
       "keep_source_dataset": true,
       "keep_checkpoints": 2,
