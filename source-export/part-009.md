@@ -553,10 +553,27 @@
         base = str(Path(f["base"]).resolve()) if f.get("base") else ""
         resume = str(Path(f["resume"]).resolve()) if f.get("resume") else ""
 
+        selected_method = str(self.cfg.get("training_method", "lora_continue_cpu"))
+        stage_map = {
+            "lora_cpu": "lora",
+            "lora_continue_cpu": "lora",
+            "continued_sft_cpu": "sft",
+            "full_finetune_micro_cpu": "base",
+        }
+        selected_stage = stage_map.get(selected_method, str(f.get("stage", "lora")))
+        if selected_method in {"lora_continue_cpu", "continued_sft_cpu"} and not resume:
+            active = self.registry.active("ALI")
+            candidate = (active or {}).get("checkpoint") or (active or {}).get("hf_dir") or ""
+            if candidate:
+                candidate_path = Path(candidate)
+                resume = str(candidate_path if candidate_path.is_absolute() else (ROOT / candidate_path).resolve())
+                if not Path(resume).exists():
+                    resume = ""
+
         def work(progress):
             cfg = PipelineConfig(
                 name="ALI",
-                stage=f["stage"],
+                stage=selected_stage,
                 scale=f["scale"],
                 train_path=train,
                 validation_path=val,
@@ -807,6 +824,7 @@
         if not active or not active.get("hf_dir"):
             messagebox.showwarning(APP, "No active HF model is available.")
             return
+        profile = str(self.cfg.get("conversion_profile", "q4_k_m"))
         out = filedialog.asksaveasfilename(
             initialdir=str(ROOT / "models" / "gguf"),
             defaultextension=".gguf",
@@ -816,9 +834,23 @@
             return
 
         def work(progress):
-            progress("convert", .2)
-            result = GGUFManager().convert(active["hf_dir"], out, "f16")
-            progress("validate", .9)
+            mgr = GGUFManager()
+            progress(f"convert:{profile}", .15)
+            direct = profile in {"f16", "bf16", "q8_0"}
+            if direct:
+                result = mgr.convert(active["hf_dir"], out, profile)
+            else:
+                temp_f16 = str(Path(out).with_name(Path(out).stem + "-f16.gguf"))
+                converted = mgr.convert(active["hf_dir"], temp_f16, "f16")
+                if not converted.get("path") and not Path(temp_f16).is_file():
+                    return converted
+                progress(f"quantize:{profile}", .70)
+                result = mgr.quantize(temp_f16, out, profile.upper())
+                result["conversion"] = converted
+            progress("validate", .95)
+            validation = mgr.validate(out)
+            result["validation"] = validation
+            result["profile"] = profile
             return result
 
         self.jobs.run("GGUF export + validation", work, "gguf")
