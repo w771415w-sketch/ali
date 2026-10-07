@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 from pathlib import Path
 DANGEROUS_WORDS=("delete","overwrite","format","drop database","rmdir","del ","rm -rf","publish","deploy","send","رفع","احذف","دمر")
 class Policy:
