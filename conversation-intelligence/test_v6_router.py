@@ -35,17 +35,6 @@ def test_mixed_language_and_format():
     assert f.output_format == "json"
 
 
-if __name__ == "__main__":
-    tests=[
-        test_continue_binds_to_state,
-        test_risky_action_requests_confirmation,
-        test_correction_is_recovery,
-        test_research_requires_evidence,
-        test_mixed_language_and_format,
-    ]
-    for t in tests: t()
-    print("V6 router tests passed")
-
 def test_high_risk_database_confirmation():
     f = frame("احذف قاعدة البيانات بالكامل")
     assert f.confirmation_required is True
@@ -62,3 +51,18 @@ def test_context_reference_needs_state():
     f = frame("عدّل هذا المشروع السابق")
     assert f.references
     assert f.ambiguity_level in {"high","dangerous","none","medium"}
+
+if __name__ == "__main__":
+    tests=[
+        test_continue_binds_to_state,
+        test_risky_action_requests_confirmation,
+        test_correction_is_recovery,
+        test_research_requires_evidence,
+        test_mixed_language_and_format,
+        test_high_risk_database_confirmation,
+        test_multi_intent_and_final_verification_signals,
+        test_context_reference_needs_state,
+    ]
+    for test in tests:
+        test()
+    print("V6.1 router tests passed")
