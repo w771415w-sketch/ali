@@ -1,5 +1,5 @@
 {
-  "files": 588,
+  "files": 603,
   "entries": [
     {
       "path": "ALI_Conversation_Training_Core_V2.md",
@@ -523,8 +523,8 @@
     },
     {
       "path": "backend/ali_ai.py",
-      "sha256": "1082c036a042343ec5fa8cf5099067d9af256b883ebd849143fad9d7bcb9dfc7",
-      "bytes": 88020
+      "sha256": "17b70bf674bddeb296a8abeefb184c554f7847a5ae165787edd5c1ea27bb0d80",
+      "bytes": 88423
     },
     {
       "path": "backend/api/__init__.py",
@@ -682,9 +682,34 @@
       "bytes": 3823
     },
     {
+      "path": "backend/config/language_profiles.json",
+      "sha256": "94c77f3e9fa5b3e704765a65a2627556f60b4d016924925347f0e1a9901fc40d",
+      "bytes": 872
+    },
+    {
+      "path": "backend/config/language_settings.py",
+      "sha256": "b12bfb54e9d0f7e562bb6d37332cd66bc606614b728f6b9792dd5d3ec61dec1b",
+      "bytes": 1892
+    },
+    {
       "path": "backend/config/paths.py",
       "sha256": "214c6d40ab89ebff726ecedc045b94770a94f0329c96b716125d40b705a13f88",
       "bytes": 3214
+    },
+    {
+      "path": "backend/config/settings_service.py",
+      "sha256": "df81c295c4bf45ca1d839f8265f0447b868ca6832f8d7d41b76b62d3073f0ee6",
+      "bytes": 1506
+    },
+    {
+      "path": "backend/config/training_methods.json",
+      "sha256": "478dfa123444aff19af8976f4ed4f6ddb66a0b07bac196991f8d5147e8122375",
+      "bytes": 5509
+    },
+    {
+      "path": "backend/config/training_settings.py",
+      "sha256": "18099ff349e9bf2bbc2bc172b25b645ecec970ed8c8144bca79ca1445ac6c2c6",
+      "bytes": 4204
     },
     {
       "path": "backend/control_plane/README.md",
@@ -725,6 +750,16 @@
       "path": "backend/control_plane/state_store.py",
       "sha256": "2ae1961581a986d388cc24cd96d5b2b15eff2d5f768f532be28e0923caa8bd4d",
       "bytes": 2264
+    },
+    {
+      "path": "backend/conversation_intelligence/importer.py",
+      "sha256": "fbf74a0c8ae467e7085f819ac34eef8d6942210a87d4eac79f85fc2db3ad094c",
+      "bytes": 2656
+    },
+    {
+      "path": "backend/conversation_intelligence/language_adapter.py",
+      "sha256": "97dbb3d621f4043444125045f95f0fd5655e27b75f4ed38d1193ca014ba2fad1",
+      "bytes": 2427
     },
     {
       "path": "backend/core/__init__.py",
@@ -875,6 +910,21 @@
       "path": "backend/database/schema.py",
       "sha256": "5c2847928d39e710064cb5ec12e2dcc58fa1ddc6f7373fd79d7e7d46085db678",
       "bytes": 4068
+    },
+    {
+      "path": "backend/diagnostics/__init__.py",
+      "sha256": "2596c9793e669b76f9d29ebc712699ecd844de0b4256e2bbaa0f6e21086ece3a",
+      "bytes": 150
+    },
+    {
+      "path": "backend/diagnostics/engine.py",
+      "sha256": "3a03a1005ce4f4bf0137b8a4c4c5a6ae86be460b89e64a2e0ccabfaed2848fc0",
+      "bytes": 6305
+    },
+    {
+      "path": "backend/diagnostics/root_cause.py",
+      "sha256": "6a8a7880e713de2ec4e39793ea28634ef7a4b577870627db989046a9a202ab42",
+      "bytes": 1899
     },
     {
       "path": "backend/docs/AI_KCA_MASTER.md",
@@ -1285,6 +1335,16 @@
       "path": "backend/model/artifacts.py",
       "sha256": "cc1f658504365e5f74a40da5af3a6bfcb93c75d3d560373c46872ac38211bc9e",
       "bytes": 4361
+    },
+    {
+      "path": "backend/model/conversion.py",
+      "sha256": "be3d8d46259165888dc873a57d766747f39132d8d4bfba70249ba98fd52d0a19",
+      "bytes": 3119
+    },
+    {
+      "path": "backend/model/conversion_policy.py",
+      "sha256": "93d32b621ec4002865e4c4c2dd88920243f33bd1bfa00d07179befec5199b24c",
+      "bytes": 562
     },
     {
       "path": "backend/model/importer.py",
@@ -2512,9 +2572,19 @@
       "bytes": 704
     },
     {
+      "path": "backend/training/continual_dataset.py",
+      "sha256": "eae72020e582a097dc790dede94d1baf953ddb24211bdb69b3275551323e3df4",
+      "bytes": 1930
+    },
+    {
       "path": "backend/training/continuous_learning.py",
       "sha256": "6b008e97aad28c7f369dd4517afe8d7d31954d2031b90fcd0c82ed9d440656e4",
       "bytes": 58437
+    },
+    {
+      "path": "backend/training/controller.py",
+      "sha256": "1ace19c8aabefd36679529ba2cf827dd5c94bcf0ac7e1699a8d0a12a41fad799",
+      "bytes": 1397
     },
     {
       "path": "backend/training/conversation.py",
@@ -2560,6 +2630,11 @@
       "path": "backend/training/generation_lineage.py",
       "sha256": "4331ac1af902174b7b9fcdf334cc43f66171a57b54579a3e8a6889e6b5716c48",
       "bytes": 11122
+    },
+    {
+      "path": "backend/training/lifecycle.py",
+      "sha256": "d201514b82c6f4826511cc537e9fbb03c71044dc7cdb040e35765730ad9c8430",
+      "bytes": 3119
     },
     {
       "path": "backend/training/lora.py",
