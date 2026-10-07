@@ -6,13 +6,14 @@ ROOT = Path(__file__).resolve().parents[1]
 PART_DIR = ROOT / "source-export"
 CI = ROOT / "conversation-intelligence"
 
+
 def main():
     parts = sorted(PART_DIR.glob("part-*.md"))
     assert len(parts) == 85, f"expected 85 source parts, found {len(parts)}"
     expected = [PART_DIR / f"part-{i:03d}.md" for i in range(1, 86)]
     assert parts == expected, "source part sequence has gaps or unexpected files"
     all_text = "".join(p.read_text(encoding="utf-8") for p in parts)
-    matches = re.findall(r"^###\\s+\`(\\d+)/(\\d+)\`\\s+\`([^\\n]+?)\`\\s*$", all_text, re.M)
+    matches = re.findall(r"^###\s+`(\d+)/(\d+)`\s+`([^\n]+?)`\s*$", all_text, re.M)
     assert len(matches) == 588, f"expected 588 file markers, found {len(matches)}"
     assert int(matches[0][1]) == 588 and int(matches[-1][0]) == 588
     manifest = json.loads((ROOT / "SOURCE_MANIFEST.json").read_text(encoding="utf-8"))
@@ -28,6 +29,7 @@ def main():
     print(f"source_parts={len(parts)} source_file_markers={len(matches)}")
     print(f"minimum_target_records={corpus['minimum_target_records']}")
     print(f"documented_combinatorial_space={corpus['documented_combinatorial_space']}")
+
 
 if __name__ == "__main__":
     main()
