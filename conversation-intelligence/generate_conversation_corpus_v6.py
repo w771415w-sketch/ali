@@ -159,7 +159,7 @@ def _choice(seq: list[str], n: int) -> str:
 
 def _hash_id(seed: int, row: int, *parts: str) -> str:
     raw = "|".join([str(seed),str(row),*parts]).encode("utf-8")
-    return "CI-V6-" + hashlib.sha256(raw).hexdigest()[:24]
+    return "CI-V6.1-" + hashlib.sha256(raw).hexdigest()[:24]
 
 
 def _user(topic: str, style: str, lang_mode: str, family: str, row: int) -> str:
@@ -277,8 +277,8 @@ def build_record(seed: int, row: int) -> dict:
         "id":uid,
         "messages":messages,
         "metadata":{
-            "generator_version":"6.0.0",
-            "source":"synthetic_composition_v6",
+            "generator_version":"6.1.0",
+            "source":"synthetic_composition_v6_1",
             "seed":seed,
             "row":row,
             "family":family,
@@ -321,7 +321,7 @@ def generate(count:int, seed:int, out_dir:Path, shard_size:int=100_000) -> dict:
     finally:
         if fh: fh.close()
     manifest={
-        "generator_version":"6.0.0",
+        "generator_version":"6.1.0",
         "seed":seed,
         "requested_count":count,
         "generated_count":generated,
