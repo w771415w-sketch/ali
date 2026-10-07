@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 from pathlib import Path
 from difflib import unified_diff
 from zipfile import ZipFile, ZIP_DEFLATED
