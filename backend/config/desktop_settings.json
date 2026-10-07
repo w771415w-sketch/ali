@@ -2,6 +2,7 @@
   "schema_version": "1.1",
   "allow_internet": true,
   "language": "ar",
+  "language_profile": "ar-SA",
   "ai": {
     "training": {
       "method": "lora_continue_cpu",
@@ -15,15 +16,12 @@
       "keep_adapters": 2,
       "ac_required": true
     },
+    "language": {"profile": "ar-SA"},
     "conversion": {
       "profile": "q4_k_m",
       "source": "verified_hf_artifact",
       "keep_previous_gguf": 2,
       "delete_intermediates_after_verified_export": false
-    },
-    "language": {
-      "profile": "ar-SA"
     }
-  },
-  "language_profile": "ar-SA"
+  }
 }
