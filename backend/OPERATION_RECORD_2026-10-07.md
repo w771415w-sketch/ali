@@ -113,3 +113,18 @@ Additional operational assets include CI for Python 3.11/3.12, a native Windows 
 Final local evidence: compileall PASS; backend tests 29/29 PASS; control-plane self-test PASS; main.py self-test PASS; deterministic P50 admission PASS; professional health PASS.
 
 Native target gates remain open until physically executed on the ThinkPad P50: Electron/node-pty integration, real model weights and GGUF/llama.cpp inference, real SFT/LoRA training and resume, complete UI-driven project E2E build/test/debug/rollback, actual multimodal execution where dependencies are absent, and distributed production HA/DR.
+
+## Final main certification — 2026-10-07
+
+- Final certified main base commit before snapshot branch: `e83ff7537eddbfde05ef8da8aeb034d448c9cadc`.
+- Final certification commit in main: `e83ff7537eddbfde05ef8da8aeb034d448c9cadc` plus the post-certification snapshot branch changes only; application code is identical.
+- GitHub Actions final Control Plane: Python 3.11 **33 passed**, Python 3.12 **33 passed**, `checks_passed=true`, P50 deterministic admission PASS.
+- GitHub Actions final V5, V6 and Rebuild Source Tree: PASS.
+- Final GitHub snapshot artifact: `ALI-main-final-full.zip`, SHA-256 `51ac2151f43de9c21c5c37bddc0dff918eba9743a1eb882e94da510e02f3bbe7`.
+- Exact local snapshot verification: **995 files**, **425 Python**, **17 JSONL**, **683 restored-project files**, **85 source-export parts**; `compileall` PASS; `33 passed in 0.76s`.
+- Restored source manifest reports **682** materialized files before the repository-level snapshot wrapper file, and the source-export remains 85 ordered parts.
+- Final model lifecycle policy: training continues from verified checkpoint/adapter; GGUF remains runtime/export output only; cumulative replay is default; previous model/dataset/checkpoint versions are retained; destructive cleanup occurs only after verification.
+- Final language policy: Arabic MSA + Saudi + Yemeni + Egyptian profiles; spelling normalization/correction is separated from response style selection.
+- Final diagnostics: safe file inspection, ZIP/TAR path traversal checks, archive size/compression limits, project syntax/JSON checks, and root-cause classification.
+- Known non-blocking GitHub Actions warning: hosted Action runtime is reporting Node 20 deprecation for currently used checkout/setup-python action versions; application tests remain green.
+- Physical-target gates still require execution on the actual ThinkPad P50 for native Windows desktop/Electron/node-pty, actual model weights/GGUF/llama.cpp inference, real SFT/LoRA resume, full user-project E2E, and multimodal hardware-backed paths.
