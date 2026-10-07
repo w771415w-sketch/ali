@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Dataset separation/quality policy for behavior, tools and evaluation."""
-from __future__ import annotations
+"""Dataset separation and minimum metadata policy."""
 from dataclasses import dataclass
 @dataclass(frozen=True)
 class DatasetSplitPolicy:
