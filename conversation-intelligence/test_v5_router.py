@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 import importlib.util
+import sys
 
 P = Path(__file__).with_name("v5_router.py")
 
 spec = importlib.util.spec_from_file_location("ali_ci_v5", P)
 mod = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = mod
 spec.loader.exec_module(mod)
 
 
