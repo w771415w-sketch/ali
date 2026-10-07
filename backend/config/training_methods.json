@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.1",
+  "hardware_target": "thinkpad-p50",
+  "principle": "Training uses checkpoints/adapters; GGUF is a runtime/export artifact and is never the training source.",
+  "defaults": {
+    "training_method": "lora_continue_cpu",
+    "conversion_profile": "q4_k_m",
+    "continue_from": "latest_checkpoint",
+    "preserve_previous_versions": true,
+    "keep_source_dataset": true,
+    "delete_intermediates_after_verified_export": false
+  },
+  "training_methods": [
+    {
+      "id": "lora_cpu",
+      "label_ar": "LoRA على المعالج",
+      "kind": "peft",
+      "stage": "lora",
+      "device": "cpu",
+      "recommended": true,
+      "enabled": true,
+      "profile": "small",
+      "checkpoint_source": "base_or_previous_checkpoint",
+      "constraints": {
+        "max_cpu_threads": 6,
+        "max_concurrent_jobs": 1,
+        "requires_ac_power": true
+      },
+      "notes_ar": "الخيار الافتراضي للتكيف التدريجي مع بيانات جديدة مع إبقاء الأوزان الأساسية منفصلة."
+    },
+    {
+      "id": "lora_continue_cpu",
+      "label_ar": "استكمال LoRA على المعالج",
+      "kind": "peft_continual",
+      "stage": "lora",
+      "device": "cpu",
+      "recommended": true,
+      "enabled": true,
+      "profile": "micro_or_small",
+      "checkpoint_source": "latest_verified_checkpoint_or_adapter",
+      "constraints": {
+        "max_cpu_threads": 6,
+        "max_concurrent_jobs": 1,
+        "requires_ac_power": true
+      },
+      "notes_ar": "المسار الموصى به عند إضافة بيانات جديدة مع الاحتفاظ بالإصدار السابق وإمكانية الرجوع."
+    },
+    {
+      "id": "continued_sft_cpu",
+      "label_ar": "استكمال SFT على المعالج",
+      "kind": "continued_finetune",
+      "stage": "sft",
+      "device": "cpu",
+      "recommended": true,
+      "enabled": true,
+      "profile": "micro",
+      "checkpoint_source": "latest_verified_checkpoint",
+      "constraints": {
+        "max_cpu_threads": 6,
+        "max_concurrent_jobs": 1,
+        "requires_ac_power": true
+      },
+      "notes_ar": "استكمال من Checkpoint سابق؛ مناسب للدفعات الصغيرة فقط بسبب كلفة تعديل أوزان النموذج."
+    },
+    {
+      "id": "full_finetune_micro_cpu",
+      "label_ar": "Fine-tune كامل لنموذج صغير جدًا",
+      "kind": "full_finetune",
+      "stage": "base",
+      "device": "cpu",
+      "recommended": false,
+      "enabled": true,
+      "profile": "micro",
+      "checkpoint_source": "previous_checkpoint",
+      "constraints": {
+        "max_cpu_threads": 6,
+        "max_concurrent_jobs": 1,
+        "requires_ac_power": true,
+        "max_parameter_count": 10000000
+      },
+      "notes_ar": "مسموح فقط للنماذج شديدة الصغر؛ يتم رفضه تلقائيًا إذا تجاوز النموذج حد المعلمات المحدد."
+    },
+    {
+      "id": "qlora_gpu",
+      "label_ar": "QLoRA على GPU",
+      "kind": "peft_quantized",
+      "stage": "lora",
+      "device": "gpu",
+      "recommended": false,
+      "enabled": false,
+      "reason": "p50_vram_2gb",
+      "notes_ar": "غير متاح كخيار آمن على P50 بسبب 2GB VRAM. لا يتم تمكينه تلقائيًا."
+    }
+  ],
+  "conversion_profiles": [
+    {
+      "id": "f16",
+      "label_ar": "GGUF F16",
+      "stage": "hf_to_gguf",
+      "converter_outtype": "f16",
+      "enabled": true,
+      "recommended": false,
+      "quality_class": "high",
+      "disk_class": "large"
+    },
+    {
+      "id": "bf16",
+      "label_ar": "GGUF BF16",
+      "stage": "hf_to_gguf",
+      "converter_outtype": "bf16",
+      "enabled": true,
+      "recommended": false,
+      "quality_class": "high",
+      "disk_class": "large",
+      "condition": "source_model_supports_bf16"
+    },
+    {
+      "id": "q8_0",
+      "label_ar": "GGUF Q8_0",
+      "stage": "hf_to_gguf",
+      "converter_outtype": "q8_0",
+      "enabled": true,
+      "recommended": false,
+      "quality_class": "very_high",
+      "disk_class": "large"
+    },
+    {
+      "id": "q6_k",
+      "label_ar": "GGUF Q6_K",
+      "stage": "hf_to_gguf_then_quantize",
+      "quantize_type": "Q6_K",
+      "enabled": true,
+      "recommended": false,
+      "quality_class": "high",
+      "disk_class": "medium"
+    },
+    {
+      "id": "q5_k_m",
+      "label_ar": "GGUF Q5_K_M",
+      "stage": "hf_to_gguf_then_quantize",
+      "quantize_type": "Q5_K_M",
+      "enabled": true,
+      "recommended": false,
+      "quality_class": "balanced",
+      "disk_class": "medium"
+    },
+    {
+      "id": "q4_k_m",
+      "label_ar": "GGUF Q4_K_M",
+      "stage": "hf_to_gguf_then_quantize",
+      "quantize_type": "Q4_K_M",
+      "enabled": true,
+      "recommended": true,
+      "quality_class": "balanced_efficiency",
+      "disk_class": "small"
+    }
+  ],
+  "retention": {
+    "keep_checkpoint_versions": 2,
+    "keep_adapter_versions": 2,
+    "keep_gguf_versions": 2,
+    "keep_dataset_versions": 3,
+    "keep_previous_production_version": true,
+    "delete_intermediates_only_after_verification": true
+  }
+}
