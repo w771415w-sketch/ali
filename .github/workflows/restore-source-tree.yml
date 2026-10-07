@@ -23,6 +23,27 @@ jobs:
           python-version: "3.12"
       - name: Restore 588-file source tree
         run: python scripts/extract_project.py
+      - name: Overlay verified runtime extensions
+        run: |
+          set -e
+          mkdir -p restored-project/backend/config
+          mkdir -p restored-project/backend/conversation_intelligence
+          mkdir -p restored-project/backend/diagnostics
+          mkdir -p restored-project/backend/model
+          mkdir -p restored-project/backend/training
+          cp backend/config/language_profiles.json restored-project/backend/config/
+          cp backend/config/language_settings.py restored-project/backend/config/
+          cp backend/config/settings_service.py restored-project/backend/config/
+          cp backend/config/training_methods.json restored-project/backend/config/
+          cp backend/config/training_settings.py restored-project/backend/config/
+          cp backend/conversation_intelligence/language_adapter.py restored-project/backend/conversation_intelligence/
+          cp backend/conversation_intelligence/importer.py restored-project/backend/conversation_intelligence/
+          cp -R backend/diagnostics/. restored-project/backend/diagnostics/
+          cp backend/model/conversion.py restored-project/backend/model/
+          cp backend/model/conversion_policy.py restored-project/backend/model/
+          cp backend/training/continual_dataset.py restored-project/backend/training/
+          cp backend/training/lifecycle.py restored-project/backend/training/
+          cp backend/training/controller.py restored-project/backend/training/
       - name: Validate restored Python
         run: |
           python -m compileall -q restored-project/backend || true
