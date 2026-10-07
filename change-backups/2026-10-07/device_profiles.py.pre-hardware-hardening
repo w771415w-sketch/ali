@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+"""Concrete device profiles for reproducible ALI AI deployments."""
+from __future__ import annotations
+from typing import Any, Dict
+
+P50_PROFILE: Dict[str, Any] = {
+    "id": "thinkpad-p50-32gb-2gb",
+    "label": "Lenovo ThinkPad P50 / 32 GB / 2 GB Quadro",
+    "cpu": {"threads": 8, "physical_cores": 4, "recommended_torch_threads": 6, "interop_threads": 1},
+    "ram_gb": 32,
+    "gpu": {"name": "NVIDIA Quadro M1000M", "vram_gb": 2, "policy": "inference-optional-offload"},
+    "training": {
+        "device": "cpu",
+        "scale": "small",
+        "bootstrap_scale": "micro",
+        "batch_size": 1,
+        "grad_accum": 16,
+        "seq_len": 256,
+        "context": 384,
+        "max_new_tokens": 192,
+        "amp": False,
+        "gradient_checkpointing": True,
+        "weight_decay": 0.05,
+        "learning_rate": 0.0003,
+        "warmup_steps": 20,
+        "save_every": 50,
+        "eval_every": 50,
+        "max_steps_bootstrap": 50,
+    },
+    "storage": {
+        "fast_root": "D:/ALI-AI",
+        "archive_root": "F:/ALI-AI-Archive",
+        "avoid_system_drive_for_checkpoints": True,
+    },
+    "rules": [
+        "Use CPU-first training on this 2 GB legacy GPU class.",
+        "Keep 2 logical CPU threads free for Windows and the UI.",
+        "Prefer micro for smoke tests and small for actual local research runs.",
+        "Treat GGUF/llama.cpp as the preferred production inference bridge when a GGUF model exists.",
+    ],
+}
+
+
+def recommend_for_hardware(hardware: Any) -> Dict[str, Any]:
+    ram = float(getattr(hardware, "ram_gb", 0) or 0)
+    vram = float(getattr(hardware, "vram_gb", 0) or 0)
+    cores = int(getattr(hardware, "cpu_cores", 0) or 0)
+    gpu_name = str(getattr(hardware, "gpu_name", "CPU"))
+    if ram >= 24 and vram < 3 and cores >= 6:
+        return dict(P50_PROFILE)
+    out = dict(P50_PROFILE)
+    out["id"] = "adaptive"
+    out["label"] = f"Adaptive profile · {ram:.1f} GB RAM · {vram:.1f} GB VRAM · {cores} threads"
+    if ram < 16:
+        out["training"] = dict(out["training"], scale="micro", seq_len=192, context=256, grad_accum=8)
+    elif ram < 24:
+        out["training"] = dict(out["training"], scale="micro", seq_len=224, context=320, grad_accum=12)
+    return out
