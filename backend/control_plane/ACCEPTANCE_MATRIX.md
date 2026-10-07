@@ -6,7 +6,7 @@
 | Planning | dependency graph + cycle detection | executable/local pass |
 | State | persisted SQLite project state/events | executable/local pass |
 | Memory | scoped validation/retrieval | executable/local pass |
-| Knowledge | ingestion/chunking/retrieval/provenance | executable/local pass |
+| Knowledge | ingestion/chunking/retrieval/provenance | executable/local pass |\n| Project intelligence | repository/AST/manifests/tests analysis | executable/local pass |\n| Document ingestion | common text formats plus optional office/PDF parsers | executable/local pass |
 | Tools | registry/version/permission/result envelope | executable/local pass |
 | Safe execution | workspace + approval + command policy | executable/local pass |
 | Recovery | failure classification + checkpoints + rollback path | executable/local pass |
@@ -17,7 +17,7 @@
 | Release | quality gate + approval + rollback | executable/local pass |
 | Learning | dataset validation/dedup/split/leakage | executable/local pass |
 | Governance | redaction/retention/RBAC/network/tenant | executable/local pass |
-| Observability | metrics/events | executable/local pass |
+| Observability | metrics/events | executable/local pass |\n| Model runtime | GGUF runtime discovery | executable/local pass |\n| Multimodal capability | dependency/capability detection | executable/local pass |\n| Local gateway | health/prepare/execute JSON surface | executable/local pass |
 | Native Windows | actual target P50 run | pending on physical P50 |
 | Electron/node-pty | real desktop integration | pending |
 | Real model/GGUF | real model weights/inference | pending |
