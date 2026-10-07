@@ -28,7 +28,7 @@ class GGUFConverter:
         if src.suffix.lower()!=".gguf":raise ModelConversionError("quantizer input must be GGUF")
         d=self.discover()
         if not d["quantizer"]:raise ModelConversionError("llama-quantize executable not found")
-        cmd=[str(d["quantizer"]),str(src),str(out),quant_type,"-t",str(max(1,int(threads)))]
+        cmd=[str(d["quantizer"]),str(src),str(out),quant_type,str(max(1,int(threads)))]
         if not approved:return {"ok":False,"status":"approval_required","dry_run_command":cmd}
         r=subprocess.run(cmd,capture_output=True,text=True,timeout=timeout_s,check=False)
         return {"ok":r.returncode==0,"status":"quantized" if r.returncode==0 else "failed","command":cmd,"stdout":r.stdout,"stderr":r.stderr,"output":str(out) if r.returncode==0 else None}

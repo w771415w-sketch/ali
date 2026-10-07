@@ -10,7 +10,7 @@ class ArabicLanguageAdapter:
     def normalize(text):
         text=unicodedata.normalize("NFKC",str(text or "")).replace("ـ","")
         text=re.sub(r"[ؐ-ًؚ-ٰٟۖ-ۭ]","",text)
-        return re.sub(r"s+"," ",text).strip()
+        return re.sub(r"\s+"," ",text).strip()
     def correct_spelling(self,text):
         out=self.normalize(text);changes=[]
         for bad,good in self.correctors.items():

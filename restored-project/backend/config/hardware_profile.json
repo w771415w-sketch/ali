@@ -1,8 +1,8 @@
 {
   "profile_name": "ALI ThinkPad P50 target profile",
   "source": "user-provided hardware report",
+  "privacy": "Unique device identifiers intentionally excluded from canonical project files.",
   "enabled": true,
-  "privacy": "Personal/device unique identifiers intentionally excluded from the canonical project profile.",
   "device_name": "Lenovo ThinkPad P50",
   "model": "20EQS2L900",
   "os_label": "Windows 11 Pro 10.0.26200 (64-bit)",
@@ -10,7 +10,6 @@
   "cpu_model": "Intel Core i7-6820HQ",
   "cpu_threads": 8,
   "physical_cores": 4,
-  "cpu_temp_c": 41.05,
   "ram_gb": 32,
   "ram_available_gb_observed": 21.32,
   "ram_type": "DDR4",
@@ -19,36 +18,28 @@
   "gpu_driver": "31.0.15.3818",
   "vram_gb": 2,
   "vram_type": "GDDR5",
-  "cuda_capability": [
-    5,
-    0
-  ],
-  "battery_percent": 38,
-  "battery_minutes": 42,
+  "cuda_capability": [5, 0],
+  "battery_percent_observed": 38,
+  "battery_minutes_observed": 42,
   "screen": "1920x1080 @ 60Hz IPS FlexView",
-  "wifi": "Intel Dual Band Wireless-AC 8260",
-  "network_speed_mbps": 72.2,
   "storage": {
-    "ssd_model": "WDC PC SN720 SDAPNTW-512G-1006",
     "ssd_capacity_gb": 512,
     "ssd_bus": "NVMe",
     "ssd_partition_style": "GPT",
     "ssd_health": "Healthy",
-    "hdd_model": "WDC WD20SPZX-22UA7T0",
     "hdd_capacity_gb": 2000,
     "hdd_bus": "SATA 5400 RPM",
     "hdd_partition_style": "MBR",
     "hdd_health": "Healthy"
   },
-  "connectivity": {
-    "ethernet": "Intel I219-LM Gigabit LAN",
-    "bluetooth": "Bluetooth Device (PAN)"
-  },
-  "notes": {
-    "cpu_temperature_source": "User-provided ACPI reading",
-    "ssd_tbw": "Requires smartctl or CrystalDiskInfo for exact SMART/TBW data",
-    "cuda_cores": "Not used as a training decision variable; hardware-reported VRAM and runtime CUDA probing are preferred",
-    "intel_vram_type": "Not treated as authoritative",
-    "battery_cells": "Requires Lenovo Vantage for exact cell count"
+  "power_policy": {
+    "training_requires_ac": true,
+    "battery_guard_percent": 45,
+    "battery_hard_stop_percent": 25,
+    "thermal_guard_c": 80,
+    "thermal_hard_stop_c": 88,
+    "min_free_ram_gb": 4,
+    "max_training_threads": 6,
+    "max_concurrent_heavy_jobs": 1
   }
 }

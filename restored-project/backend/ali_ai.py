@@ -1564,95 +1564,61 @@ class App:
         training_method = tk.StringVar(value=str(self.cfg.get("training_method", "lora_continue_cpu")))
         conversion_profile = tk.StringVar(value=str(self.cfg.get("conversion_profile", "q4_k_m")))
 
-        tk.Checkbutton(
-            w, text="تفعيل البحث عبر الإنترنت داخل المحادثة (مع التحقق من المصادر)",
-            variable=internet, bg=C["BG"], fg=C["INK"], selectcolor=C["PANEL"],
-        ).pack(anchor="w", padx=18, pady=8)
-        tk.Checkbutton(
-            w, text="Enable gated automatic improvement scheduler",
-            variable=auto, bg=C["BG"], fg=C["INK"], selectcolor=C["PANEL"],
-        ).pack(anchor="w", padx=18, pady=8)
+        for label, var in (
+            ("تفعيل البحث عبر الإنترنت داخل المحادثة (مع التحقق من المصادر)", internet),
+            ("Enable gated automatic improvement scheduler", auto),
+        ):
+            if isinstance(var, tk.BooleanVar):
+                tk.Checkbutton(w,text=label,variable=var,bg=C["BG"],fg=C["INK"],selectcolor=C["PANEL"]).pack(anchor="w",padx=18,pady=8)
 
-        def combo(title, var, values, pady=(10,2)):
-            tk.Label(w, text=title, bg=C["BG"], fg=C["MUTED"]).pack(anchor="w", padx=18, pady=pady)
-            ttk.Combobox(w, textvariable=var, values=values, state="readonly").pack(fill="x", padx=18)
+        def combo(title,var,values,pady=(10,2)):
+            tk.Label(w,text=title,bg=C["BG"],fg=C["MUTED"]).pack(anchor="w",padx=18,pady=pady)
+            ttk.Combobox(w,textvariable=var,values=values,state="readonly").pack(fill="x",padx=18)
 
-        combo("لهجة/أسلوب الرد العربي", language_profile, ["ar-MSA","ar-SA","ar-YE","ar-EG"])
-
+        combo("لهجة/أسلوب الرد العربي",language_profile,["ar-MSA","ar-SA","ar-YE","ar-EG"])
         try:
             from config.settings_service import ProjectSettingsService
-            settings_service = ProjectSettingsService()
-            snapshot = settings_service.snapshot(self.hardware)
-            available_methods = [m for m in snapshot["training_methods"] if m.get("available")]
-            all_methods = snapshot["training_methods"]
-            conversions = [c for c in snapshot["conversion_profiles"] if c.get("enabled", True)]
-            method_ids = [m["id"] for m in available_methods] or ["lora_continue_cpu"]
-            conversion_ids = [c["id"] for c in conversions] or ["q4_k_m"]
-
-            if training_method.get() not in method_ids:
-                training_method.set(method_ids[0])
-            if conversion_profile.get() not in conversion_ids:
-                conversion_profile.set(next((c["id"] for c in conversions if c.get("recommended")), conversion_ids[0]))
-
-            combo("طريقة التدريب المتاحة للجهاز", training_method, method_ids)
-            combo("طريقة تحويل النموذج إلى GGUF", conversion_profile, conversion_ids)
-            combo("استراتيجية إضافة البيانات", dataset_strategy, [x["id"] for x in snapshot["dataset_strategies"]] or ["cumulative_replay"])
-
-            details = []
-            for m in all_methods:
-                status = "متاح" if m.get("available") else "غير متاح"
-                reason = m.get("disabled_reason") or m.get("reason") or ""
-                details.append(f"{m['id']} — {status}" + (f" — {reason}" if reason else ""))
-            tk.Label(
-                w, text="حالة طرق التدريب", bg=C["BG"], fg=C["MUTED"],
-                font=("Segoe UI Semibold", 8),
-            ).pack(anchor="w", padx=18, pady=(14,4))
-            tk.Label(
-                w, text="\n".join(details),
-                bg=C["BG"], fg=C["INK"], justify="left", anchor="w", wraplength=790,
-            ).pack(fill="x", padx=28)
+            service=ProjectSettingsService()
+            snapshot=service.snapshot(self.hardware)
+            methods=snapshot.get("training_methods",[])
+            available=[m for m in methods if m.get("available")]
+            conversions=[c for c in snapshot.get("conversion_profiles",[]) if c.get("enabled",True)]
+            method_ids=[m["id"] for m in available] or ["lora_continue_cpu"]
+            conversion_ids=[c["id"] for c in conversions] or ["q4_k_m"]
+            if training_method.get() not in method_ids: training_method.set(method_ids[0])
+            if conversion_profile.get() not in conversion_ids: conversion_profile.set(next((x["id"] for x in conversions if x.get("recommended")),conversion_ids[0]))
+            combo("طريقة التدريب المتاحة للجهاز",training_method,method_ids)
+            combo("طريقة تحويل النموذج إلى GGUF",conversion_profile,conversion_ids)
+            combo("استراتيجية إضافة البيانات",dataset_strategy,[x["id"] for x in snapshot.get("dataset_strategies",[])] or ["cumulative_replay"])
+            status_lines=[f"{m['id']} — {'متاح' if m.get('available') else 'غير متاح'}" + (f" — {m.get('disabled_reason') or m.get('reason')}" if not m.get('available') else "") for m in methods]
+            tk.Label(w,text="حالة طرق التدريب\n" + "\n".join(status_lines),bg=C["BG"],fg=C["INK"],justify="left",wraplength=790).pack(anchor="w",padx=18,pady=(12,8))
         except Exception as exc:
-            combo("طريقة التدريب", training_method, ["lora_continue_cpu"])
-            combo("طريقة تحويل النموذج", conversion_profile, ["q4_k_m"])
-            combo("استراتيجية إضافة البيانات", dataset_strategy, ["cumulative_replay"])
-            tk.Label(w, text=f"تعذر قراءة كتالوج التدريب: {exc}", bg=C["BG"], fg=C["AMBER"], wraplength=790).pack(anchor="w", padx=18, pady=10)
+            combo("طريقة التدريب",training_method,["lora_continue_cpu"])
+            combo("طريقة تحويل النموذج",conversion_profile,["q4_k_m"])
+            combo("استراتيجية إضافة البيانات",dataset_strategy,["cumulative_replay"])
+            tk.Label(w,text=f"تعذر قراءة كتالوج التدريب: {exc}",bg=C["BG"],fg=C["AMBER"],wraplength=790).pack(anchor="w",padx=18,pady=8)
 
-        combo("Permission mode", mode, [x[0] for x in PERM_MODES])
-
-        tk.Label(
-            w,
-            text=(
-                "P50: التدريب المحلي CPU-first بحد أقصى 6 خيوط ووظيفة ثقيلة واحدة. "
-                "QLoRA/GPU التدريب غير متاح تلقائيًا على Quadro M1000M 2GB. "
-                "استكمال التدريب يبدأ من Checkpoint/Adapter موثوق؛ GGUF مخرج تشغيل وليس مصدر تدريب. "
-                "البيانات الجديدة تمر عبر تنظيف وإزالة التكرار وCumulative Replay وتقييم Regression قبل اعتماد إصدار جديد."
-            ),
-            bg=C["BG"], fg=C["AMBER"], wraplength=790, justify="left",
-        ).pack(anchor="w", padx=18, pady=18)
+        combo("Permission mode",mode,[x[0] for x in PERM_MODES])
+        tk.Label(w,text=("P50: CPU-first، حد أقصى 6 خيوط وتدريب ثقيل واحد. QLoRA/GPU مغلق تلقائيًا عند عدم ملاءمة العتاد. "
+                         "استكمال التدريب يبدأ من Checkpoint/Adapter موثوق؛ GGUF مخرج تشغيل وليس مصدر تدريب. "
+                         "البيانات الجديدة تستخدم Cumulative Replay مع Regression قبل الإصدار."),bg=C["BG"],fg=C["AMBER"],wraplength=790,justify="left").pack(anchor="w",padx=18,pady=18)
 
         def save():
-            self.runtime.allow_internet = bool(internet.get())
+            self.runtime.allow_internet=bool(internet.get())
             self.runtime.permission_manager.set_mode(mode.get())
             self.cfg.update({
-                "allow_internet": bool(internet.get()),
-                "auto_improve": bool(auto.get()),
-                "perm_mode": mode.get(),
-                "ai_mode": self.ai_mode.get(),
-                "language_profile": language_profile.get(),
-                "training_method": training_method.get(),
-                "conversion_profile": conversion_profile.get(),
-                "dataset_strategy": dataset_strategy.get(),
+                "allow_internet":bool(internet.get()),"auto_improve":bool(auto.get()),"perm_mode":mode.get(),
+                "ai_mode":self.ai_mode.get(),"language_profile":language_profile.get(),
+                "training_method":training_method.get(),"conversion_profile":conversion_profile.get(),
+                "dataset_strategy":dataset_strategy.get(),
             })
             try:
                 from conversation_intelligence.language_adapter import ArabicLanguageAdapter
-                self.language_adapter = ArabicLanguageAdapter(profile=language_profile.get())
+                self.language_adapter=ArabicLanguageAdapter(profile=language_profile.get())
             except Exception:
-                self.language_adapter = None
-            save_cfg(self.cfg)
-            w.destroy()
-            self._refresh_status()
-
-        self._button(w, "حفظ الإعدادات", save, accent=True)
+                self.language_adapter=None
+            save_cfg(self.cfg);w.destroy();self._refresh_status()
+        self._button(w,"حفظ الإعدادات",save,accent=True)
 
     # ---------- compatibility ----------
     def _ai_mode_menu(self, parent=None):
