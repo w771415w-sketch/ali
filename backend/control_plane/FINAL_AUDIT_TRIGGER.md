@@ -1,0 +1,1 @@
+Final CI certification trigger for current main after restored-project coverage was added.
