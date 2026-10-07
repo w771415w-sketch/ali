@@ -272,16 +272,36 @@ __all__ = [
 
 ```python
 # -*- coding: utf-8 -*-
-"""Concrete device profiles for reproducible ALI AI deployments."""
+"""Concrete, reproducible device profiles for ALI AI deployments.
+
+The ThinkPad P50 profile is deliberately conservative: the Quadro M1000M has
+only 2 GB VRAM, so local training stays CPU-first while inference may use
+optional GGUF/llama.cpp offload. Profiles are copied deeply before adaptation
+so nested configuration cannot leak mutations between callers.
+"""
 from __future__ import annotations
+
+from copy import deepcopy
 from typing import Any, Dict
 
 P50_PROFILE: Dict[str, Any] = {
     "id": "thinkpad-p50-32gb-2gb",
-    "label": "Lenovo ThinkPad P50 / 32 GB / 2 GB Quadro",
-    "cpu": {"threads": 8, "physical_cores": 4, "recommended_torch_threads": 6, "interop_threads": 1},
+    "label": "Lenovo ThinkPad P50 / 32 GB / Quadro M1000M 2 GB",
+    "cpu": {
+        "threads": 8,
+        "physical_cores": 4,
+        "recommended_torch_threads": 6,
+        "interop_threads": 1,
+        "leave_free_threads": 2,
+    },
     "ram_gb": 32,
-    "gpu": {"name": "NVIDIA Quadro M1000M", "vram_gb": 2, "policy": "inference-optional-offload"},
+    "gpu": {
+        "name": "NVIDIA Quadro M1000M",
+        "vram_gb": 2,
+        "cuda_capability": [5, 0],
+        "training": "disabled-by-default",
+        "inference": "optional-offload",
+    },
     "training": {
         "device": "cpu",
         "scale": "small",
@@ -289,8 +309,8 @@ P50_PROFILE: Dict[str, Any] = {
         "batch_size": 1,
         "grad_accum": 16,
         "seq_len": 256,
-        "context": 384,
-        "max_new_tokens": 192,
+        "context": 320,
+        "max_new_tokens": 160,
         "amp": False,
         "gradient_checkpointing": True,
         "weight_decay": 0.05,
@@ -299,6 +319,26 @@ P50_PROFILE: Dict[str, Any] = {
         "save_every": 50,
         "eval_every": 50,
         "max_steps_bootstrap": 50,
+        "max_concurrent_jobs": 1,
+        "require_ac_power": True,
+        "min_available_ram_gb": 4.0,
+        "max_cpu_threads": 6,
+    },
+    "runtime": {
+        "recommended_context": 320,
+        "max_context": 384,
+        "recommended_max_new_tokens": 160,
+        "max_new_tokens": 192,
+        "temperature_default": 0.65,
+        "max_concurrent_inference": 1,
+        "min_available_ram_gb": 3.0,
+    },
+    "power": {
+        "battery_guard_percent": 45,
+        "battery_hard_stop_percent": 25,
+        "thermal_guard_c": 80.0,
+        "thermal_hard_stop_c": 88.0,
+        "prefer_ac_for_training": True,
     },
     "storage": {
         "fast_root": "D:/ALI-AI",
@@ -306,29 +346,56 @@ P50_PROFILE: Dict[str, Any] = {
         "avoid_system_drive_for_checkpoints": True,
     },
     "rules": [
-        "Use CPU-first training on this 2 GB legacy GPU class.",
-        "Keep 2 logical CPU threads free for Windows and the UI.",
-        "Prefer micro for smoke tests and small for actual local research runs.",
-        "Treat GGUF/llama.cpp as the preferred production inference bridge when a GGUF model exists.",
+        "CPU-first training is the default for this 2 GB legacy GPU class.",
+        "Use at most 6 logical CPU threads for training so Windows/UI retain headroom.",
+        "Run one heavy local training job at a time.",
+        "Use micro scale for smoke tests; use small scale only for real local runs.",
+        "Prefer GGUF/llama.cpp for production inference when a compatible GGUF exists.",
+        "Pause or refuse heavy training when battery, thermal, or free-RAM guards are violated.",
     ],
 }
+
+
+def _adaptive_training(base: Dict[str, Any], ram_gb: float) -> Dict[str, Any]:
+    training = deepcopy(base["training"])
+    if ram_gb < 16:
+        training.update(scale="micro", seq_len=192, context=256, grad_accum=8)
+    elif ram_gb < 24:
+        training.update(scale="micro", seq_len=224, context=288, grad_accum=12)
+    elif ram_gb < 32:
+        training.update(scale="small", seq_len=256, context=320, grad_accum=16)
+    return training
 
 
 def recommend_for_hardware(hardware: Any) -> Dict[str, Any]:
     ram = float(getattr(hardware, "ram_gb", 0) or 0)
     vram = float(getattr(hardware, "vram_gb", 0) or 0)
-    cores = int(getattr(hardware, "cpu_cores", 0) or 0)
-    gpu_name = str(getattr(hardware, "gpu_name", "CPU"))
-    if ram >= 24 and vram < 3 and cores >= 6:
-        return dict(P50_PROFILE)
-    out = dict(P50_PROFILE)
-    out["id"] = "adaptive"
-    out["label"] = f"Adaptive profile · {ram:.1f} GB RAM · {vram:.1f} GB VRAM · {cores} threads"
+    threads = int(getattr(hardware, "cpu_cores", 0) or 0)
+    gpu_name = str(getattr(hardware, "gpu_name", "") or "").lower()
+
+    profile = deepcopy(P50_PROFILE)
+    p50_match = ram >= 24 and threads >= 6 and vram < 3 and (
+        "m1000m" in gpu_name or "quadro" in gpu_name or not gpu_name
+    )
+    if p50_match:
+        profile["detected_match"] = True
+        return profile
+
+    profile["id"] = "adaptive"
+    profile["label"] = (
+        f"Adaptive profile · {ram:.1f} GB RAM · "
+        f"{vram:.1f} GB VRAM · {threads} logical threads"
+    )
+    profile["detected_match"] = False
+    profile["training"] = _adaptive_training(profile, ram)
     if ram < 16:
-        out["training"] = dict(out["training"], scale="micro", seq_len=192, context=256, grad_accum=8)
+        profile["runtime"].update(recommended_context=256, max_context=320,
+                                  recommended_max_new_tokens=128, max_new_tokens=160)
     elif ram < 24:
-        out["training"] = dict(out["training"], scale="micro", seq_len=224, context=320, grad_accum=12)
-    return out
+        profile["runtime"].update(recommended_context=288, max_context=352,
+                                  recommended_max_new_tokens=144, max_new_tokens=176)
+    return profile
+
 ```
 
 ---
@@ -361,9 +428,10 @@ def recommend_for_hardware(hardware: Any) -> Dict[str, Any]:
 
 ```json
 {
-  "profile_name": "MRALI ThinkPad P50 target profile",
+  "profile_name": "ALI ThinkPad P50 target profile",
   "source": "user-provided hardware report",
   "enabled": true,
+  "privacy": "Personal/device unique identifiers intentionally excluded from the canonical project profile.",
   "device_name": "Lenovo ThinkPad P50",
   "model": "20EQS2L900",
   "os_label": "Windows 11 Pro 10.0.26200 (64-bit)",
@@ -372,79 +440,46 @@ def recommend_for_hardware(hardware: Any) -> Dict[str, Any]:
   "cpu_threads": 8,
   "physical_cores": 4,
   "cpu_temp_c": 41.05,
-  "ram_gb": 32.0,
+  "ram_gb": 32,
+  "ram_available_gb_observed": 21.32,
   "ram_type": "DDR4",
   "ram_speed_mhz": 2133,
   "gpu_name": "NVIDIA Quadro M1000M",
   "gpu_driver": "31.0.15.3818",
-  "vram_gb": 2.0,
+  "vram_gb": 2,
   "vram_type": "GDDR5",
   "cuda_capability": [
     5,
     0
   ],
-  "battery_percent": 38.0,
+  "battery_percent": 38,
   "battery_minutes": 42,
   "screen": "1920x1080 @ 60Hz IPS FlexView",
   "wifi": "Intel Dual Band Wireless-AC 8260",
   "network_speed_mbps": 72.2,
-  "ssd": {
-    "model": "WDC PC SN720 SDAPNTW-512G-1006",
-    "capacity_gb": 512,
-    "bus": "NVMe"
+  "storage": {
+    "ssd_model": "WDC PC SN720 SDAPNTW-512G-1006",
+    "ssd_capacity_gb": 512,
+    "ssd_bus": "NVMe",
+    "ssd_partition_style": "GPT",
+    "ssd_health": "Healthy",
+    "hdd_model": "WDC WD20SPZX-22UA7T0",
+    "hdd_capacity_gb": 2000,
+    "hdd_bus": "SATA 5400 RPM",
+    "hdd_partition_style": "MBR",
+    "hdd_health": "Healthy"
   },
-  "hdd": {
-    "model": "WDC WD20SPZX-22UA7T0",
-    "capacity_gb": 2000,
-    "bus": "SATA 5400 RPM"
+  "connectivity": {
+    "ethernet": "Intel I219-LM Gigabit LAN",
+    "bluetooth": "Bluetooth Device (PAN)"
   },
   "notes": {
-    "intel_vram_type": "غير محدد برمجياً بدقة بحسب التقرير",
-    "ssd_tbw": "يحتاج smartctl أو CrystalDiskInfo",
-    "cuda_cores": "تقدير معماري، لا يُثبت من WMI وحده",
-    "battery_cells": "تحتاج Lenovo Vantage"
-  },
-  "chassis_serial": "L1HF6CH036A",
-  "product_id": "PC0J8H3F",
-  "system_uuid": "DFBD464C-2222-11B2-A85C-ED47CEA099E4",
-  "motherboard": "LENOVO 20EQS2L900 — SDK0J40697 WIN",
-  "bios": "LENOVO N1EETA2W — إصدار 1.75 (18 مارس 2024)",
-  "processor_id": "BFEBFBFF000506E3",
-  "socket": "U3E1",
-  "virtualization": "VT-x enabled",
-  "ram_modules": 2,
-  "ram_vendor": "SK Hynix",
-  "ram_model": "HMA82GS6AFR8N-UH",
-  "ram_form_factor": "SODIMM",
-  "ram_serials": [
-    "91BE090E",
-    "91BE0910"
-  ],
-  "ssd_partitions": "C: 152 GB; D: 322 GB",
-  "ssd_partition_style": "GPT",
-  "ssd_serial": "E823_8FA6_BF53_0001_001B_448B_4601_9BE3",
-  "ssd_health": "Healthy",
-  "hdd_partitions": "F: 1.67 TB; G: 194 GB",
-  "hdd_partition_style": "MBR",
-  "hdd_serial": "WD-WX62E3049YU1",
-  "hdd_health": "Healthy",
-  "gpu_pci": "VEN_10DE & DEV_13B1",
-  "igpu_name": "Intel HD Graphics 530",
-  "igpu_pci": "VEN_8086 & DEV_191B",
-  "igpu_shared_vram_gb": 1.0,
-  "igpu_driver": "30.0.100.9865",
-  "audio": "Realtek High Definition Audio",
-  "keyboard": "Enhanced 101/102-key — Arabic 0401",
-  "pointing_device": "Synaptics Pointing Device — TrackPoint + Touchpad",
-  "ethernet": "Intel I219-LM Gigabit LAN",
-  "bluetooth": "Bluetooth Device (PAN)",
-  "mac_wifi": "34:F3:9A:52:12:CD",
-  "mac_lan": "C8:5B:76:BC:60:4A",
-  "battery_model": "Lenovo 00NY493",
-  "battery_wh": 90,
-  "screen_vendor": "Lenovo",
-  "screen_model": "LEN40BA",
-  "color_depth_bits": 32
+    "cpu_temperature_source": "User-provided ACPI reading",
+    "ssd_tbw": "Requires smartctl or CrystalDiskInfo for exact SMART/TBW data",
+    "cuda_cores": "Not used as a training decision variable; hardware-reported VRAM and runtime CUDA probing are preferred",
+    "intel_vram_type": "Not treated as authoritative",
+    "battery_cells": "Requires Lenovo Vantage for exact cell count"
+  }
 }
 ```
 
