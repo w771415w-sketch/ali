@@ -31,3 +31,4 @@ class PermissionManager:
         if mode==PermMode.FULL_ACCESS.value: return Decision.allow("full-access")
         if p==PermMode.READ_ONLY.value: return Decision.allow("mode permits")
         return Decision.ask(f"tool '{tool_name}' requires '{p}' in '{mode}' mode")
+\n\n_DEFAULT_MANAGER = PermissionManager()\ndef get_permission_manager():\n    return _DEFAULT_MANAGER\n
