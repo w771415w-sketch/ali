@@ -85,7 +85,7 @@ class Frame:
 def _domain(s: str) -> str:
     t = normalize(s)
     groups = {
-        "software": ("python","javascript","typescript","react","electron","api","backend","frontend","كود","برمجة"),
+        "software": ("python","javascript","typescript","react","electron","api","backend","frontend","كود","برمجة","مشروع","تطبيق","برنامج","اختبر","اختبار","عدل","عدّل"),
         "ai": ("ai","llm","rag","embedding","lora","qlora","gguf","نموذج","ذكاء اصطناعي","تدريب"),
         "data": ("sql","sqlite","postgres","mysql","csv","json","بيانات","قاعدة بيانات","جدول"),
         "git": ("git","github","commit","branch","pull request","مستودع","جيت"),
