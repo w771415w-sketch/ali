@@ -6,7 +6,7 @@
   "generator": "conversation-intelligence/generate_conversation_corpus_v6.py",
   "format": "JSONL",
   "storage": "streamed sharded output; do not commit generated multi-gigabyte corpus to the source repository",
-  "uniqueness": "deterministic canonical id from generator version + seed + row index + semantic axes",
+  "uniqueness": "row-index makes IDs unique within each generated run; digest binds the ID to semantic axes",
   "semantic_axes": {
     "families": 132,
     "topics": 96,
@@ -39,5 +39,6 @@
     "132 conversation/project/agent families verified in generator",
     "V6.1.1 includes family-aware natural-language variation and 12 deterministic behavior variants"
   ],
-  "id_scheme": "CI-V6.1.1-{sha256(seed,row,semantic_axes)[:24]}"
+  "id_scheme": "CI-V6.1.1-{row:08d}-{sha256(seed,row,semantic_axes)[:16]}",
+  "memory_behavior": "O(1) generator state; no 10M-ID in-memory set"
 }
