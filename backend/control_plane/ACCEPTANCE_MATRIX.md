@@ -1,0 +1,29 @@
+# ALI Acceptance Matrix
+
+| Gate | Evidence required | Current status |
+|---|---|---|
+| Requirements | structured contract + missing/conflict detection | executable/local pass |
+| Planning | dependency graph + cycle detection | executable/local pass |
+| State | persisted SQLite project state/events | executable/local pass |
+| Memory | scoped validation/retrieval | executable/local pass |
+| Knowledge | ingestion/chunking/retrieval/provenance | executable/local pass |
+| Tools | registry/version/permission/result envelope | executable/local pass |
+| Safe execution | workspace + approval + command policy | executable/local pass |
+| Recovery | failure classification + checkpoints + rollback path | executable/local pass |
+| Reliability | budget/retry/rate/circuit/idempotency/cancel | executable/local pass |
+| Model routing | route/fallback abstraction | executable/local pass |
+| Multi-agent | roles/handoff/loop control | executable/local pass |
+| Evaluation | categorized executable cases | executable/local pass |
+| Release | quality gate + approval + rollback | executable/local pass |
+| Learning | dataset validation/dedup/split/leakage | executable/local pass |
+| Governance | redaction/retention/RBAC/network/tenant | executable/local pass |
+| Observability | metrics/events | executable/local pass |
+| Native Windows | actual target P50 run | pending on physical P50 |
+| Electron/node-pty | real desktop integration | pending |
+| Real model/GGUF | real model weights/inference | pending |
+| Real SFT/LoRA | real training + resume | pending |
+| Full E2E project delivery | real user project built/tested/fixed/retested | pending |
+| Multimodal | audio/vision/doc pipeline | pending |
+| Production infrastructure | gateway/worker/queue/HA/DR | pending |
+
+Pending rows are deliberately not marked complete from documentation alone.
