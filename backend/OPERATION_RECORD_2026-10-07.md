@@ -55,3 +55,24 @@ The repository still contains the historical 588-file source publication in sour
 - Validate real model loading, GGUF/llama.cpp inference, training resume, tool execution, filesystem operations and rollback.
 - Expand project/agent integration for the remaining feature layers.
 - Keep Hermes inactive until separately authorized and verified.
+
+## Control-plane integration — 2026-10-07
+
+After the initial P50 work, the requested feature map was converted into an executable control-plane foundation rather than model-only prompt text. Existing files were backed up before modification; new files were added only after local verification.
+
+### Added
+- `backend/ali_control_plane.py`: requirements/contract extraction, clarification, planning/DAG, SQLite state, memory, knowledge index/search, secure project execution, snapshots, model routing, multi-agent supervision, and AgentLoop.
+- `backend/tests/test_ali_control_plane.py`: regression tests for gaps/conflicts, planning, memory, workspace safety, command blocking, multi-agent, and dry-run flow.
+- `backend/main.py`: `--self-test` entrypoint.
+
+### Local evidence
+- `python -m compileall`: PASS.
+- Backend test suite: **22/22 passed**.
+- Control-plane self-test: **checks_passed=true**.
+- Deterministic P50 health gate: **admission.allowed=true**, CPU training policy, max 6 CPU threads, one heavy job, AC required.
+
+### Safety/accuracy boundary
+The control plane does not treat an unverified action as completed. High-impact file/command paths require approval, workspace escape is rejected, dangerous command patterns are blocked, and model fallback is explicit. The feature specification also requires that self-improvement be gated by testing/evaluation/approval instead of uncontrolled production mutation. fileciteturn358file0L771-L799
+
+### Remaining native gates
+The GitHub repository still publishes the historical 588-file source export; the native Windows/Electron/.NET/node-pty/model-binary stack has not been reconstructed and executed end-to-end in this non-Windows connector runtime. The remaining work therefore stays explicitly tracked instead of being marked complete by documentation alone.
