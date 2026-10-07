@@ -1,0 +1,40 @@
+name: ALI Control Plane
+
+on:
+  push:
+    paths:
+      - "backend/control_plane/**"
+      - "backend/security/**"
+      - "backend/runtime/**"
+      - "backend/tests/**"
+      - "backend/main.py"
+  pull_request:
+    paths:
+      - "backend/control_plane/**"
+      - "backend/security/**"
+      - "backend/runtime/**"
+      - "backend/tests/**"
+      - "backend/main.py"
+  workflow_dispatch:
+
+jobs:
+  control-plane:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install test runner
+        run: python -m pip install --upgrade pip pytest
+      - name: Compile
+        run: python -m compileall -q backend
+      - name: Regression tests
+        run: PYTHONPATH=backend python -m pytest -q backend/tests
+      - name: Control-plane self-test
+        run: PYTHONPATH=backend python backend/main.py --self-test
+      - name: P50 deterministic gate
+        run: PYTHONPATH=backend python backend/main.py --target-p50
