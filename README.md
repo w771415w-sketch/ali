@@ -61,3 +61,15 @@ The P50 hardware/runtime policy remains separate and is checked with:
 `PYTHONPATH=backend python backend/main.py --target-p50`
 
 The control plane is an integration foundation, not a claim that the historical 588-file source export has been fully reconstructed into the native Windows desktop runtime. Native Electron/node-pty, real model/GGUF inference, SFT/LoRA resume, and full Windows end-to-end release validation remain separate gates.
+
+
+## Professional Control Plane — 2026-10-07
+
+The executable control plane now includes structured requirements/contracts, acceptance criteria, dependency-aware planning, persistent project state, scoped memory, local knowledge/RAG indexing with provenance, a knowledge graph, versioned tools, safe project/filesystem execution, Git checkpoints/rollback, failure recovery, budgets/rate limits/circuit breakers/retry/idempotency/cancellation, scheduling, model routing/fallback, artifact lineage, governance/RBAC/network policy, observability, categorized evaluation, release quality gates, dataset validation, controlled self-improvement, code/project intelligence, model/GGUF capability inspection, a local service gateway, and a native Windows/P50 validation script.
+
+Run:
+- `PYTHONPATH=backend python backend/main.py --self-test`
+- `PYTHONPATH=backend python backend/main.py --target-p50`
+- `PYTHONPATH=backend python backend/main.py --professional-health`
+
+The repository remains honest about native gates: actual Electron/node-pty, real model/GGUF/llama.cpp inference, real SFT/LoRA checkpoint resume, full Windows UI-driven execution, multimodal processing, and distributed production HA/DR must be exercised in the target environment before being marked complete.
