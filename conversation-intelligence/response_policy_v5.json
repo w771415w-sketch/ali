@@ -1,0 +1,51 @@
+{
+  "version": "5.0.0",
+  "global": {
+    "direct_answer_first": true,
+    "language_match": true,
+    "preserve_context": true,
+    "separate_facts_assumptions": true,
+    "never_claim_unverified_execution": true,
+    "never_expose_hidden_reasoning": true
+  },
+  "modes": {
+    "direct_first": {"opening":"answer","structure":["answer","evidence_if_needed","next_action_if_needed"]},
+    "evidence_first": {"opening":"answer_with_sources","structure":["claim","sources","uncertainty","conclusion"]},
+    "result_first": {"opening":"execution_result","structure":["result","verification","changed_items","remaining_issues"]},
+    "progressive_steps": {"opening":"task_status","structure":["goal","stages","current_result","next_stage"]},
+    "symptoms_causes_fix_verify": {"opening":"diagnosis","structure":["observed_symptoms","likely_causes","fix","verification","fallback"]},
+    "preserve_meaning": {"opening":"transformed_output","structure":["result","key_changes_if_requested"]},
+    "criteria_comparison_recommendation": {"opening":"comparison","structure":["criteria","option_a","option_b","recommendation","tradeoffs"]},
+    "claim_evidence_verdict": {"opening":"verification_verdict","structure":["claim","evidence","verdict","limits"]},
+    "acknowledge_correct_retest": {"opening":"correction_acknowledgement","structure":["what_was_wrong","corrected_result","retest_or_basis"]},
+    "state_saved_or_not": {"opening":"memory_state","structure":["status","what_was_saved","scope","deletion_path"]},
+    "resume_active_goal": {"opening":"continuation","structure":["active_goal","completed_since_last_turn","next_action"]},
+    "one_targeted_question": {"opening":"clarification","structure":["known","missing","one_question"]},
+    "confirm_target_and_scope": {"opening":"confirmation","structure":["action","target","scope","risk"]},
+    "stop_and_report_state": {"opening":"cancelled","structure":["stopped","completed","not_completed"]},
+    "deliver_artifact": {"opening":"artifact","structure":["artifact","verification","usage"]},
+    "dataset_checkpoint_evaluate_gate": {"opening":"training_status","structure":["dataset","checkpoint","evaluation","promotion_gate","rollback"] }
+  },
+  "failure_recovery": {
+    "empty_output":"retry_bounded_then_fallback",
+    "repetition":"sanitize_and_regenerate",
+    "malformed_text":"sanitize_then_regenerate",
+    "unsupported_claim":"remove_or_mark_uncertain",
+    "missing_source":"search_or_disclose_no_source",
+    "stale_information":"refresh_web_evidence",
+    "ignored_constraint":"replan_with_constraint",
+    "incomplete_execution":"resume_or_report_partial",
+    "unverified_postcondition":"do_not_mark_complete"
+  },
+  "conversation_behaviors": {
+    "short_reference":"resolve_against_last_active_goal",
+    "topic_switch":"decay_old_context_not_delete_history",
+    "user_correction":"increase_correction_priority_and_recheck",
+    "implicit_request":"infer_only_when_low_risk",
+    "multi_request":"split_into_explicit_stages",
+    "yes_no_followup":"bind_to_latest_pending_decision",
+    "user_says_more":"expand_scope_without_repeating_prior_content",
+    "user_says_same":"reuse_previous constraints and format",
+    "user_says_best":"ask_or_infer decision criteria from context"
+  }
+}
