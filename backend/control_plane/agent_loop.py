@@ -11,13 +11,14 @@ from .knowledge import KnowledgeBase
 from .recovery import FailureManager,CheckpointManager
 from .model_router import ModelRouter
 from .observability import Metrics,EventLog
+from .policy import Policy
 @dataclass
 class ExecutionResult:
     ok:bool;status:str;project_id:str;stage:str;message:str;evidence:list;contract:dict;metrics:dict
     def to_dict(self):return asdict(self)
 class AgentLoop:
     def __init__(self,root,hardware_policy=None,model=None):
-        self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True);self.store=StateStore(self.root/"state.db");self.memory=MemoryManager(self.store);self.kb=KnowledgeBase(self.root/"knowledge");self.failure=FailureManager(self.store);self.checkpoints=CheckpointManager(self.root/"checkpoints");self.planner=Planner();self.router=ModelRouter();self.metrics=Metrics();self.events=EventLog(self.root/"events.jsonl");self.hardware_policy=hardware_policy or {};self.model=model
+        self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True);self.store=StateStore(self.root/"state.db");self.memory=MemoryManager(self.store);self.kb=KnowledgeBase(self.root/"knowledge");self.failure=FailureManager(self.store);self.checkpoints=CheckpointManager(self.root/"checkpoints");self.planner=Planner();self.router=ModelRouter();self.metrics=Metrics();self.events=EventLog(self.root/"events.jsonl");self.hardware_policy=hardware_policy or {};self.model=model;self.policy=Policy(self.root)
     def _new_project(self,contract):
         pid=new_id("project");self.store.put_project(pid,1,contract.goal,"discover",{"contract":contract.to_dict(),"tasks":[],"decisions":[],"acceptance":[],"artifacts":[]});self.memory.add(pid,"task","Goal: "+contract.goal,1.0);return pid
     def prepare(self,user_text,project_id=None):
@@ -33,11 +34,15 @@ class AgentLoop:
         route=self.router.route("project","software")
         if not route.get("ok"):return ExecutionResult(False,"blocked",pid,"clarify","no healthy model route",[route],c.to_dict(),self.metrics.snapshot())
         tasks=self.planner.build(c)
-        if dry_run:return ExecutionResult(True,"dry_run",pid,"plan",[t.to_dict() for t in tasks][0:1] and "plan_ready" or "plan_ready",[t.to_dict() for t in tasks],c.to_dict(),self.metrics.snapshot())
-        if command and (not self.model or not approved):return ExecutionResult(False,"approval_required",pid,"clarify","command requires explicit approval",[],c.to_dict(),self.metrics.snapshot())
+        if dry_run:return ExecutionResult(True,"dry_run",pid,"plan","plan_ready",[t.to_dict() for t in tasks],c.to_dict(),self.metrics.snapshot())
+        if command:
+            if not approved:return ExecutionResult(False,"approval_required",pid,"clarify","command requires explicit approval",[],c.to_dict(),self.metrics.snapshot())
+            if not self.policy.command_allowed(command):return ExecutionResult(False,"blocked",pid,"clarify","command blocked by safety policy",[],c.to_dict(),self.metrics.snapshot())
+            try:
+                r=subprocess.run(command,shell=True,cwd=str(self.root),capture_output=True,text=True,timeout=60)
+                passed=r.returncode==0
+                return ExecutionResult(passed,"verified" if passed else "failed",pid,"complete" if passed else "recover","command executed and exit code verified" if passed else "command failed",[{"kind":"command","returncode":r.returncode,"stdout":r.stdout,"stderr":r.stderr,"verified":passed}],c.to_dict(),self.metrics.snapshot())
+            except subprocess.TimeoutExpired:
+                return ExecutionResult(False,"timeout",pid,"recover","command timeout",[],c.to_dict(),self.metrics.snapshot())
         self.checkpoints.save("plan",{"project_id":pid,"contract":c.to_dict(),"tasks":[t.to_dict() for t in tasks],"stage":"execute"})
-        for t in tasks:
-            t.attempts+=1;t.status="done";t.evidence.append({"kind":"postcondition","verified":True});self.metrics.inc("tasks_done")
-        final=all(t.status=="done" for t in tasks) and bool(c.requirements)
-        self.checkpoints.save("verified",{"project_id":pid,"contract":c.to_dict(),"tasks":[t.to_dict() for t in tasks],"verified":final})
-        return ExecutionResult(final,"verified" if final else "recovery_required",pid,"complete" if final else "recover","verified control-plane execution" if final else "verification failed",[{"kind":"requirements","verified":bool(c.requirements)},{"kind":"tasks","verified":final}],c.to_dict(),self.metrics.snapshot())
+        return ExecutionResult(False,"awaiting_operations",pid,"plan","planning completed; no concrete operation was supplied",[{"kind":"plan","task_count":len(tasks),"verified":True}],c.to_dict(),self.metrics.snapshot())
