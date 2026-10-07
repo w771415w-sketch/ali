@@ -1,0 +1,30 @@
+{
+  "version": "5.0.0",
+  "language_support": ["ar", "en", "mixed"],
+  "intents": [
+    "question_answering","explanation","definition","translation","rewriting","proofreading",
+    "summarization","extraction","classification","comparison","recommendation","decision_support",
+    "brainstorming","planning","execution","modification","creation","diagnosis","debugging",
+    "troubleshooting","code_generation","code_review","project_analysis","file_operation",
+    "terminal_operation","git_operation","web_research","fact_check","current_information",
+    "document_analysis","image_analysis","data_analysis","spreadsheet_task","report_generation",
+    "study_tutoring","quiz","simulation","roleplay","creative_writing","structured_output",
+    "citation_request","source_request","memory_save","memory_forget","memory_recall",
+    "preference_update","session_management","follow_up","correction","clarification",
+    "confirmation","cancellation","status_request","progress_request","capability_request",
+    "configuration","testing","verification","deployment","release","security_review",
+    "performance_review","architecture_review","model_training","model_evaluation",
+    "model_conversion","model_management","automation","workflow","multi_step_task","unknown"
+  ],
+  "operational": {
+    "continuation_phrases":["كمل","تابع","اكمل","أكمل","من حيث توقفنا","نفذها","طبّقها","أضف المزيد","نفس السابق","واصل"],
+    "confirmation_phrases":["نعم","ايوه","أيوه","تمام","نفذ","ابدأ","موافق"],
+    "correction_phrases":["هذا خطأ","خطأ","غير صحيح","صحح","صححه","عدّل الرد","النتيجة غير صحيحة"],
+    "cancellation_phrases":["إلغاء","ألغ","توقف","لا تكمل","cancel","stop"],
+    "freshness_signals":["اليوم","الآن","حاليا","آخر","الأحدث","حديث","مؤخرا","2026","today","now","latest","recent"],
+    "execution_signals":["نفذ","شغّل","عدّل","أنشئ","اكتب","احذف","ارفع","ثبّت","طبّق","run","edit","create","upload","install"],
+    "research_signals":["ابحث","بحث ويب","الإنترنت","مصادر","تحقق عبر الإنترنت","search web","research","sources"],
+    "high_risk_signals":["احذف","دمر","استبدل","ارفع","انشر","أرسل","نشر","deploy","delete","overwrite","publish"],
+    "domains":["software","hardware","windows","android","firmware","ai","security","web","data","business","education","science","writing","translation","personal_productivity","git","models"]
+  }
+}
