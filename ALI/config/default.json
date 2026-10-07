@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "app": {
+    "name": "ALI Studio Pro",
+    "version": "1.0.0",
+    "locale": "ar-SA",
+    "timezone": "Asia/Aden"
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8787,
+    "max_body_bytes": 1048576,
+    "request_rate_limit": 60,
+    "request_rate_window_seconds": 60,
+    "remote_access": false
+  },
+  "workspace": {
+    "directory": "auto",
+    "create_if_missing": true
+  },
+  "hardware": {
+    "profile": "thinkpad-p50-32gb-2gb",
+    "cpu_threads": 8,
+    "physical_cores": 4,
+    "ram_gb": 32,
+    "gpu_name": "NVIDIA Quadro M1000M",
+    "vram_gb": 2,
+    "training_device": "cpu",
+    "max_training_threads": 6,
+    "max_concurrent_heavy_jobs": 1,
+    "training_requires_ac": true,
+    "recommended_context": 320,
+    "recommended_max_new_tokens": 160
+  },
+  "backend": {
+    "module": "backend.control_plane.runtime_facade",
+    "class": "ProfessionalRuntime",
+    "preferred": true
+  }
+}
